@@ -3,4 +3,5 @@
     <string name="logo_funder">Logo Funder</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot password ?</string>
 </resources>
