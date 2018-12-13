@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import com.example.unikomcodelabs.funder.MainFragment.MainChatFragment
-import com.example.unikomcodelabs.funder.MainFragment.MainDealHistoryFragment
-import com.example.unikomcodelabs.funder.MainFragment.MainHomeFragment
+import android.view.Menu
+import com.example.unikomcodelabs.funder.Chat.MainChatFragment
+import com.example.unikomcodelabs.funder.DealHistory.MainDealHistoryFragment
+import com.example.unikomcodelabs.funder.Home.MainHomeFragment
 import com.example.unikomcodelabs.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,30 +18,40 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        startActivity<LoginActivity>()
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        supportActionBar?.hide()
+        initView()
+    }
+
+
+    private fun initView(){
+        val homeFragment = MainHomeFragment.newInstance()
+        openFragment(homeFragment)
     }
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId){
+        val homeFragment = MainHomeFragment.newInstance()
+        val chatFragment = MainChatFragment.newInstance()
+        val dealHistoryFragment = MainDealHistoryFragment.newInstance()
+        when (item.itemId) {
             bnvHome -> {
-                val homeFragment = MainHomeFragment.newInstance()
                 openFragment(homeFragment)
             }
             bnvChat -> {
-                val homeFragment = MainChatFragment.newInstance()
-                openFragment(homeFragment)
+                openFragment(chatFragment)
             }
             bnvDealHistory -> {
-                val homeFragment = MainDealHistoryFragment.newInstance()
+                openFragment(dealHistoryFragment)
+            }
+            else -> {
                 openFragment(homeFragment)
             }
         }
-        bottom_navigation.selectedItemId = bnvHome
         true
     }
 
-    private fun openFragment(fragment:Fragment){
+    private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_container,fragment)
+        transaction.replace(R.id.main_container, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

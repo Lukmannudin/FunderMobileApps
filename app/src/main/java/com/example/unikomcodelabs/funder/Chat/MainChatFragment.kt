@@ -1,12 +1,9 @@
-package com.example.unikomcodelabs.funder.MainFragment
+package com.example.unikomcodelabs.funder.Chat
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 
 import com.example.unikomcodelabs.funder.R
 
@@ -18,13 +15,13 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [MainHomeFragment.OnFragmentInteractionListener] interface
+ * [MainChatFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [MainHomeFragment.newInstance] factory method to
+ * Use the [MainChatFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class MainHomeFragment : Fragment() {
+class MainChatFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,14 +40,18 @@ class MainHomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_home, container, false)
+        setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_main_chat, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
-
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_main,menu)
+    }
 //    override fun onAttach(context: Context) {
 //        super.onAttach(context)
 //        if (context is OnFragmentInteractionListener) {
@@ -88,20 +89,19 @@ class MainHomeFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MainHomeFragment.
+         * @return A new instance of fragment MainChatFragment.
          */
         // TODO: Rename and change types and number of parameters
 //        @JvmStatic
 //        fun newInstance(param1: String, param2: String) =
-//            MainHomeFragment().apply {
+//            MainChatFragment().apply {
 //                arguments = Bundle().apply {
 //                    putString(ARG_PARAM1, param1)
 //                    putString(ARG_PARAM2, param2)
 //                }
 //            }
-
         @JvmStatic
-        fun newInstance() = MainHomeFragment().apply {
+        fun newInstance() = MainChatFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_PARAM1, param1)
                 putString(ARG_PARAM2, param2)
