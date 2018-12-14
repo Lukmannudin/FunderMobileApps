@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.DividerItemDecoration
 import com.example.unikomcodelabs.funder.*
+import com.facebook.drawee.backends.pipeline.Fresco
 import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 
@@ -43,8 +44,8 @@ class MainHomeFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
         }
+        Fresco.initialize(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,7 +66,7 @@ class MainHomeFragment : Fragment() {
         setHasOptionsMenu(true)
         val view =  inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvTopFunder.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        view.rvTopFunder.adapter = TopFunderAdapter(topFunderList)
+        view.rvTopFunder.adapter = TopFunderAdapter(context,topFunderList)
         return view
     }
 
@@ -75,7 +76,6 @@ class MainHomeFragment : Fragment() {
     }
 
     private fun dummyDataTopFunder(){
-        Log.i("cek",DummyTopFunder.getListData().size.toString())
         topFunderList.addAll(DummyTopFunder.getListData())
 
     }
