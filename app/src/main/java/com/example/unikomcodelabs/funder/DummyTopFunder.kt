@@ -1,22 +1,34 @@
 package com.example.unikomcodelabs.funder
 
-import android.util.Log
-
 
 object DummyTopFunder {
     var data = arrayOf(
         TopFunder(
-            "https://4g92mivec.files.wordpress.com/2014/02/simpati.png",
+            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
             "Sponsor 1",
             "Lynda Finding a Sponsor"
         ),
         TopFunder(
-            "https://www.telkomsel.com/sites/default/files/2017-06/group_main_description_simPati_desktop_720x405.png",
+            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
             "Sponsor 2",
             "Sponsor Capital"
+        ),
+        TopFunder(
+            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
+            "Sponsor 2",
+            "Sponsor Capital"
+        ),
+        TopFunder(
+            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
+            "Sponsor 2",
+            "Sponsor Capital"
+        ),
+        TopFunder(
+            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
+            "Sponsor 1",
+            "Lynda Finding a Sponsor"
         )
     )
-    private lateinit var topFunder: TopFunder
     fun getListData(): MutableList<TopFunder> {
         val list = mutableListOf<TopFunder>()
         for (i in 0 until data.size) {

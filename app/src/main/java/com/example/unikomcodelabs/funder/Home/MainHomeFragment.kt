@@ -30,9 +30,10 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class MainHomeFragment : Fragment() {
-    private val groceryList : MutableList<Grocery> = mutableListOf()
     private val topFunderList : MutableList<TopFunder> = mutableListOf()
-    private lateinit var adapter: TopFunderAdapter
+    private val auctionList : MutableList<Sponsor> = mutableListOf()
+    private lateinit var adapterTopFunder: TopFunderAdapter
+    private lateinit var adapterAuction: Sponsor
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -67,6 +68,9 @@ class MainHomeFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvTopFunder.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         view.rvTopFunder.adapter = TopFunderAdapter(context,topFunderList)
+
+        view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        view.rvAuction.adapter = AuctionAdapter(context,auctionList)
         return view
     }
 
@@ -77,17 +81,9 @@ class MainHomeFragment : Fragment() {
 
     private fun dummyDataTopFunder(){
         topFunderList.addAll(DummyTopFunder.getListData())
+        auctionList.addAll(DummyAuction.getListData())
+    }
 
-    }
-    private fun populateGroceryList(){
-        val pineapple = Grocery(R.drawable.fruit1,"pineapple")
-        val strawberry = Grocery(R.drawable.fruit2, "strawberry")
-        val kiwi = Grocery(R.drawable.fruit3,"kiwi")
-        groceryList.add(pineapple)
-        groceryList.add(strawberry)
-        groceryList.add(kiwi)
-        adapter.notifyDataSetChanged()
-    }
 
 //    override fun onAttach(context: C ontext) {
 //        super.onAttach(context)

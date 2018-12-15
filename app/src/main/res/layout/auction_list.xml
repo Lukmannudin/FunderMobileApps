@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="140dp">
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+        <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_height="100dp">
+            <ImageView
+                    android:id="@+id/ivAuctionList"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/fjords"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="10dp"
+            />
+            <TextView
+                    android:id="@+id/tvTitleAuctionList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Pekan ini, Si Kasep Mulai Menjaring Calon Kepsek"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/ivAuctionList"
+                    android:textColor="@android:color/black"
+            />
+            <TextView
+                    android:id="@+id/tvContentAuctionList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ivAuctionList"
+                    android:layout_below="@id/tvTitleAuctionList"
+                    android:textSize="10sp"
+                    android:text="Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi"
+                    android:textStyle="bold"
+            />
+            <TextView
+                    android:id="@+id/tvAuctionCompanyList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ivAuctionList"
+                    android:layout_alignParentBottom="true"
+                    android:text="Pemerintah Kota Bandung"
+                    android:textStyle="bold"
+            />
+            <TextView
+                    android:layout_below="@id/tvContentAuctionList"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="bottom"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="5dp"
+                    android:id="@+id/tvDateAuctionList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12/12/2018"
+            />
+        </RelativeLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
