@@ -1,14 +1,13 @@
-package com.example.unikomcodelabs.funder
+package com.team.oleg.funder
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
-import com.example.unikomcodelabs.funder.Chat.MainChatFragment
-import com.example.unikomcodelabs.funder.DealHistory.MainDealHistoryFragment
-import com.example.unikomcodelabs.funder.Home.MainHomeFragment
-import com.example.unikomcodelabs.funder.R.id.*
+import com.team.oleg.funder.Chat.MainChatFragment
+import com.team.oleg.funder.DealHistory.MainDealHistoryFragment
+import com.team.oleg.funder.Home.MainHomeFragment
+import com.team.oleg.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

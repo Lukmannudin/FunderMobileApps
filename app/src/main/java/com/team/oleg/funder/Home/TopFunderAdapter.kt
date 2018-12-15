@@ -1,12 +1,12 @@
-package com.example.unikomcodelabs.funder.Home
+package com.team.oleg.funder.Home
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.unikomcodelabs.funder.R
-import com.example.unikomcodelabs.funder.TopFunder
+import com.team.oleg.funder.R
+import com.team.oleg.funder.TopFunder
 import kotlinx.android.synthetic.main.top_funder_list.view.*
 
 

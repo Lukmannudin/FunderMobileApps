@@ -1,4 +1,4 @@
-package com.example.unikomcodelabs.funder
+package com.team.oleg.funder
 
 import android.app.Application
 import android.content.res.Configuration

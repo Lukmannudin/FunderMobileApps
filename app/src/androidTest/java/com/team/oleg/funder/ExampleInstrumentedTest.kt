@@ -1,4 +1,4 @@
-package com.example.unikomcodelabs.funder
+package com.team.oleg.funder
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

@@ -1,4 +1,4 @@
-package com.example.unikomcodelabs.funder.Home
+package com.team.oleg.funder.Home
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.unikomcodelabs.funder.R
-import com.example.unikomcodelabs.funder.Sponsor
+import com.team.oleg.funder.R
+import com.team.oleg.funder.Sponsor
 import kotlinx.android.synthetic.main.auction_list.view.*
 
 class AuctionAdapter(private val context: Context?, private val items: List<Sponsor>) :

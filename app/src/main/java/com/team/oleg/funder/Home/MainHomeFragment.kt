@@ -1,11 +1,15 @@
-package com.example.unikomcodelabs.funder.Chat
+package com.team.oleg.funder.Home
 
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 
-import com.example.unikomcodelabs.funder.R
+import android.support.v7.widget.LinearLayoutManager
+import com.team.oleg.funder.*
+import com.facebook.drawee.backends.pipeline.Fresco
+import kotlinx.android.synthetic.main.fragment_main_home.view.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -15,13 +19,18 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [MainChatFragment.OnFragmentInteractionListener] interface
+ * [MainHomeFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [MainChatFragment.newInstance] factory method to
+ * Use the [MainHomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class MainChatFragment : Fragment() {
+class MainHomeFragment : Fragment() {
+    private val topFunderList : MutableList<TopFunder> = mutableListOf()
+    private val auctionList : MutableList<Sponsor> = mutableListOf()
+    private lateinit var adapterTopFunder: TopFunderAdapter
+    private lateinit var adapterAuction: Sponsor
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,26 +42,46 @@ class MainChatFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        Fresco.initialize(context)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        dummyDataTopFunder()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_main_chat, container, false)
+        setHasOptionsMenu(true)
+        val view =  inflater.inflate(R.layout.fragment_main_home, container, false)
+        view.rvTopFunder.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        view.rvTopFunder.adapter = TopFunderAdapter(context,topFunderList)
+
+        view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        view.rvAuction.adapter = AuctionAdapter(context,auctionList)
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
     }
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_main,menu)
+
+    private fun dummyDataTopFunder(){
+        topFunderList.addAll(DummyTopFunder.getListData())
+        auctionList.addAll(DummyAuction.getListData())
     }
-//    override fun onAttach(context: Context) {
+
+
+//    override fun onAttach(context: C ontext) {
 //        super.onAttach(context)
 //        if (context is OnFragmentInteractionListener) {
 //            listener = context
@@ -66,6 +95,10 @@ class MainChatFragment : Fragment() {
         listener = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_main,menu)
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -89,19 +122,20 @@ class MainChatFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MainChatFragment.
+         * @return A new instance of fragment MainHomeFragment.
          */
         // TODO: Rename and change types and number of parameters
 //        @JvmStatic
 //        fun newInstance(param1: String, param2: String) =
-//            MainChatFragment().apply {
+//            MainHomeFragment().apply {
 //                arguments = Bundle().apply {
 //                    putString(ARG_PARAM1, param1)
 //                    putString(ARG_PARAM2, param2)
 //                }
 //            }
+
         @JvmStatic
-        fun newInstance() = MainChatFragment().apply {
+        fun newInstance() = MainHomeFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_PARAM1, param1)
                 putString(ARG_PARAM2, param2)

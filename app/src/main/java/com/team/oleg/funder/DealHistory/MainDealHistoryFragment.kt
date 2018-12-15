@@ -1,12 +1,11 @@
-package com.example.unikomcodelabs.funder.DealHistory
+package com.team.oleg.funder.DealHistory
 
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.*
 
-import com.example.unikomcodelabs.funder.R
+import com.team.oleg.funder.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

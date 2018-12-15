@@ -1,4 +1,4 @@
-package com.example.unikomcodelabs.funder
+package com.team.oleg.funder
 
 data class Sponsor(
     val sponsorId : Int,
