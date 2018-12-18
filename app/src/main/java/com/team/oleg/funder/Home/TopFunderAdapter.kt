@@ -9,14 +9,14 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.TopFunder
 import kotlinx.android.synthetic.main.top_funder_list.view.*
 
-
-class TopFunderAdapter(private val context: Context?, private val items: List<TopFunder>) :
+class TopFunderAdapter(
+    private val context: Context?,
+    private val items: List<TopFunder>
+) :
     RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderViewHolder {
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderAdapter.TopFunderViewHolder {
         return TopFunderViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.top_funder_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.top_funder_list, parent, false)
         )
     }
 
@@ -25,7 +25,7 @@ class TopFunderAdapter(private val context: Context?, private val items: List<To
     }
 
     override fun onBindViewHolder(holder: TopFunderViewHolder, position: Int) {
-        holder.bindItem(context, items[position])
+        holder.bindItem(context,items[position])
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,4 +40,5 @@ class TopFunderAdapter(private val context: Context?, private val items: List<To
             sponsorCompany.text = items.sponsorCompany
         }
     }
+
 }

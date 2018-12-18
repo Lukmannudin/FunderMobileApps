@@ -11,11 +11,11 @@ import com.team.oleg.funder.Sponsor
 import kotlinx.android.synthetic.main.auction_list.view.*
 
 class AuctionAdapter(private val context: Context?, private val items: List<Sponsor>) :
-    RecyclerView.Adapter<AuctionAdapter.AuctionHolder>() {
+    RecyclerView.Adapter<SponsorAdapter.AuctionViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuctionHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SponsorAdapter.AuctionViewHolder {
 
-        return AuctionHolder(
+        return SponsorAdapter.AuctionViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.auction_list, parent, false)
         )
     }
@@ -24,11 +24,11 @@ class AuctionAdapter(private val context: Context?, private val items: List<Spon
         return items.size
     }
 
-    override fun onBindViewHolder(holder: AuctionHolder, position: Int) {
-        holder.bindItem(context, items[position])
+    override fun onBindViewHolder(viewHolder: SponsorAdapter.AuctionViewHolder, position: Int) {
+        viewHolder.bindItem(context, items[position])
     }
 
-    class AuctionHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class AuctionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val sponsorImage = view.ivAuctionList
         private val sponsorTitle = view.tvTitleAuctionList

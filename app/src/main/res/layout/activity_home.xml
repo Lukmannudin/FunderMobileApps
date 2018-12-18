@@ -23,8 +23,6 @@
                 android:orientation="horizontal"
                 android:showDividers="end">
 
-
-
             <TextView
                     android:id="@+id/toolbar_save"
                     style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"

@@ -3,10 +3,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="140dp">
+
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="140dp">
-
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/shadow"/>
         <RelativeLayout
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
@@ -16,7 +20,6 @@
                     android:id="@+id/ivAuctionList"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/fjords"
                     android:scaleType="centerCrop"
                     android:layout_marginEnd="10dp"
             />
@@ -61,11 +64,13 @@
                     android:layout_height="wrap_content"
                     android:text="12/12/2018"
             />
+            <View
+                    android:layout_below="@id/tvDateAuctionList"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorLightGray"/>
         </RelativeLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/colorLightGray" />
+
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
