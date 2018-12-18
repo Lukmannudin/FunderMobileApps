@@ -12,8 +12,7 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.Sponsor
 import com.team.oleg.funder.TopFunder
 import kotlinx.android.synthetic.main.auction_list.view.*
-import kotlinx.android.synthetic.main.home.view.*
-import kotlinx.android.synthetic.main.top_funder_list.view.*
+import kotlinx.android.synthetic.main.heading_home_main.view.*
 
 
 class SponsorAdapter(
@@ -37,7 +36,7 @@ class SponsorAdapter(
         when (viewType) {
             TOP_FUNDER_VIEW_TYPE -> {
                 return TopFunderViewHolder(
-                    inflater.inflate(R.layout.home, parent, false)
+                    inflater.inflate(R.layout.heading_home_main, parent, false)
                 )
             }
 
