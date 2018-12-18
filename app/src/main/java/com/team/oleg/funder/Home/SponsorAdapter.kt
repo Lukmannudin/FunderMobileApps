@@ -26,6 +26,7 @@ class SponsorAdapter(
 
     private val TOP_FUNDER_VIEW_TYPE = 0
     private val AUCTION_VIEW_TYPE = 1
+    private val OVERSIZE = 1
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) TOP_FUNDER_VIEW_TYPE else AUCTION_VIEW_TYPE
@@ -53,35 +54,21 @@ class SponsorAdapter(
         if (holder is TopFunderViewHolder) {
             holder.init(context, items)
         } else if (holder is AuctionViewHolder) {
-            holder.bindItem(context, sponsor[position])
+            holder.bindItem(context, sponsor[position - OVERSIZE])
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size + 1
+        return sponsor.size + OVERSIZE
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val sponsorImage = view.ivSponsorImage
-        private val sponsorTitle = view.tvSponsorTitle
-        private val sponsorCompany = view.tvSponsorCompany
         private val TopFunderRecyclerView = view.rvTopFunder
-
 
         fun init(context: Context?, items: List<TopFunder>) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             TopFunderRecyclerView.adapter = TopFunderAdapter(context, items)
         }
-
-//        }
-
-//        fun bindItem(context: Context?, items: TopFunder) {
-//            if (context != null) {
-//                sponsorImage.setImageURI(items.sponsorImage)
-//            }
-//            sponsorTitle.text = items.sponsorTitle
-//            sponsorCompany.text = items.sponsorCompany
-//        }
     }
 
 

@@ -16,8 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        startActivity<LoginActivity>()
-        bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        supportActionBar?.hide()
+//        bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         initView()
     }
 

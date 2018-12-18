@@ -6,7 +6,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "1",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg",
@@ -17,7 +17,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "2",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -28,7 +28,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "3",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -39,7 +39,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "4",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -50,7 +50,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "5",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -61,7 +61,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "6",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -72,7 +72,7 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
+            "7",
             "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
@@ -83,8 +83,8 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
-            "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
+            "BANGSAT",
+            "8",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
             "Pemerintah Kota Bandung",
@@ -94,8 +94,8 @@ object DummyAuction {
         Sponsor(
             10111,
             12123,
-            "Pekan Ini, Si Kasep Mulai Menjaring Calon Kepsek",
-            "Dinas Pendidikan Kota Bandung secara resmi akan meluncurkan Sistem Seleksi",
+            "BANGSAT",
+            "9",
             "[sponsor requirements]",
             "http://www.sinarpaginews.com/media/original/170414061108-pemerintah-kota-bandung-punya-cara-baru-untuk-meningkatkan-geliat-program-kamis-inggris.jpg",
             "Pemerintah Kota Bandung",
@@ -103,7 +103,6 @@ object DummyAuction {
             ""
         )
     )
-    private lateinit var sponsor: Sponsor
     fun getListData(): MutableList<Sponsor> {
         val list = mutableListOf<Sponsor>()
         for (i in 0 until data.size) {

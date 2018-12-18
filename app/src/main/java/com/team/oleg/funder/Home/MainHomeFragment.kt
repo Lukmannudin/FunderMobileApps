@@ -6,11 +6,9 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import android.widget.LinearLayout
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
-import kotlinx.android.synthetic.main.home.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,9 +28,6 @@ private const val ARG_PARAM2 = "param2"
 class MainHomeFragment : Fragment() {
     private val topFunderList: MutableList<TopFunder> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
-    //    private lateinit var adapterSponsor: SponsorAdapter
-    private lateinit var adapterAuction: Sponsor
-    lateinit var recyclerView: RecyclerView
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -66,14 +61,9 @@ class MainHomeFragment : Fragment() {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
-//        initRecycler(view)
-//        view.rvTopFunder.adapter = SponsorAdapter(context, topFunderList, auctionList)
 
-//        view.rvTopFunder.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//        view.rvTopFunder.adapter = SponsorAdapter(context,topFunderList,auctionList)
-
-        view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
-        view.rvAuction.adapter = SponsorAdapter(context,topFunderList,auctionList)
+        view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        view.rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList)
         return view
     }
 
@@ -88,25 +78,12 @@ class MainHomeFragment : Fragment() {
     }
 
 
-//    override fun onAttach(context: C ontext) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
-    
 
     override fun onDetach() {
         super.onDetach()
         listener = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_main, menu)
-    }
 
     /**
      * This interface must be implemented by activities that contain this
