@@ -3,6 +3,7 @@ package com.team.oleg.funder.Chat
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.*
 
 import com.team.oleg.funder.R
@@ -29,6 +30,8 @@ class MainChatFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("Fragment","MainChat")
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)

@@ -3,7 +3,6 @@ package com.team.oleg.funder.Home
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.Sponsor
 import com.team.oleg.funder.TopFunder
 import kotlinx.android.synthetic.main.auction_list.view.*
-import kotlinx.android.synthetic.main.heading_home_main.view.*
+import kotlinx.android.synthetic.main.rv_heading_auction.view.*
 
 
 class SponsorAdapter(
@@ -36,7 +35,7 @@ class SponsorAdapter(
         when (viewType) {
             TOP_FUNDER_VIEW_TYPE -> {
                 return TopFunderViewHolder(
-                    inflater.inflate(R.layout.heading_home_main, parent, false)
+                    inflater.inflate(R.layout.rv_heading_auction, parent, false)
                 )
             }
 
@@ -81,7 +80,6 @@ class SponsorAdapter(
         fun bindItem(context: Context?, sponsor: Sponsor) {
             context?.let { Glide.with(it).load(sponsor.sponsorImage).into(sponsorImage) }
             sponsorTitle.text = sponsor.sponsorName
-            Log.i("cek", "bindItem")
             sponsorDescription.text = sponsor.sponsorDesc
             sponsorCompanyName.text = sponsor.sponsorCompany
             sponsorDatePost.text = sponsor.sponsorDate

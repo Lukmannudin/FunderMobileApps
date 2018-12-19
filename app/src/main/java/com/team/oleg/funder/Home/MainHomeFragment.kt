@@ -4,7 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
@@ -36,6 +36,7 @@ class MainHomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -60,6 +61,7 @@ class MainHomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
+        Log.i("Fragment","MainHome")
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
 
         view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
