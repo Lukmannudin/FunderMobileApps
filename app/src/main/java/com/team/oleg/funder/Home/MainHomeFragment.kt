@@ -1,10 +1,13 @@
 package com.team.oleg.funder.Home
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
@@ -12,6 +15,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
+import android.view.Gravity
+
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,11 +59,7 @@ class MainHomeFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
+    @SuppressLint("RtlHardcoded")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,7 +84,16 @@ class MainHomeFragment : Fragment() {
         })
         view.ab_search.setOnSearchClickListener {
             ab_notification.visibility = View.GONE
+            ab_user_profile.visibility = View.GONE
+            view.ab_search.maxWidth = Integer.MAX_VALUE
         }
+       view.ab_search.setOnCloseListener(object : android.support.v7.widget.SearchView.OnCloseListener{
+           override fun onClose(): Boolean {
+               Log.i("cek","close diklik")
+               return true
+           }
+
+       })
 
         return view
     }

@@ -39,7 +39,6 @@
                     app:searchIcon="@drawable/icon_search"
                     android:layout_marginBottom="13dp"
                     app:searchHintIcon="@drawable/icon_search"
-                    app:queryHint="search your"
                     />
         </RelativeLayout>
         <View
