@@ -1,13 +1,16 @@
 package com.team.oleg.funder.Home
 
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
+import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 
 
@@ -61,11 +64,26 @@ class MainHomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
-        Log.i("Fragment","MainHome")
+        Log.i("Fragment", "MainHome")
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
-
         view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         view.rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList)
+        view.ab_search.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                Log.i("cek","klik")
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Log.i("cek","ker di ome")
+                return true
+            }
+
+        })
+        view.ab_search.setOnSearchClickListener {
+            ab_notification.visibility = View.GONE
+        }
+
         return view
     }
 
@@ -79,6 +97,21 @@ class MainHomeFragment : Fragment() {
         auctionList.addAll(DummyAuction.getListData())
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        val searchView = menu?.findItem(R.id.ab_search)?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.i("ketik","aya nu ngetik")
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return true
+            }
+        })
+    }
 
 
     override fun onDetach() {
