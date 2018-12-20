@@ -1,23 +1,19 @@
 package com.team.oleg.funder.Home
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBar
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.SearchView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
-import android.view.Gravity
-
-
+import kotlinx.android.synthetic.main.main_toolbar.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,15 +21,6 @@ import android.view.Gravity
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MainHomeFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MainHomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class MainHomeFragment : Fragment() {
     private val topFunderList: MutableList<TopFunder> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
@@ -56,7 +43,32 @@ class MainHomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dummyDataTopFunder()
+        ab_search.setOnCloseListener {
+            ab_notification.visibility = View.VISIBLE
+            ab_user_profile.visibility = View.VISIBLE
+            ab_search.clearFocus()
+            ab_search.setQuery("", false)
+            false
+        }
+        ab_search.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
 
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return true
+            }
+
+        })
+        ab_search.setOnSearchClickListener {
+            ab_notification.visibility = View.GONE
+            ab_user_profile.visibility = View.GONE
+            ab_search.maxWidth = Integer.MAX_VALUE
+            val sc = ab_search.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+            sc.setTextColor(resources.getColor(R.color.white))
+//            LayoutMainHomeFragment.visibility = View.GONE
+//            startActivity<SearchHomeActivity>()
+        }
     }
 
     @SuppressLint("RtlHardcoded")
@@ -66,37 +78,20 @@ class MainHomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
-        Log.i("Fragment", "MainHome")
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvAuction.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         view.rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList)
-        view.ab_search.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                Log.i("cek","klik")
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                Log.i("cek","ker di ome")
-                return true
-            }
-
-        })
-        view.ab_search.setOnSearchClickListener {
-            ab_notification.visibility = View.GONE
-            ab_user_profile.visibility = View.GONE
-            view.ab_search.maxWidth = Integer.MAX_VALUE
-        }
-       view.ab_search.setOnCloseListener(object : android.support.v7.widget.SearchView.OnCloseListener{
-           override fun onClose(): Boolean {
-               Log.i("cek","close diklik")
-               return true
-           }
-
-       })
 
         return view
     }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.main_container, fragment)
+        transaction?.addToBackStack(null)
+        transaction?.commit()
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
@@ -114,7 +109,7 @@ class MainHomeFragment : Fragment() {
         val searchView = menu?.findItem(R.id.ab_search)?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("ketik","aya nu ngetik")
+                Log.i("ketik", "aya nu ngetik")
                 return true
             }
 
@@ -130,41 +125,12 @@ class MainHomeFragment : Fragment() {
         listener = null
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainHomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            MainHomeFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
 
         @JvmStatic
         fun newInstance() = MainHomeFragment().apply {
@@ -175,3 +141,5 @@ class MainHomeFragment : Fragment() {
         }
     }
 }
+
+

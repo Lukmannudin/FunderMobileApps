@@ -15,7 +15,7 @@ import com.team.oleg.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     var prevMenuItem: MenuItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
             }
             bnvChat -> {
 //                openFragment(chatFragment)
-            viewpager.currentItem = 1
+                viewpager.currentItem = 1
             }
             bnvDealHistory -> {
-//                openFragment(dealHistoryFragment)
+                openFragment(dealHistoryFragment)
                 viewpager.currentItem = 2
             }
             else -> {
