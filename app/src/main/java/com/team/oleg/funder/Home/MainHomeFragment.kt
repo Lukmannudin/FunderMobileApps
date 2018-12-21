@@ -22,7 +22,10 @@ import kotlinx.android.synthetic.main.main_toolbar.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class MainHomeFragment : Fragment() {
+class MainHomeFragment : Fragment(),HomeContract.View {
+
+
+    override lateinit var presenter: HomeContract.Presenter
     private val topFunderList: MutableList<TopFunder> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
 
@@ -81,6 +84,26 @@ class MainHomeFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.start()
+    }
+
+    override fun setLoadingIndicator(active: Boolean) {
+    }
+
+    override fun showTopFunder(topFunder: List<TopFunder>) {
+    }
+
+    override fun showAuction(sponsor: List<Sponsor>) {
+    }
+
+    override fun showAuctionDetailsUi(auctionId: String) {
+    }
+
+    override fun showNoAuction() {
     }
 }
 
