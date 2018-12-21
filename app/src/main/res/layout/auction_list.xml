@@ -7,10 +7,6 @@
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="140dp">
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@drawable/shadow"/>
         <RelativeLayout
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"

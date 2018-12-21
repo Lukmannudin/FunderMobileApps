@@ -10,7 +10,8 @@
         android:elevation="16dp">
     <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent" android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <RelativeLayout
                 android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
@@ -49,12 +50,7 @@
                     android:background="@drawable/circle_shape"
                     android:layout_width="15dp"
                     android:layout_height="15dp"/>
-
-
         </RelativeLayout>
-        <View
-                android:background="@drawable/toolbar_dropshadow"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+
     </LinearLayout>
 </android.support.v7.widget.Toolbar>
