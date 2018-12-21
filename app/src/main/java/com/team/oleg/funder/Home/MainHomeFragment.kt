@@ -11,9 +11,10 @@ import android.widget.EditText
 import android.widget.SearchView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.team.oleg.funder.*
-import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
+import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.startActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,31 +44,8 @@ class MainHomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dummyDataTopFunder()
-        ab_search.setOnCloseListener {
-            ab_notification.visibility = View.VISIBLE
-            ab_user_profile.visibility = View.VISIBLE
-            ab_search.clearFocus()
-            ab_search.setQuery("", false)
-            false
-        }
-        ab_search.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return true
-            }
-
-        })
-        ab_search.setOnSearchClickListener {
-            ab_notification.visibility = View.GONE
-            ab_user_profile.visibility = View.GONE
-            ab_search.maxWidth = Integer.MAX_VALUE
-            val sc = ab_search.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
-            sc.setTextColor(resources.getColor(R.color.white))
-//            LayoutMainHomeFragment.visibility = View.GONE
-//            startActivity<SearchHomeActivity>()
+        ab_search.setOnClickListener {
+            startActivity(intentFor<SearchHomeActivity>())
         }
     }
 
@@ -106,17 +84,7 @@ class MainHomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        val searchView = menu?.findItem(R.id.ab_search)?.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("ketik", "aya nu ngetik")
-                return true
-            }
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return true
-            }
-        })
     }
 
 

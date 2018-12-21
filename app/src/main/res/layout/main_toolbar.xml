@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
-        android:layout_height="90dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="10dp"
         android:elevation="16dp">
     <LinearLayout
@@ -29,21 +29,32 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/icon_notification"
             />
-            <android.support.v7.widget.SearchView
+            <TextView
                     android:id="@+id/ab_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layoutDirection="ltr"
-                    app:searchIcon="@drawable/icon_search"
-                    android:layout_marginBottom="13dp"
-                    app:queryHint="Search"
-                    app:searchHintIcon="@drawable/icon_search"
+                    android:drawableStart="@drawable/icon_search"
+                    android:layout_marginEnd="15dp"
             />
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginTop="13dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/circle_shape"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"/>
+
+
         </RelativeLayout>
         <View
                 android:background="@drawable/toolbar_dropshadow"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
     </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+</android.support.v7.widget.Toolbar>

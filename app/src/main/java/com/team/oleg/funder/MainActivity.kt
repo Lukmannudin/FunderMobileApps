@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.MenuItem
 import com.team.oleg.funder.Chat.MainChatFragment
 import com.team.oleg.funder.DealHistory.MainDealHistoryFragment
@@ -28,14 +26,27 @@ class MainActivity : BaseActivity() {
             }
 
             override fun onPageSelected(position: Int) {
+                val MENU_HOME = 0
+                val MENU_CHAT = 1
+                val MENU_DEAL_HISTORY = 2
                 if (prevMenuItem != null) {
                     prevMenuItem?.isChecked = false
                 } else {
                     bottom_navigation.menu.getItem(0).isChecked = false
                 }
-                Log.d("page", "onPageSelected: $position")
-                bottom_navigation.menu.getItem(position).isChecked = true
-                prevMenuItem = bottom_navigation.menu.getItem(position)
+                val bottomIconActive = bottom_navigation.menu.getItem(position)
+                bottomIconActive.isChecked = true
+
+
+                when (position){
+                    MENU_CHAT -> {
+                        bottomIconActive.icon = resources.getDrawable(R.drawable.icon_chat_active)
+                    }
+                    MENU_DEAL_HISTORY -> {
+                        bottomIconActive.icon = resources.getDrawable(R.drawable.icon_history_active)
+                    }
+                }
+                prevMenuItem = bottomIconActive
 
             }
 
@@ -45,31 +56,20 @@ class MainActivity : BaseActivity() {
         })
         setupViewPager(viewpager)
     }
-//    private fun initView(){
-//        val homeFragment = MainHomeFragment.newInstance()
-//        openFragment(homeFragment)
-//    }
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        val homeFragment = MainHomeFragment.newInstance()
-        val chatFragment = MainChatFragment.newInstance()
-        val dealHistoryFragment = MainDealHistoryFragment.newInstance()
         when (item.itemId) {
             bnvHome -> {
-//                openFragment(homeFragment)
                 viewpager.currentItem = 0
             }
             bnvChat -> {
-//                openFragment(chatFragment)
                 viewpager.currentItem = 1
             }
             bnvDealHistory -> {
-                openFragment(dealHistoryFragment)
                 viewpager.currentItem = 2
             }
             else -> {
-//                openFragment(homeFragment)
                 viewpager.currentItem = 0
             }
         }
