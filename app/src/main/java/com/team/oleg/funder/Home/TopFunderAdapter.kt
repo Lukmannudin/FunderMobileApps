@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Data.TopFunder
 import kotlinx.android.synthetic.main.top_funder_list.view.*
 
 class TopFunderAdapter(

@@ -9,10 +9,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Data.TopFunder
+import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.Dummy.DummyAuction
-import com.team.oleg.funder.Dummy.DummyTopFunder
 import com.team.oleg.funder.R
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
@@ -20,9 +18,10 @@ import kotlinx.android.synthetic.main.main_toolbar.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class MainHomeFragment : Fragment() {
+class MainHomeFragment : Fragment(),HomeContract.View {
 
-//    override lateinit var presenter: HomeContract.Presenter
+
+    override lateinit var presenter: HomeContract.Presenter
 
     private val topFunderList: MutableList<Sponsor> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
@@ -75,6 +74,26 @@ class MainHomeFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun setLoadingIndicator(active: Boolean) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showTopFunder(topFunder: List<Sponsor>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showAuction(sponsor: List<Sponsor>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showAuctionDetailsUi(auctionId: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showNoAuction() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onResume() {

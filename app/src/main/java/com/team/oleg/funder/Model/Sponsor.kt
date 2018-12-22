@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Data
+package com.team.oleg.funder.Model
 
 data class Sponsor(
     val sponsorId : Int,

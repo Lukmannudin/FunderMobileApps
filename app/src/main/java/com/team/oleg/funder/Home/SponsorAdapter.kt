@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Data.TopFunder
+import com.team.oleg.funder.Model.Sponsor
 import kotlinx.android.synthetic.main.auction_list.view.*
 import kotlinx.android.synthetic.main.rv_heading_auction.view.*
 
