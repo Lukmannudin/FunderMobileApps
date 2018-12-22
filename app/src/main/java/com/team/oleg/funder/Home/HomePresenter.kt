@@ -1,8 +1,12 @@
 package com.team.oleg.funder.Home
 
-import com.team.oleg.funder.Model.Sponsor
+import android.util.Log
+import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Dummy.DummyAuction
 
-class HomePresenter(val auctionView: HomeContract.View): HomeContract.Presenter{
+class HomePresenter(val auctionView: HomeContract.View) : HomeContract.Presenter {
+
+
     private var firstLoad = true
 
     init {
@@ -10,6 +14,7 @@ class HomePresenter(val auctionView: HomeContract.View): HomeContract.Presenter{
     }
 
     override fun start() {
+        loadTopFunder(false)
         loadAuction(false)
     }
 
@@ -18,13 +23,14 @@ class HomePresenter(val auctionView: HomeContract.View): HomeContract.Presenter{
     }
 
 
-
     override fun loadAuction(forceUpdate: Boolean) {
         loadAuction(forceUpdate || firstLoad, true)
         firstLoad = false
     }
 
     override fun loadTopFunder(forceUpdate: Boolean) {
+        loadTopFunder(forceUpdate || firstLoad, true)
+        firstLoad = false
     }
 
     /**
@@ -32,17 +38,49 @@ class HomePresenter(val auctionView: HomeContract.View): HomeContract.Presenter{
      * *
      * @param showLoadingUI Pass in true to display a loading icon in the UI
      */
-    private fun loadAuction(forceUpdate: Boolean, showLoadingUI: Boolean){
-        if (showLoadingUI){
-            auctionView.setLoadingIndicator(true)
+    private fun loadAuction(forceUpdate: Boolean, showLoadingUI: Boolean) {
+//        if (showLoadingUI){
+//            auctionView.setLoadingIndicator(true)
+//        }
+//        if (forceUpdate){
+//
+//        }
+        val auctionToShow = ArrayList<Sponsor>()
+        auctionToShow.addAll(DummyAuction.getListData())
+        if (showLoadingUI) {
+            auctionView.setLoadingIndicator(false)
         }
-
+        processTask(auctionToShow)
     }
 
-    override fun openAuctionDetail(requestedAuction: Sponsor) {
+    private fun loadTopFunder(forceUpdate: Boolean, showLoadingUI: Boolean) {
+//        if (showLoadingUI){
+//            auctionView.setLoadingIndicator(true)
+//        }
+//        if (forceUpdate){
+//
+//        }
+        val topFunderToShow = ArrayList<Sponsor>()
+        topFunderToShow.addAll(DummyAuction.getListData())
+        if (showLoadingUI) {
+            auctionView.setLoadingIndicator(false)
+        }
+        processTask(topFunderToShow)
     }
 
-    override fun openTopFunderDetail(requestedTopFunder: TopFunder) {
+
+
+    private fun processTask(sponsor: List<Sponsor>) {
+        if (sponsor.isEmpty()) {
+            Log.i("cek", "isEmpty")
+        } else {
+            auctionView.showAuction(sponsor)
+        }
+    }
+
+    override fun openSponsorDetail(requestedAuction: Sponsor) {
+        Log.i("cek","cek")
+        auctionView.showAuctionDetailsUi(requestedAuction.sponsorId)
     }
 
 

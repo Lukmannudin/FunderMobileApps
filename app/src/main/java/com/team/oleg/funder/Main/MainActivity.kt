@@ -9,6 +9,7 @@ import android.view.MenuItem
 import com.team.oleg.funder.BaseActivity
 import com.team.oleg.funder.Chat.MainChatFragment
 import com.team.oleg.funder.DealHistory.MainDealHistoryFragment
+import com.team.oleg.funder.Home.HomePresenter
 import com.team.oleg.funder.Home.MainHomeFragment
 import com.team.oleg.funder.R
 import com.team.oleg.funder.R.id.*
@@ -16,12 +17,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
+    private val CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY"
     var prevMenuItem: MenuItem? = null
+    private lateinit var homePresenter: HomePresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        startActivity<LoginActivity>()
 
+        homePresenter = HomePresenter(MainHomeFragment.newInstance()).apply {
+         if (savedInstanceState != null){
+
+         }
+        }
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -59,6 +67,7 @@ class MainActivity : BaseActivity() {
         })
         setupViewPager(viewpager)
     }
+
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
