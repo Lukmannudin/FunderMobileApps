@@ -5,13 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.team.oleg.funder.Data.Sponsor
 import com.team.oleg.funder.R
-import com.team.oleg.funder.TopFunder
+import com.team.oleg.funder.Data.TopFunder
 import kotlinx.android.synthetic.main.top_funder_list.view.*
 
 class TopFunderAdapter(
     private val context: Context?,
-    private val items: List<TopFunder>
+    private val items: List<Sponsor>
 ) :
     RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderAdapter.TopFunderViewHolder {
@@ -32,11 +33,11 @@ class TopFunderAdapter(
         private val sponsorImage = view.ivSponsorImage
         private val sponsorTitle = view.tvSponsorTitle
         private val sponsorCompany = view.tvSponsorCompany
-        fun bindItem(context: Context?, items: TopFunder) {
+        fun bindItem(context: Context?, items: Sponsor) {
             if (context != null) {
                 sponsorImage.setImageURI(items.sponsorImage)
             }
-            sponsorTitle.text = items.sponsorTitle
+            sponsorTitle.text = items.sponsorName
             sponsorCompany.text = items.sponsorCompany
         }
     }

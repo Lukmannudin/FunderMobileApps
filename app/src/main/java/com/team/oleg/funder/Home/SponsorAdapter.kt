@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Sponsor
-import com.team.oleg.funder.TopFunder
+import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Data.TopFunder
 import kotlinx.android.synthetic.main.auction_list.view.*
 import kotlinx.android.synthetic.main.rv_heading_auction.view.*
 
 
 class SponsorAdapter(
     private val context: Context?,
-    private val items: List<TopFunder>,
+    private val items: List<Sponsor>,
     private val sponsor: List<Sponsor>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -63,7 +63,7 @@ class SponsorAdapter(
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val TopFunderRecyclerView = view.rvTopFunder
 
-        fun init(context: Context?, items: List<TopFunder>) {
+        fun init(context: Context?, items: List<Sponsor>) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             TopFunderRecyclerView.adapter = TopFunderAdapter(context, items)
         }

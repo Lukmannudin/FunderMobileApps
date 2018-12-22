@@ -1,43 +1,39 @@
 package com.team.oleg.funder.Home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.facebook.drawee.backends.pipeline.Fresco
+import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Data.TopFunder
 import com.team.oleg.funder.Dummy.DummyAuction
 import com.team.oleg.funder.Dummy.DummyTopFunder
 import com.team.oleg.funder.R
-import com.team.oleg.funder.R.id.ab_search
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
-import com.team.oleg.funder.Sponsor
-import com.team.oleg.funder.TopFunder
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class MainHomeFragment : Fragment(),HomeContract.View {
+class MainHomeFragment : Fragment() {
 
+//    override lateinit var presenter: HomeContract.Presenter
 
-    override lateinit var presenter: HomeContract.Presenter
-    private val topFunderList: MutableList<TopFunder> = mutableListOf()
+    private val topFunderList: MutableList<Sponsor> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
-        Fresco.initialize(context)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        presenter.result(requestCode, resultCode)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -62,14 +58,10 @@ class MainHomeFragment : Fragment(),HomeContract.View {
     }
 
     private fun dummyDataTopFunder() {
-        topFunderList.addAll(DummyTopFunder.getListData())
+        topFunderList.addAll(DummyAuction.getListData())
         auctionList.addAll(DummyAuction.getListData())
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
 
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -77,7 +69,6 @@ class MainHomeFragment : Fragment(),HomeContract.View {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = MainHomeFragment().apply {
             arguments = Bundle().apply {
@@ -88,23 +79,14 @@ class MainHomeFragment : Fragment(),HomeContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter.start()
+//        presenter.start()
     }
 
-    override fun setLoadingIndicator(active: Boolean) {
-    }
 
-    override fun showTopFunder(topFunder: List<TopFunder>) {
-    }
+//    interface AuctionItemListener {
+//        fun onTaskClick(clickedAuction: S)
+//    }
 
-    override fun showAuction(sponsor: List<Sponsor>) {
-    }
-
-    override fun showAuctionDetailsUi(auctionId: String) {
-    }
-
-    override fun showNoAuction() {
-    }
 }
 
 
