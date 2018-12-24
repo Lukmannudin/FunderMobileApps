@@ -34,7 +34,7 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         }
     }
 
-    private val listAdapter = SponsorAdapter(context, ArrayList(0), ArrayList(0), itemListener)
+    private lateinit var listAdapter: SponsorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,9 @@ class MainHomeFragment : Fragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        listAdapter = SponsorAdapter(context,topFunderList,auctionList,itemListener)
+//        rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList, itemListener)
+        rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
         }
@@ -64,7 +66,7 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvAuction.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        view.rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList, itemListener)
+
         view.homeSwipeRefresh.setOnRefreshListener {
             presenter.loadSponsor(false)
         }

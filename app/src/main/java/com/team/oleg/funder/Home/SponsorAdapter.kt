@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Dummy.DummyAuction
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.auction_list.view.*
 import kotlinx.android.synthetic.main.rv_heading_auction.view.*
@@ -17,8 +16,8 @@ import kotlinx.android.synthetic.main.rv_heading_auction.view.*
 
 class SponsorAdapter(
     private val context: Context?,
-    topFunder: List<Sponsor>,
-    auction: List<Sponsor>,
+    private val items: List<Sponsor>,
+    private val sponsor: List<Sponsor>,
     private val listener: MainHomeFragment.SponsorItemListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,50 +26,52 @@ class SponsorAdapter(
     private val AUCTION_VIEW_TYPE = 1
     private val OVERSIZE = 1
 
-    var items: List<Sponsor> = topFunder
-        set(items) {
-            field = items
-            notifyDataSetChanged()
-        }
-
-    var sponsor: List<Sponsor> = auction
-        set(sponsor) {
-            field = sponsor
-            notifyDataSetChanged()
-        }
-
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) TOP_FUNDER_VIEW_TYPE else AUCTION_VIEW_TYPE
+        return when (position) {
+            0 -> {
+                TOP_FUNDER_VIEW_TYPE
+            }
+            else -> {
+                AUCTION_VIEW_TYPE
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
+            AUCTION_VIEW_TYPE -> {
+                return AuctionViewHolder(
+                    inflater.inflate(R.layout.auction_list, parent, false)
+                )
+            }
             TOP_FUNDER_VIEW_TYPE -> {
                 return TopFunderViewHolder(
                     inflater.inflate(R.layout.rv_heading_auction, parent, false)
                 )
             }
 
-            AUCTION_VIEW_TYPE -> {
-                return AuctionViewHolder(
-                    inflater.inflate(R.layout.auction_list, parent, false)
-                )
-            }
         }
         throw RuntimeException("View Type not defined")
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is TopFunderViewHolder) {
-            holder.bindItem(context, items)
-        } else if (holder is AuctionViewHolder) {
-            holder.bindItem(context, sponsor[position - OVERSIZE], listener)
-        }
+        Log.i("position", "$position")
+//        if (!sponsor.isEmpty() && !items.isEmpty()) {
+            when (holder) {
+                is TopFunderViewHolder -> {
+                    Log.i("cekcok", items.size.toString())
+                    holder.bindItem(context, items)
+                }
+                is AuctionViewHolder -> {
+                    holder.bindItem(context, sponsor[position - OVERSIZE], listener)
+                }
+            }
+//        }
     }
 
     override fun getItemCount(): Int {
-        return sponsor.size + OVERSIZE
+        return sponsor.size +1
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -78,8 +79,8 @@ class SponsorAdapter(
 
         fun bindItem(context: Context?, items: List<Sponsor>) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            TopFunderRecyclerView.adapter = TopFunderAdapter(context, DummyAuction.getListData())
-            Log.i("positionaing","bindItem:"+items.size)
+            TopFunderRecyclerView.adapter = TopFunderAdapter(context, items)
+
         }
     }
 
@@ -92,7 +93,8 @@ class SponsorAdapter(
         private val sponsorDatePost = view.tvDateAuctionList
 
         fun bindItem(context: Context?, sponsor: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
-            val dummyImage ="https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
+            val dummyImage =
+                "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             context?.let { Glide.with(it).load(dummyImage).into(sponsorImage) }
             sponsorTitle.text = sponsor.sponsorName
             sponsorDescription.text = sponsor.sponsorDesc
