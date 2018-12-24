@@ -13,12 +13,16 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", "\"http://funderapi.perfectweddingorganizer.web.id/\""
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -39,4 +43,8 @@ dependencies {
     implementation 'com.facebook.fresco:fresco:1.11.0'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+    implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

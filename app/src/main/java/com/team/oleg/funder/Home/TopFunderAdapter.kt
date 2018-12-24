@@ -33,11 +33,12 @@ class TopFunderAdapter(
         private val sponsorTitle = view.tvSponsorTitle
         private val sponsorCompany = view.tvSponsorCompany
         fun bindItem(context: Context?, items: Sponsor) {
+            val dummyImage ="https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             if (context != null) {
-                sponsorImage.setImageURI(items.sponsorImage)
+                sponsorImage.setImageURI(dummyImage)
             }
             sponsorTitle.text = items.sponsorName
-            sponsorCompany.text = items.sponsorCompany
+            sponsorCompany.text = items.companyName
         }
     }
 

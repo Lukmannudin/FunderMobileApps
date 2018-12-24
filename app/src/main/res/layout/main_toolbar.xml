@@ -2,7 +2,7 @@
 
 <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/my_toolbar"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:layout_height="80dp"
@@ -19,33 +19,35 @@
             <TextView
                     android:id="@+id/ab_user_profile"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableStart="@drawable/icon_user_profile"
             />
             <TextView
-                    android:layout_marginEnd="10dp"
+                    android:paddingEnd="5dp"
                     android:layout_toLeftOf="@id/ab_search"
                     android:id="@+id/ab_notification"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:drawableStart="@drawable/icon_notification"
             />
             <TextView
                     android:id="@+id/ab_search"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="5dp"
                     android:layout_alignParentEnd="true"
                     android:layoutDirection="ltr"
                     android:drawableStart="@drawable/icon_search"
-                    android:layout_marginEnd="15dp"
+
             />
             <TextView
                     android:layout_alignParentEnd="true"
                     android:text="1"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="43dp"
+                    android:layout_marginTop="18dp"
                     android:textColor="@android:color/white"
                     android:background="@drawable/circle_shape"
                     android:layout_width="15dp"

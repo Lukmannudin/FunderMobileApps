@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Dummy.DummyAuction
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.auction_list.view.*
 import kotlinx.android.synthetic.main.rv_heading_auction.view.*
@@ -62,7 +63,7 @@ class SponsorAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is TopFunderViewHolder) {
-            holder.init(context, items)
+            holder.bindItem(context, items)
         } else if (holder is AuctionViewHolder) {
             holder.bindItem(context, sponsor[position - OVERSIZE], listener)
         }
@@ -75,9 +76,10 @@ class SponsorAdapter(
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val TopFunderRecyclerView = view.rvTopFunder
 
-        fun init(context: Context?, items: List<Sponsor>) {
+        fun bindItem(context: Context?, items: List<Sponsor>) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            TopFunderRecyclerView.adapter = TopFunderAdapter(context, items)
+            TopFunderRecyclerView.adapter = TopFunderAdapter(context, DummyAuction.getListData())
+            Log.i("positionaing","bindItem:"+items.size)
         }
     }
 
@@ -90,11 +92,12 @@ class SponsorAdapter(
         private val sponsorDatePost = view.tvDateAuctionList
 
         fun bindItem(context: Context?, sponsor: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
-            context?.let { Glide.with(it).load(sponsor.sponsorImage).into(sponsorImage) }
+            val dummyImage ="https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
+            context?.let { Glide.with(it).load(dummyImage).into(sponsorImage) }
             sponsorTitle.text = sponsor.sponsorName
             sponsorDescription.text = sponsor.sponsorDesc
-            sponsorCompanyName.text = sponsor.sponsorCompany
-            sponsorDatePost.text = sponsor.sponsorDate
+            sponsorCompanyName.text = sponsor.companyName
+            sponsorDatePost.text = sponsor.dateline
             itemView.setOnClickListener {
                 listener.onSponsorClick(sponsor)
             }

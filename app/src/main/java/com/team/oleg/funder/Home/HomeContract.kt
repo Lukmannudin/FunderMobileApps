@@ -14,7 +14,7 @@ interface HomeContract {
 
         fun showAuction(sponsor: List<Sponsor>)
 
-        fun showAuctionDetailsUi(auctionId : Int)
+        fun showAuctionDetailsUi(auctionId: String)
 
         fun showNoAuction()
 
@@ -24,9 +24,7 @@ interface HomeContract {
 
         fun result(requestCode: Int,resultCode: Int)
 
-        fun loadTopFunder(forceUpdate: Boolean)
-
-        fun loadAuction(forceUpdate: Boolean)
+        fun loadSponsor(forceUpdate: Boolean)
 
         fun openSponsorDetail(requestedAuction: Sponsor)
     }

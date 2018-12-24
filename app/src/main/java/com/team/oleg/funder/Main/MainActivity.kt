@@ -3,7 +3,6 @@ package com.team.oleg.funder.Main
 import MainHomeAdapter
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import com.team.oleg.funder.BaseActivity
@@ -25,11 +24,6 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 //        startActivity<LoginActivity>()
 
-        homePresenter = HomePresenter(MainHomeFragment.newInstance()).apply {
-         if (savedInstanceState != null){
-
-         }
-        }
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
