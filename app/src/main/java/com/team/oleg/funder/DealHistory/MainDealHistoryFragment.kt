@@ -4,12 +4,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.*
-import com.team.oleg.funder.Home.MainHomeFragment
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.team.oleg.funder.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_deal_history.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,19 +31,21 @@ class MainDealHistoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("Fragment","MainDeal")
+        Log.i("Fragment", "MainDeal")
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
     private fun openFragment(fragment: Fragment) {
         val transaction = activity?.supportFragmentManager?.beginTransaction()
         transaction?.replace(R.id.main_container, fragment)
         transaction?.addToBackStack(null)
         transaction?.commit()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,10 +57,6 @@ class MainDealHistoryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        testView.setOnClickListener {
-            testViewGroup.visibility = View.GONE
-            bottom_navigation.visibility = View.GONE
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

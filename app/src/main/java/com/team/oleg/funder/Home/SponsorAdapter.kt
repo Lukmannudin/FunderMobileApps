@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.auction_list.view.*
@@ -57,7 +58,6 @@ class SponsorAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Log.i("position", "$position")
-//        if (!sponsor.isEmpty() && !items.isEmpty()) {
             when (holder) {
                 is TopFunderViewHolder -> {
                     holder.bindItem(context, items)
@@ -66,7 +66,6 @@ class SponsorAdapter(
                     holder.bindItem(context, sponsor[position - OVERSIZE], listener)
                 }
             }
-//        }
     }
 
     override fun getItemCount(): Int {
@@ -94,7 +93,8 @@ class SponsorAdapter(
         fun bindItem(context: Context?, sponsor: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
-            context?.let { Glide.with(it).load(dummyImage).into(sponsorImage) }
+            Log.i("ceki",BuildConfig.BASE_URL+"uploads/img/img_sponsor/${sponsor.sponsorImage}")
+            context?.let { Glide.with(it).load(BuildConfig.BASE_URL+"uploads/img/img_sponsor/${sponsor.sponsorImage}").into(sponsorImage) }
             sponsorTitle.text = sponsor.sponsorName
             sponsorDescription.text = sponsor.sponsorDesc
             sponsorCompanyName.text = sponsor.companyName
