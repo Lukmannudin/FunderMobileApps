@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.auction_list.view.*
 import kotlinx.android.synthetic.main.rv_heading_auction.view.*
@@ -60,7 +60,6 @@ class SponsorAdapter(
 //        if (!sponsor.isEmpty() && !items.isEmpty()) {
             when (holder) {
                 is TopFunderViewHolder -> {
-                    Log.i("cekcok", items.size.toString())
                     holder.bindItem(context, items)
                 }
                 is AuctionViewHolder -> {

@@ -1,6 +1,6 @@
 package com.team.oleg.funder.Dummy
 
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Model.Sponsor
 
 
 object DummyAuction {

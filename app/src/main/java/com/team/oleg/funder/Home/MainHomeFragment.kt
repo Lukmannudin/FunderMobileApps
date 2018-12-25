@@ -2,7 +2,6 @@ package com.team.oleg.funder.Home
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,9 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.gson.Gson
-import com.team.oleg.funder.APIRequest.ApiRepository
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
 import kotlinx.android.synthetic.main.fragment_main_home.*
@@ -22,6 +19,7 @@ import org.jetbrains.anko.support.v4.intentFor
 
 
 class MainHomeFragment : Fragment(), HomeContract.View {
+
 
     override lateinit var presenter: HomeContract.Presenter
 
@@ -36,11 +34,14 @@ class MainHomeFragment : Fragment(), HomeContract.View {
 
     private lateinit var listAdapter: SponsorAdapter
 
+    override fun onPause() {
+        super.onPause()
+        presenter.destroy()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val request = ApiRepository()
-        val gson = Gson()
-        presenter = HomePresenter(this, request, gson)
+        presenter = HomePresenter(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,8 +50,7 @@ class MainHomeFragment : Fragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listAdapter = SponsorAdapter(context,topFunderList,auctionList,itemListener)
-//        rvAuction.adapter = SponsorAdapter(context, topFunderList, auctionList, itemListener)
+        listAdapter = SponsorAdapter(context, topFunderList, auctionList, itemListener)
         rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
@@ -71,12 +71,6 @@ class MainHomeFragment : Fragment(), HomeContract.View {
             presenter.loadSponsor(false)
         }
         return view
-    }
-
-
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
@@ -119,7 +113,6 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         super.onResume()
         presenter.start()
     }
-
 
     interface SponsorItemListener {
         fun onSponsorClick(clickedAuction: Sponsor)

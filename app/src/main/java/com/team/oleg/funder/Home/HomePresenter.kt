@@ -1,22 +1,18 @@
 package com.team.oleg.funder.Home
 
 import android.util.Log
-import com.google.gson.Gson
-import com.team.oleg.funder.APIRequest.APISponsors
-import com.team.oleg.funder.APIRequest.ApiRepository
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Response.SponsorResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.team.oleg.funder.APIRequest.RequestApiSponsor
+import com.team.oleg.funder.Model.Sponsor
+import com.team.oleg.funder.Service.SponsorService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class HomePresenter(
-    private val auctionView: HomeContract.View,
-    private val apiRepository: ApiRepository,
-    private val gson: Gson
+    private val auctionView: HomeContract.View
 ) : HomeContract.Presenter {
 
-
+    private var disposable: Disposable? = null
     private var firstLoad = true
 
     init {
@@ -25,6 +21,10 @@ class HomePresenter(
 
     override fun start() {
         loadSponsor(false)
+    }
+
+    override fun destroy() {
+        disposable?.dispose()
     }
 
     override fun loadSponsor(forceUpdate: Boolean) {
@@ -40,25 +40,32 @@ class HomePresenter(
 //
 //        }
 
-        GlobalScope.launch(Dispatchers.Main) {
-            val data = gson.fromJson(
-                apiRepository
-                    .doRequest(APISponsors.getSponsor()).await(),
-                SponsorResponse::class.java
+        val service: RequestApiSponsor = SponsorService.create()
+        disposable = service.getSponsor()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    processAuction(result.data)
+                    auctionView.setLoadingIndicator(false)
+                },
+                { error ->
+                    Log.e("Error", error.message)
+                }
             )
-
-            val data2 = gson.fromJson(
-                apiRepository
-                    .doRequest(APISponsors.getSponsor()).await(),
-                SponsorResponse::class.java
+        auctionView.setLoadingIndicator(true)
+        disposable = service.getSponsorTopFunder()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    processTopFunder(result.data)
+                    auctionView.setLoadingIndicator(false)
+                },
+                { error ->
+                    Log.e("Error", error.message)
+                }
             )
-            if (showLoadingUI) {
-                auctionView.setLoadingIndicator(false)
-            }
-            processTopFunder(data2.data)
-            processAuction(data.data)
-
-        }
     }
 
     override fun result(requestCode: Int, resultCode: Int) {

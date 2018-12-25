@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Data
+package com.team.oleg.funder.Model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -6,10 +6,10 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class Sponsor(
+open class Sponsor(
     @SerializedName("sponsor_id")
 
-    val sponsorId: String? = null,
+    open var sponsorId: String? = null,
     @SerializedName("company_id")
 
     val companyId: String? = null,

@@ -20,8 +20,6 @@
         </activity>
         <activity android:name="com.team.oleg.funder.Login.LoginActivity">
         </activity>
-        <activity android:name="com.team.oleg.funder.Home.HomeActivity">
-        </activity>
         <activity android:name="com.team.oleg.funder.Chat.ChatActivity">
         </activity>
         <activity android:name="com.team.oleg.funder.DealHistory.DealHistoryActivity">

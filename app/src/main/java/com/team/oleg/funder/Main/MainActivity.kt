@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
                 }
                 val bottomIconActive = bottom_navigation.menu.getItem(position)
                 bottomIconActive.isChecked = true
-
+                bottom_navigation.menu.getItem(MENU_DEAL_HISTORY).icon = resources.getDrawable(R.drawable.icon_history)
 
                 when (position){
                     MENU_CHAT -> {
@@ -49,6 +49,8 @@ class MainActivity : BaseActivity() {
                     }
                     MENU_DEAL_HISTORY -> {
                         bottomIconActive.icon = resources.getDrawable(R.drawable.icon_history_active)
+
+                    } else ->{
                     }
                 }
                 prevMenuItem = bottomIconActive
