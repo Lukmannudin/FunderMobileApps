@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/testViewGroup"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/testViewGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+    <include
+            layout="@layout/toolbar"
+            android:id="@+id/include2"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/dealHistorySwipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/include2">
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDealHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        >
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

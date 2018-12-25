@@ -6,4 +6,7 @@
     <color name="colorAccent">#006b82</color>
     <color name="colorLightGray">#24000000</color>
     <color name="white">#fff</color>
+    <color name="bidAccepted">#53b636</color>
+    <color name="bidRejected">#b63636</color>
+    <color name="bidCanceled">#b67a36</color>
 </resources>

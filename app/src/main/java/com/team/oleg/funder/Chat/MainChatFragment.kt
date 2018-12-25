@@ -1,12 +1,18 @@
 package com.team.oleg.funder.Chat
 
+import android.app.ActionBar
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.*
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
 import com.team.oleg.funder.R
+import kotlinx.android.synthetic.main.toolbar.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +36,7 @@ class MainChatFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("Fragment","MainChat")
+        Log.i("Fragment", "MainChat")
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
@@ -47,26 +53,15 @@ class MainChatFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main_chat, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_main,menu)
-    }
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
 
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupSearchView()
     }
 
     /**
@@ -109,6 +104,40 @@ class MainChatFragment : Fragment() {
                 putString(ARG_PARAM1, param1)
                 putString(ARG_PARAM2, param2)
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        actionSearch.clearFocus()
+        actionSearch.setQuery("", false)
+        actionSearch.isIconified = true
+    }
+
+    private fun setupSearchView() {
+        val searchIconImage = actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_button)
+        searchIconImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.icon_search) })
+        tbTitle.text = getString(R.string.title_chat)
+        val searchIconCloseImage =
+            actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
+        searchIconCloseImage.setImageDrawable(context?.let {
+            ContextCompat.getDrawable(
+                it,
+                R.drawable.ic_close_white_24dp
+            )
+        })
+        actionSearch.setOnSearchClickListener {
+            tbTitle.visibility = View.GONE
+            actionSearch.layoutParams.width = ActionBar.LayoutParams.MATCH_PARENT
+        }
+
+        val searchIconEditText = actionSearch.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+        searchIconEditText.setTextColor(resources.getColor(R.color.white))
+
+        actionSearch.setOnCloseListener {
+            actionSearch.layoutParams.width = ActionBar.LayoutParams.WRAP_CONTENT
+            tbTitle.visibility = View.VISIBLE
+            false
         }
     }
 }

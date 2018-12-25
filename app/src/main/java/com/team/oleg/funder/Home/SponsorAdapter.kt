@@ -93,8 +93,11 @@ class SponsorAdapter(
         fun bindItem(context: Context?, sponsor: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
-            Log.i("ceki",BuildConfig.BASE_URL+"uploads/img/img_sponsor/${sponsor.sponsorImage}")
-            context?.let { Glide.with(it).load(BuildConfig.BASE_URL+"uploads/img/img_sponsor/${sponsor.sponsorImage}").into(sponsorImage) }
+            context?.let {
+                Glide.with(it).load(
+                    BuildConfig.BASE_URL
+                            +"uploads/img/img_sponsor/${sponsor.sponsorImage}")
+                    .into(sponsorImage) }
             sponsorTitle.text = sponsor.sponsorName
             sponsorDescription.text = sponsor.sponsorDesc
             sponsorCompanyName.text = sponsor.companyName

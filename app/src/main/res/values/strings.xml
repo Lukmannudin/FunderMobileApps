@@ -10,4 +10,5 @@
     <string name="close_button">Close Button</string>
     <string name="search">Search</string>
     <string name="top_funder">Top Funder</string>
+    <string name="title_chat">Chat Room</string>
 </resources>

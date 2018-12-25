@@ -11,20 +11,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name="com.team.oleg.funder.Main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-        >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.team.oleg.funder.Login.LoginActivity">
-        </activity>
-        <activity android:name="com.team.oleg.funder.Chat.ChatActivity">
-        </activity>
-        <activity android:name="com.team.oleg.funder.DealHistory.DealHistoryActivity">
-        </activity>
-        <activity android:name="com.team.oleg.funder.SearchHome.SearchHomeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.team.oleg.funder.Login.LoginActivity"/>
+        <activity android:name="com.team.oleg.funder.Chat.ChatActivity"/>
+        <activity android:name="com.team.oleg.funder.SearchHome.SearchHomeActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 

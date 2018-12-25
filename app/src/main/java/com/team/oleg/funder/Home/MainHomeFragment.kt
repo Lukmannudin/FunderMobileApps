@@ -26,7 +26,7 @@ class MainHomeFragment : Fragment(), HomeContract.View {
     private val topFunderList: MutableList<Sponsor> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
 
-    internal var itemListener: SponsorItemListener = object : SponsorItemListener {
+    private var itemListener: SponsorItemListener = object : SponsorItemListener {
         override fun onSponsorClick(clickedAuction: Sponsor) {
             presenter.openSponsorDetail(clickedAuction)
         }
