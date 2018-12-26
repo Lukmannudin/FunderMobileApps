@@ -45,14 +45,13 @@ class ChatPresenter(
 //        }
 
         val service: RequestApiChat = ChatService.create()
-        disposable = service.getChatEO()
+        disposable = service.getChatEO("1")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("cekl",result.data[0].companyName)
-//                    processChat(result.data)
-//                    chatView.setLoadingIndicator(false)
+                    processChat(result.data)
+                    chatView.setLoadingIndicator(false)
                 },
                 { error ->
                     Log.e("ErrorLOL", error.message)

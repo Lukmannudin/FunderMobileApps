@@ -3,7 +3,6 @@ package com.team.oleg.funder.Home
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,19 +56,18 @@ class SponsorAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.i("position", "$position")
-            when (holder) {
-                is TopFunderViewHolder -> {
-                    holder.bindItem(context, items)
-                }
-                is AuctionViewHolder -> {
-                    holder.bindItem(context, sponsor[position - OVERSIZE], listener)
-                }
+        when (holder) {
+            is TopFunderViewHolder -> {
+                holder.bindItem(context, items)
             }
+            is AuctionViewHolder -> {
+                holder.bindItem(context, sponsor[position - OVERSIZE], listener)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-        return sponsor.size +1
+        return sponsor.size + 1
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -96,8 +94,10 @@ class SponsorAdapter(
             context?.let {
                 Glide.with(it).load(
                     BuildConfig.BASE_URL
-                            +"uploads/img/img_sponsor/${sponsor.sponsorImage}")
-                    .into(sponsorImage) }
+                            + "uploads/img/img_sponsor/${sponsor.sponsorImage}"
+                )
+                    .into(sponsorImage)
+            }
             sponsorTitle.text = sponsor.sponsorName
             sponsorDescription.text = sponsor.sponsorDesc
             sponsorCompanyName.text = sponsor.companyName

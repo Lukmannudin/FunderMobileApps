@@ -95,6 +95,11 @@ class MainChatFragment : Fragment(), ChatContract.View {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.start()
+    }
+
 
     override fun onDetach() {
         super.onDetach()

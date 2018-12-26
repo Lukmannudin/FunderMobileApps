@@ -83,19 +83,16 @@ class MainHomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun setLoadingIndicator(active: Boolean) {
-        Log.i("loading", active.toString())
         homeSwipeRefresh.isRefreshing = active
     }
 
     override fun showTopFunder(topFunder: List<Sponsor>) {
-        Log.i("cekcek213", topFunder.size.toString())
         topFunderList.clear()
         topFunderList.addAll(topFunder)
         listAdapter.notifyDataSetChanged()
     }
 
     override fun showAuction(sponsor: List<Sponsor>) {
-        Log.i("cek", "showAuction123:" + sponsor[0].sponsorName)
         auctionList.clear()
         auctionList.addAll(sponsor)
         listAdapter.notifyDataSetChanged()

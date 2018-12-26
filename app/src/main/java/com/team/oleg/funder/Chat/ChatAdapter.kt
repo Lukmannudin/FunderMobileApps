@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ChatAdapter(
     private val context: Context?,
@@ -53,8 +55,19 @@ class ChatAdapter(
             titleChat.text = chat.companyName
             eventName.text = chat.companyVision
             messageChat.text = chat.message
-            dateChat.text = chat.messageTime
             unreadMessage.text = "3"
+
+            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+
+            val currentDate = sdf.format(Date()).split(" ")[0]
+            val currentDateTanggal = chat.messageTime.toString().split(" ")[1].substring(0, 5)
+            val currentDateChat = chat.messageTime.toString().split(" ")[0]
+
+            if (currentDate == currentDateChat) {
+                dateChat.text = currentDateTanggal
+            } else {
+                dateChat.text = currentDateChat
+            }
         }
     }
 }

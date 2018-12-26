@@ -3,7 +3,6 @@ package com.team.oleg.funder.DealHistory
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,6 @@ class DealHistoryAdapter(
             }
 
             bidStatus.text = dealHistory.bidderStatus
-            Log.i("ceko", dealHistory.bidderStatus)
             when (dealHistory.bidderStatus?.toLowerCase()) {
                 "canceled" -> {
                     bidStatus.setTextColor(Color.parseColor("#b67a36"))
