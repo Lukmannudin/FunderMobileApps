@@ -65,7 +65,7 @@ class DealHistoryAdapter(
                     bidStatus.setTextColor(Color.parseColor("#53b636"))
                 }
             }
-            bidName.text = dealHistory.eventName
+            bidName.text = dealHistory.sponsorName
             companyName.text = dealHistory.companyName
             bidDate.text = dealHistory.dateline
         }

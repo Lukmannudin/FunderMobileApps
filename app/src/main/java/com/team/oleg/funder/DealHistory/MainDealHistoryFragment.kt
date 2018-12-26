@@ -25,15 +25,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [DealHistoryFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [DealHistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
 
     // TODO: Rename and change types of parameters
@@ -78,9 +70,7 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         super.onActivityCreated(savedInstanceState)
         listAdapter = DealHistoryAdapter(context, dealHistoryList, itemListener)
         rvDealHistory.adapter = listAdapter
-
         setupSearchView()
-
     }
 
 

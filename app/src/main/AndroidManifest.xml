@@ -18,7 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.team.oleg.funder.Login.LoginActivity"/>
-        <activity android:name="com.team.oleg.funder.Chat.ChatActivity"/>
         <activity android:name="com.team.oleg.funder.SearchHome.SearchHomeActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
     </application>

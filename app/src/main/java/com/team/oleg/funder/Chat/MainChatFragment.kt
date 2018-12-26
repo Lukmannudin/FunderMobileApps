@@ -1,17 +1,22 @@
 package com.team.oleg.funder.Chat
 
 import android.app.ActionBar
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
+import kotlinx.android.synthetic.main.fragment_main_chat.*
+import kotlinx.android.synthetic.main.fragment_main_chat.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,11 +33,15 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class MainChatFragment : Fragment() {
+class MainChatFragment : Fragment(), ChatContract.View {
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+
+    override lateinit var presenter: ChatContract.Presenter
+    private val chatList: MutableList<Chat> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +51,35 @@ class MainChatFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        presenter = ChatPresenter(this)
     }
+
+    private val itemListener: MainChatFragment.chatItemListener = object :
+        MainChatFragment.chatItemListener {
+        override fun onChatClick(clicked: Chat) {
+            presenter.openChatDetail(clicked)
+        }
+    }
+
+    private lateinit var listAdapter: ChatAdapter
+
+    override fun onPause() {
+        super.onPause()
+        presenter.destroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        presenter.result(requestCode, resultCode)
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        listAdapter = ChatAdapter(context, chatList, itemListener)
+        rvMainChat.adapter = listAdapter
+        setupSearchView()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +87,12 @@ class MainChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_main_chat, container, false)
+        val view =  inflater.inflate(R.layout.fragment_main_chat, container, false)
+        view.rvMainChat.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        view.chatSwipeRefresh.setOnRefreshListener {
+            presenter.loadChat(false)
+        }
+        return view
     }
 
 
@@ -59,22 +101,7 @@ class MainChatFragment : Fragment() {
         listener = null
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupSearchView()
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
@@ -106,6 +133,25 @@ class MainChatFragment : Fragment() {
             }
         }
     }
+
+    override fun setLoadingIndicator(active: Boolean) {
+        chatSwipeRefresh.isRefreshing = active
+    }
+
+    override fun showChatList(chat: List<Chat>) {
+        chatList.clear()
+        chatList.addAll(chat)
+        listAdapter.notifyDataSetChanged()
+    }
+
+    override fun showChatDetailUi(chatId: String) {
+
+    }
+
+    override fun showNoChat() {
+    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -140,4 +186,9 @@ class MainChatFragment : Fragment() {
             false
         }
     }
+
+    interface chatItemListener {
+        fun onChatClick(clicked: Chat)
+    }
+
 }
