@@ -57,6 +57,7 @@ class ChatAdapter(
             messageChat.text = chat.message
             unreadMessage.text = "3"
 
+            
             val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
 
             val currentDate = sdf.format(Date()).split(" ")[0]
