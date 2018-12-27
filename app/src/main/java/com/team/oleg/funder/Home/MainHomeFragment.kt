@@ -9,13 +9,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.team.oleg.funder.Auction.AuctionActivity
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class MainHomeFragment : Fragment(), HomeContract.View {
@@ -99,11 +103,17 @@ class MainHomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showAuctionDetailsUi(auctionId: String) {
-        Log.i("id", "ID:$auctionId")
+        Log.i("cekoprat", "showAuctionDetailsUi:$auctionId")
+        startActivity(intentFor<AuctionActivity>(
+            Utils.ID to auctionId
+        ))
+    }
+
+    private fun showToast(message: String){
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
     }
 
     override fun showNoAuction() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onResume() {

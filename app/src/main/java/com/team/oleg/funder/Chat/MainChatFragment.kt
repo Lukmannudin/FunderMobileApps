@@ -92,6 +92,7 @@ class MainChatFragment : Fragment(), ChatContract.View {
         view.chatSwipeRefresh.setOnRefreshListener {
             presenter.loadChat(false)
         }
+        view.no_main_chat.visibility = View.VISIBLE
         return view
     }
 
@@ -153,7 +154,14 @@ class MainChatFragment : Fragment(), ChatContract.View {
 
     }
 
-    override fun showNoChat() {
+    override fun showNoChat(active: Boolean) {
+        if (active){
+            no_main_chat.visibility = View.VISIBLE
+            chatSwipeRefresh.visibility = View.GONE
+        } else {
+            no_main_chat.visibility = View.GONE
+            chatSwipeRefresh.visibility = View.VISIBLE
+        }
     }
 
 

@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.top_funder_list.view.*
 
 class TopFunderAdapter(
     private val context: Context?,
-    private val items: List<Sponsor>
+    private val items: List<Sponsor>,
+    private val listener: MainHomeFragment.SponsorItemListener
 ) :
     RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderAdapter.TopFunderViewHolder {
@@ -26,20 +27,23 @@ class TopFunderAdapter(
     }
 
     override fun onBindViewHolder(holder: TopFunderViewHolder, position: Int) {
-        holder.bindItem(context,items[position])
+        holder.bindItem(context,items[position], listener)
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val sponsorImage = view.ivSponsorImage
         private val sponsorTitle = view.tvSponsorTitle
         private val sponsorCompany = view.tvSponsorCompany
-        fun bindItem(context: Context?, items: Sponsor) {
+        fun bindItem(context: Context?, items: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
             val dummyImage ="https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             if (context != null) {
                 sponsorImage.setImageURI(BuildConfig.BASE_URL+"uploads/img/img_sponsor/${items.sponsorImage}")
             }
             sponsorTitle.text = items.sponsorName
             sponsorCompany.text = items.companyName
+            itemView.setOnClickListener {
+                listener.onSponsorClick(items)
+            }
         }
     }
 

@@ -14,7 +14,7 @@ interface ChatContract {
 
         fun showChatDetailUi(chatId: String)
 
-        fun showNoChat()
+        fun showNoChat(active: Boolean)
     }
 
     interface Presenter: BasePresenter {
@@ -23,6 +23,6 @@ interface ChatContract {
 
         fun loadChat(forceUpdate: Boolean)
 
-        fun openChatDetail(requestedDealHistory:Chat)
+        fun openChatDetail(requestedChat:Chat)
     }
 }

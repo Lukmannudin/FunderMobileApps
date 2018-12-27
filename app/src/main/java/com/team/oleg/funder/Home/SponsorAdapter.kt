@@ -58,7 +58,7 @@ class SponsorAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TopFunderViewHolder -> {
-                holder.bindItem(context, items)
+                holder.bindItem(context, items, listener)
             }
             is AuctionViewHolder -> {
                 holder.bindItem(context, sponsor[position - OVERSIZE], listener)
@@ -73,9 +73,9 @@ class SponsorAdapter(
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val TopFunderRecyclerView = view.rvTopFunder
 
-        fun bindItem(context: Context?, items: List<Sponsor>) {
+        fun bindItem(context: Context?, items: List<Sponsor>, listener: MainHomeFragment.SponsorItemListener) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            TopFunderRecyclerView.adapter = TopFunderAdapter(context, items)
+            TopFunderRecyclerView.adapter = TopFunderAdapter(context, items, listener)
 
         }
     }

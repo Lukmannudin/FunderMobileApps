@@ -11,4 +11,6 @@
     <string name="search">Search</string>
     <string name="top_funder">Top Funder</string>
     <string name="title_chat">Chat Room</string>
+    <string name="no_chat">You have no chats here try submitting your proposal</string>
+    <string name="auction_image">Auction Image</string>
 </resources>

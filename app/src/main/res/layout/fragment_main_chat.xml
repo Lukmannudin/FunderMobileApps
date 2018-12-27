@@ -10,7 +10,18 @@
     <include
             layout="@layout/toolbar"
             android:id="@+id/include2"/>
-
+    <TextView
+            android:visibility="gone"
+            android:id="@+id/no_main_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_chat"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:padding="50dp"
+            android:textColor="@color/lightGray"
+    />
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/chatSwipeRefresh"
             android:layout_width="match_parent"
@@ -25,4 +36,5 @@
                 app:layout_constraintStart_toStartOf="parent">
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

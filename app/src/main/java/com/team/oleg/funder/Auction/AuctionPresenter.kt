@@ -1,22 +1,25 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.Sponsor
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.RequestApiSponsor
+import com.team.oleg.funder.Auction.AuctionContract
 import com.team.oleg.funder.Model.Sponsor
+import com.team.oleg.funder.Response.SponsorResponse
 import com.team.oleg.funder.Service.SponsorService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class HomePresenter(
-    private val auctionView: HomeContract.View
-) : HomeContract.Presenter {
+class AuctionPresenter(
+    private val sponsorId: String,
+    private val sponsorView: AuctionContract.View
+) : AuctionContract.Presenter {
 
     private var disposable: Disposable? = null
     private var firstLoad = true
 
     init {
-        auctionView.presenter = this
+        sponsorView.presenter = this
     }
 
     override fun start() {
@@ -34,33 +37,33 @@ class HomePresenter(
 
     private fun loadSponsor(forceUpdate: Boolean, showLoadingUI: Boolean) {
         if (showLoadingUI) {
-            auctionView.setLoadingIndicator(true)
+            sponsorView.setLoadingIndicator(true)
         }
 //        if (forceUpdate){
 //
 //        }
 
         val service: RequestApiSponsor = SponsorService.create()
-        disposable = service.getSponsor()
+        disposable = service.getSponsorById(sponsorId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    processAuction(result.data)
-                    auctionView.setLoadingIndicator(false)
+                    Log.i("idIn",sponsorId)
+                    processSponsor(result)
+                    sponsorView.setLoadingIndicator(false)
                 },
                 { error ->
                     Log.e("Error", error.message)
                 }
             )
-        auctionView.setLoadingIndicator(true)
+        sponsorView.setLoadingIndicator(true)
         disposable = service.getSponsorTopFunder()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    processTopFunder(result.data)
-                    auctionView.setLoadingIndicator(false)
+                    sponsorView.setLoadingIndicator(false)
                 },
                 { error ->
                     Log.e("Error", error.message)
@@ -74,26 +77,11 @@ class HomePresenter(
     }
 
 
-    private fun processTopFunder(sponsor: List<Sponsor>) {
-        if (sponsor.isEmpty()) {
+    private fun processSponsor(sponsor: SponsorResponse) {
+        if (sponsor == null) {
             Log.i("cek", "isEmpty")
         } else {
-            auctionView.showTopFunder(sponsor)
-        }
-    }
-
-    private fun processAuction(sponsor: List<Sponsor>) {
-        if (sponsor.isEmpty()) {
-            Log.i("cek", "isEmpty")
-        } else {
-            auctionView.showAuction(sponsor)
-        }
-    }
-
-    override fun openSponsorDetail(requestedAuction: Sponsor) {
-        Log.i("cekoprat","openSponsorDetail:${requestedAuction.sponsorId}")
-        requestedAuction.sponsorId?.let {
-            auctionView.showAuctionDetailsUi(it)
+            sponsorView.showSponsor(sponsor)
         }
     }
 

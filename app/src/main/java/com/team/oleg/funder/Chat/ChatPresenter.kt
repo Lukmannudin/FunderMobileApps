@@ -1,6 +1,5 @@
 package com.team.oleg.funder.Chat
 
-import android.util.Log
 import com.team.oleg.funder.APIRequest.RequestApiChat
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.Service.ChatService
@@ -22,6 +21,7 @@ class ChatPresenter(
 
     override fun start() {
         loadChat(false)
+        chatView.showNoChat(false)
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
@@ -54,21 +54,21 @@ class ChatPresenter(
                     chatView.setLoadingIndicator(false)
                 },
                 { error ->
-                    Log.e("ErrorLOL", error.message)
+                    chatView.showNoChat(true)
                 }
             )
     }
 
     private fun processChat(chat: List<Chat>) {
         if (chat.isEmpty()) {
-            Log.i("cek", "isEmpty")
+            chatView.showNoChat(true)
         } else {
             chatView.showChatList(chat)
         }
     }
 
-    override fun openChatDetail(requestChat: Chat) {
-        requestChat.chatId?.let {
+    override fun openChatDetail(requestedChat: Chat) {
+        requestedChat.chatId?.let {
             chatView.showChatDetailUi(it)
         }
     }
