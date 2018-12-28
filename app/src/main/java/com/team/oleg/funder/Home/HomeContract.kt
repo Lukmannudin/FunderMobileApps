@@ -14,7 +14,7 @@ interface HomeContract {
 
         fun showAuction(sponsor: List<Sponsor>)
 
-        fun showAuctionDetailsUi(auctionId: String)
+        fun showAuctionDetailsUi(sponsor : Sponsor)
 
         fun showNoAuction()
 

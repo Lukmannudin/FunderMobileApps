@@ -91,10 +91,9 @@ class HomePresenter(
     }
 
     override fun openSponsorDetail(requestedAuction: Sponsor) {
-        Log.i("cekoprat","openSponsorDetail:${requestedAuction.sponsorId}")
-        requestedAuction.sponsorId?.let {
-            auctionView.showAuctionDetailsUi(it)
-        }
+        Log.i("cekoprat", "openSponsorDetail:${requestedAuction.sponsorId}")
+
+        auctionView.showAuctionDetailsUi(requestedAuction)
     }
 
 

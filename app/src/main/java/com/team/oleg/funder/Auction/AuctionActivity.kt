@@ -1,19 +1,25 @@
 package com.team.oleg.funder.Auction
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import com.team.oleg.funder.BuildConfig
+import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Response.SponsorResponse
 import com.team.oleg.funder.Sponsor.AuctionPresenter
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_auction.*
-import org.jetbrains.anko.act
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar_detail.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 
 class AuctionActivity : AppCompatActivity(),AuctionContract.View {
 
@@ -23,10 +29,17 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auction)
-        supportActionBar?.setHomeButtonEnabled(true)
-        val auctionId = intent.getStringExtra(Utils.ID)
-        Log.i("cekoprat","AuctionActivity$auctionId")
-        presenter = AuctionPresenter(auctionId,this)
+        val sponsorData = intent.getParcelableExtra<Sponsor>(Utils.INTENT_PARCELABLE)
+
+        backButton.setOnClickListener {
+            startActivity(intentFor<MainActivity>())
+        }
+        Glide.with(this).load(BuildConfig.BASE_URL
+            + "uploads/photo/company_photo/" + sponsorData.companyPhoto
+        ).into(tbImageIconLogo)
+
+        tbNameTitle.text = sponsorData.companyName
+        presenter = AuctionPresenter(""+sponsorData.sponsorId,this)
     }
 
     override fun onResume() {
@@ -59,6 +72,11 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
 
     override fun clickedInterested(sponsorId: String?) {
         Toast.makeText(this,sponsorId,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
+
     }
 
 }

@@ -2,7 +2,6 @@ package com.team.oleg.funder.Auction
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.Response.SponsorResponse
 
 interface AuctionContract {
@@ -19,7 +18,7 @@ interface AuctionContract {
 
     interface Presenter : BasePresenter {
 
-        fun result(requestCode: Int,resultCode: Int)
+        fun result(requestCode: Int, resultCode: Int)
 
         fun loadSponsor(forceUpdate: Boolean)
 

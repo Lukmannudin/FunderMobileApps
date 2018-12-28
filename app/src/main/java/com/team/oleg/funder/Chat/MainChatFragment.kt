@@ -168,9 +168,6 @@ class MainChatFragment : Fragment(), ChatContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        actionSearch.clearFocus()
-        actionSearch.setQuery("", false)
-        actionSearch.isIconified = true
     }
 
     private fun setupSearchView() {

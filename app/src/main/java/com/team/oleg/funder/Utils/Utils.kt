@@ -1,5 +1,8 @@
 package com.team.oleg.funder.Utils
 
 object Utils {
-    val ID = "ID"
+    const val ID = "ID"
+    const val NAME = "NAME"
+    const val INTENT_PARCELABLE = "INTENT_PARCELABLE"
+
 }

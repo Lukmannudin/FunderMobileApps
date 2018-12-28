@@ -7,7 +7,7 @@
     <application
             android:name=".MyCustomApplication"
             android:allowBackup="true"
-            android:icon="@drawable/icon"
+            android:icon="@drawable/appicon"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
@@ -25,7 +25,11 @@
         <activity
                 android:name=".SearchHome.SearchHomeActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Auction.AuctionActivity">
+        <activity
+                android:name=".Auction.AuctionActivity"
+                android:parentActivityName=".Main.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+        >
         </activity>
     </application>
 

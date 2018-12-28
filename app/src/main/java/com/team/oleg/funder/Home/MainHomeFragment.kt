@@ -102,10 +102,9 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         listAdapter.notifyDataSetChanged()
     }
 
-    override fun showAuctionDetailsUi(auctionId: String) {
-        Log.i("cekoprat", "showAuctionDetailsUi:$auctionId")
+    override fun showAuctionDetailsUi(sponsor: Sponsor) {
         startActivity(intentFor<AuctionActivity>(
-            Utils.ID to auctionId
+            Utils.INTENT_PARCELABLE to sponsor
         ))
     }
 
