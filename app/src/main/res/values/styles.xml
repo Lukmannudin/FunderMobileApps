@@ -15,5 +15,9 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="toolbarDetailCustomize">
+        <item name="android:background">@color/white</item>
+        <item name="android:maxHeight">?attr/actionBarSize</item>
 
+    </style>
 </resources>

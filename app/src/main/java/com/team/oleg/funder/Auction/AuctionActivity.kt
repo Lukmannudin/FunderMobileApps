@@ -66,17 +66,26 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
         tvAuctionDesc.text = sponsor.data.sponsorDesc
         auctionRequirement.text = sponsor.data.sponsorReq
         btnSponsor.setOnClickListener {
-            clickedInterested(sponsor.data.sponsorId)
+            clickedInterested(sponsor.data.sponsorId, sponsor.data)
         }
     }
 
-    override fun clickedInterested(sponsorId: String?) {
+    override fun clickedInterested(sponsorId: String?, sponsor: Sponsor) {
         Toast.makeText(this,sponsorId,Toast.LENGTH_SHORT).show()
+        startActivity(intentFor<FillForm>(
+            Utils.INTENT_PARCELABLE to sponsor
+        ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         return super.onCreateOptionsMenu(menu)
+    }
 
+    private fun loadFragment(savedInstanceState: Bundle?){
+        if (savedInstanceState == null){
+            supportFragmentManager
+                .beginTransaction()
+        }
     }
 
 }

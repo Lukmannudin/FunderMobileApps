@@ -2,6 +2,7 @@ package com.team.oleg.funder.Auction
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
+import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.Response.SponsorResponse
 
 interface AuctionContract {
@@ -12,7 +13,7 @@ interface AuctionContract {
 
         fun showSponsor(sponsor: SponsorResponse)
 
-        fun clickedInterested(sponsorId: String?)
+        fun clickedInterested(sponsorId: String?, sponsor: Sponsor)
 
     }
 

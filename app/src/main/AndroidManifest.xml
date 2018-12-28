@@ -28,7 +28,10 @@
         <activity
                 android:name=".Auction.AuctionActivity"
                 android:parentActivityName=".Main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Auction.FillForm"
+            android:theme="@style/AppTheme.NoActionBar"
         >
         </activity>
     </application>
