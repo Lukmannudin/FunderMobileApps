@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:layout_height="80dp"
+        android:fitsSystemWindows="true"
         android:elevation="16dp">
     <LinearLayout
             android:orientation="vertical"
@@ -41,6 +42,7 @@
 
             />
             <TextView
+                    android:id="@+id/tbUnreadChat"
                     android:layout_alignParentEnd="true"
                     android:text="1"
                     android:gravity="center"

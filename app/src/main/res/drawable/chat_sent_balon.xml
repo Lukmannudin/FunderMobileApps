@@ -12,7 +12,7 @@
                     android:bottomLeftRadius="10dp"
                     android:bottomRightRadius="10dp"
             />
-            <solid android:color="@android:color/white"/>
+            <solid android:color="#e8fbfd"/>
         </shape>
     </item>
 </layer-list>

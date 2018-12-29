@@ -1,8 +1,10 @@
 package com.team.oleg.funder.Home
 
 import android.util.Log
+import com.team.oleg.funder.APIRequest.RequestApiChat
 import com.team.oleg.funder.APIRequest.RequestApiSponsor
 import com.team.oleg.funder.Model.Sponsor
+import com.team.oleg.funder.Service.ChatService
 import com.team.oleg.funder.Service.SponsorService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,6 +23,7 @@ class HomePresenter(
 
     override fun start() {
         loadSponsor(false)
+        loadUnreadChat()
     }
 
     override fun destroy() {
@@ -96,5 +99,24 @@ class HomePresenter(
         auctionView.showAuctionDetailsUi(requestedAuction)
     }
 
+    override fun loadUnreadChat() {
+        val service: RequestApiChat = ChatService.create()
+        disposable = service.getUnreadChatEO("1")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("unread",result.data.unread)
+                    processUnreadChat(result.data.unread)
+                },
+                { error ->
+                    Log.i("unread:Error",error.toString())
+                }
+            )
+    }
+
+    private fun processUnreadChat(countUnread: String?) {
+        countUnread?.let { auctionView.showUnreadChat(it) }
+    }
 
 }

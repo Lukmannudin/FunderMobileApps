@@ -58,17 +58,17 @@ class ChatAdapter(
             unreadMessage.text = "3"
 
 
-            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
-
-            val currentDate = sdf.format(Date()).split(" ")[0]
-            val currentDateTanggal = chat.messageTime.toString().split(" ")[1].substring(0, 5)
-            val currentDateChat = chat.messageTime.toString().split(" ")[0]
-
-            if (currentDate == currentDateChat) {
-                dateChat.text = currentDateTanggal
-            } else {
-                dateChat.text = currentDateChat
-            }
+//            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
+//
+//            val currentDate = sdf.format(Date()).split(" ")[0]
+//            val currentDateTanggal = chat.messageTime.toString().split(" ")[1].substring(0, 5)
+//            val currentDateChat = chat.messageTime.toString().split(" ")[0]
+//
+//            if (currentDate == currentDateChat) {
+//                dateChat.text = currentDateTanggal
+//            } else {
+//                dateChat.text = currentDateChat
+//            }
         }
     }
 }

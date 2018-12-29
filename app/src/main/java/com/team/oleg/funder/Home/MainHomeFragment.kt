@@ -24,7 +24,6 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class MainHomeFragment : Fragment(), HomeContract.View {
 
-
     override lateinit var presenter: HomeContract.Presenter
 
     private val topFunderList: MutableList<Sponsor> = mutableListOf()
@@ -113,6 +112,10 @@ class MainHomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showNoAuction() {
+    }
+
+    override fun showUnreadChat(count: String) {
+        tbUnreadChat.text = count
     }
 
     override fun onResume() {

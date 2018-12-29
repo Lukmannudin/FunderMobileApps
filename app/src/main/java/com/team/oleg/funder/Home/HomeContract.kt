@@ -18,6 +18,8 @@ interface HomeContract {
 
         fun showNoAuction()
 
+        fun showUnreadChat(count: String)
+
     }
 
     interface Presenter : BasePresenter {
@@ -27,6 +29,8 @@ interface HomeContract {
         fun loadSponsor(forceUpdate: Boolean)
 
         fun openSponsorDetail(requestedAuction: Sponsor)
+
+        fun loadUnreadChat()
     }
 }
 

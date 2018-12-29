@@ -30,9 +30,13 @@
                 android:parentActivityName=".Main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Auction.FillForm"
-            android:theme="@style/AppTheme.NoActionBar"
-        >
+        <activity
+                android:name=".FillForm.FillFormActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".Chat_Message.ChatMessageActivity">
+        </activity>
+        <activity android:name=".EventOrganizer.EventOrganizerProfile">
         </activity>
     </application>
 

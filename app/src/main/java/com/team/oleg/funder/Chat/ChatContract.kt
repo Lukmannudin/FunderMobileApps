@@ -24,5 +24,6 @@ interface ChatContract {
         fun loadChat(forceUpdate: Boolean)
 
         fun openChatDetail(requestedChat:Chat)
+
     }
 }

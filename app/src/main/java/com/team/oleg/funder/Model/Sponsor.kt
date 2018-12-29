@@ -6,13 +6,13 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-open class Sponsor(
+data class Sponsor(
     @SerializedName("sponsor_id")
 
-    open var sponsorId: String? = null,
+    val sponsorId: String? = null,
     @SerializedName("company_id")
-
     val companyId: String? = null,
+
     @SerializedName("sponsor_name")
 
     val sponsorName: String? = null,
