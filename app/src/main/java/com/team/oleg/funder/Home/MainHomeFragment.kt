@@ -5,12 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.team.oleg.funder.Auction.AuctionActivity
+import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.startActivity
 
 
 class MainHomeFragment : Fragment(), HomeContract.View {
@@ -57,6 +56,9 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
+        }
+        ab_user_profile.setOnClickListener {
+            startActivity(intentFor<EventOrganizerProfile>())
         }
     }
 
