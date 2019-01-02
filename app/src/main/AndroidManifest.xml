@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".Main.MainActivity"
+                android:name=".Login.LoginEOActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity"/>
+        <activity android:name=".Main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+        />
         <activity
                 android:name=".SearchHome.SearchHomeActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
@@ -36,7 +38,17 @@
         </activity>
         <activity android:name=".Chat_Message.ChatMessageActivity">
         </activity>
-        <activity android:name=".EventOrganizer.EventOrganizerProfile">
+        <activity
+                android:name=".EventOrganizer.EventOrganizerProfile"
+                android:theme="@style/Theme.MyEOProfile">
+        </activity>
+        <activity android:name=".Login.LoginCompanyActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+        >
+        </activity>
+        <activity android:name=".Login.SignUpActivity"
+            android:parentActivityName=".Login.LoginEOActivity"
+        >
         </activity>
     </application>
 

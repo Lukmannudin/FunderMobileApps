@@ -131,9 +131,7 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        actionSearch.clearFocus()
-        actionSearch.setQuery("", false);
-        actionSearch.isIconified = true
+        presenter.destroy()
     }
     private fun setupSearchView() {
         val searchIconImage = actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_button)

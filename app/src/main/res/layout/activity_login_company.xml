@@ -10,7 +10,7 @@
         android:layout_margin="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
-        tools:context=".Login.LoginActivity">
+        tools:context=".Login.LoginEOActivity">
     <ImageView
             android:src="@drawable/background_login"
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" android:id="@+id/loginCompanyLink"/>
     <ImageView
             android:src="@drawable/logo"
             android:layout_width="269dp"
@@ -31,29 +31,18 @@
             app:layout_constraintHorizontal_bias="0.505"/>
     <TextView
             android:id="@+id/tvLogin"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
             android:text="@string/login"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:layout_height="30dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:layout_marginStart="30dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
-
-    <TextView
-            android:id="@+id/tvSignUp"
-            android:text="@string/sign_up"
-            android:gravity="center"
-            android:layout_width="120dp"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent"
-            android:layout_height="30dp"
-            android:layout_marginEnd="30dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvLogin" android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="1.0"/>
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -106,12 +95,13 @@
     </LinearLayout>
     <TextView
             android:text="@string/forgot_password"
-            android:layout_width="142dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:id="@+id/textView" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"/>
+            android:id="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"/>
     <TextView
             android:text="@string/login"
             android:background="@drawable/rounded_white"
@@ -119,9 +109,21 @@
             android:layout_width="180dp"
             android:textSize="20sp"
             android:layout_height="40dp"
+            android:textStyle="bold"
             android:gravity="center"
-            android:id="@+id/textView2" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:id="@+id/loginButton" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+    <TextView
+            android:text="Login as EventOrganizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginEventOrganizer" android:layout_marginBottom="24dp"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            tools:text="Login as company" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </android.support.constraint.ConstraintLayout>
