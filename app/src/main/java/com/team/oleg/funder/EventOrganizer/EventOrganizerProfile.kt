@@ -6,8 +6,10 @@ import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
+import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_event_organizer_profile.*
 import kotlinx.android.synthetic.main.toolbar_profile.*
 import org.jetbrains.anko.intentFor
@@ -44,6 +46,18 @@ class EventOrganizerProfile : AppCompatActivity() {
                 tvStringtilEoVisionCount.text = tilEoVision.editText?.text?.length.toString() + " / 120"
             }
         })
+
+        logout.setOnClickListener {
+            logout()
+        }
+    }
+
+    private fun logout(){
+        val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN,0)
+        if (sharedPref.getString(SharedPreferenceUtils.USER_ID,SharedPreferenceUtils.EMPTY)!= SharedPreferenceUtils.EMPTY){
+            sharedPref.edit().clear().apply()
+            startActivity(intentFor<LoginEOActivity>())
+        }
     }
 
 }

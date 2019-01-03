@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.team.oleg.funder.Auction.AuctionActivity
 import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
+import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.SearchHome.SearchHomeActivity
@@ -18,7 +19,9 @@ import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
+import kotlinx.android.synthetic.main.main_toolbar.view.*
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class MainHomeFragment : Fragment(), HomeContract.View {
@@ -71,7 +74,11 @@ class MainHomeFragment : Fragment(), HomeContract.View {
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvAuction.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
+        view.tbUnreadChat.setOnClickListener {
+            startActivity(intentFor<MainActivity>(
+                Utils.NAME to Utils.TOCHAT
+            ))
+        }
         view.homeSwipeRefresh.setOnRefreshListener {
             presenter.loadSponsor(false)
         }

@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Login
+package com.team.oleg.funder.Login.SignUp
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

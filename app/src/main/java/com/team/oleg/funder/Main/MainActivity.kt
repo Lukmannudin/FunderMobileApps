@@ -1,13 +1,10 @@
 package com.team.oleg.funder.Main
 
 import MainHomeAdapter
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.view.MenuItem
-import android.view.WindowManager
 import com.team.oleg.funder.BaseActivity
 import com.team.oleg.funder.Chat.MainChatFragment
 import com.team.oleg.funder.DealHistory.MainDealHistoryFragment
@@ -19,15 +16,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
-    private val CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY"
     var prevMenuItem: MenuItem? = null
     private lateinit var homePresenter: HomePresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        startActivity<LoginEOActivity>()
-
+        
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
 
         viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -47,14 +43,15 @@ class MainActivity : BaseActivity() {
                 bottomIconActive.isChecked = true
                 bottom_navigation.menu.getItem(MENU_DEAL_HISTORY).icon = resources.getDrawable(R.drawable.icon_history)
 
-                when (position){
+                when (position) {
                     MENU_CHAT -> {
                         bottomIconActive.icon = resources.getDrawable(R.drawable.icon_chat_active)
                     }
                     MENU_DEAL_HISTORY -> {
                         bottomIconActive.icon = resources.getDrawable(R.drawable.icon_history_active)
 
-                    } else ->{
+                    }
+                    else -> {
                     }
                 }
                 prevMenuItem = bottomIconActive

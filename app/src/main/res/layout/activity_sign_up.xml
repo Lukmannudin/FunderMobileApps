@@ -14,7 +14,7 @@
             android:layout_margin="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
-            tools:context=".Login.LoginEOActivity">
+            tools:context=".Login.LoginEO.LoginEOActivity">
         <ImageView
                 android:src="@drawable/background_login"
                 android:layout_width="match_parent"

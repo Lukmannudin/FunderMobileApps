@@ -1,10 +1,11 @@
-package com.team.oleg.funder.Login
+package com.team.oleg.funder.Login.LoginEO
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
+import com.team.oleg.funder.Model.Company
 import com.team.oleg.funder.Model.User
 
-interface LoginContract {
+interface LoginEOContract {
 
     interface View : BaseView<Presenter> {
 

@@ -1,5 +1,6 @@
 package com.team.oleg.funder.APIRequest
 
+import com.team.oleg.funder.Model.Company
 import com.team.oleg.funder.Model.User
 import com.team.oleg.funder.Response.RootResponse
 import io.reactivex.Observable
@@ -10,4 +11,8 @@ interface RequestUser {
     @POST("login/eo")
     fun login(@Body user: User):
             Observable<RootResponse<User>>
+
+    @POST("login/company")
+    fun loginCompany(@Body company: Company):
+            Observable<RootResponse<Company>>
 }
