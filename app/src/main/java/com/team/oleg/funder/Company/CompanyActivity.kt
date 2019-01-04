@@ -3,10 +3,10 @@ package com.team.oleg.funder.Company
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuItem
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import kotlinx.android.synthetic.main.activity_company.*
 import org.jetbrains.anko.intentFor
 
 class CompanyActivity : AppCompatActivity() {
@@ -14,19 +14,19 @@ class CompanyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_company)
+        supportActionBar?.elevation = 0f
+        vpCompanyMain.adapter = CompanyAdapter(supportFragmentManager)
+        tbCompanyMain.setupWithViewPager(vpCompanyMain)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_profile, menu)
-        val btnLogout = menu?.findItem(R.id.btnLogout)
+        menuInflater.inflate(R.menu.toolbar_company, menu)
+        val btnLogout = menu?.findItem(R.id.logout)
 
-        btnLogout?.setOnMenuItemClickListener(object : MenuItem.OnMenuItemClickListener{
-            override fun onMenuItemClick(item: MenuItem?): Boolean {
-                logout()
-                return true
-            }
-
-        })
+        btnLogout?.setOnMenuItemClickListener {
+            logout()
+            true
+        }
         return true
     }
 
@@ -37,4 +37,6 @@ class CompanyActivity : AppCompatActivity() {
             startActivity(intentFor<LoginEOActivity>())
         }
     }
+
+
 }

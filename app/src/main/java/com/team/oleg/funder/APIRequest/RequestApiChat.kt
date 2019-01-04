@@ -12,7 +12,14 @@ interface RequestApiChat {
         fun getChatEO(@Path("eoId") eoId : String):
             Observable<RootResponse<Chat>>
 
+
+    @GET("chat/company/{companyId}")
+    fun getChatCompany(@Path("companyId") companyId : String?):
+            Observable<RootResponse<Chat>>
+
     @GET("chat/unread/{eoId}")
     fun getUnreadChatEO(@Path("eoId") eoId : String):
             Observable<ChatUnreadResponse>
+
+
 }

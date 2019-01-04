@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/dealHistoryCompany"
+            android:title="@string/deal_history"
+    />
+    <item
+            android:id="@+id/searchCompany"
+            android:title="@string/search"
+            android:icon="@drawable/ic_search_white_24dp"
+            app:showAsAction="always"
+            app:actionViewClass="android.support.v7.widget.SearchView"
+    />
+    <item
+            android:id="@+id/settings"
+            android:title="@string/settings"
+        />
+    <item
+            android:id="@+id/logout"
+            android:title="@string/logout"/>
+</menu>
