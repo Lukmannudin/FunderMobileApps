@@ -18,7 +18,7 @@ class ChatEOAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.chat_list, parent, false)
+             LayoutInflater.from(parent.context).inflate(R.layout.chat_list, parent, false)
         )
     }
 
@@ -52,21 +52,9 @@ class ChatEOAdapter(
             }
             titleChat.text = chat.companyName
             eventName.text = chat.companyVision
-            messageChat.text = chat.message
+            messageChat.text = "selamat pagi"
             unreadMessage.text = "3"
 
-
-//            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
-//
-//            val currentDate = sdf.format(Date()).split(" ")[0]
-//            val currentDateTanggal = chat.messageTime.toString().split(" ")[1].substring(0, 5)
-//            val currentDateChat = chat.messageTime.toString().split(" ")[0]
-//
-//            if (currentDate == currentDateChat) {
-//                dateChat.text = currentDateTanggal
-//            } else {
-//                dateChat.text = currentDateChat
-//            }
         }
     }
 }

@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "1030524195413",
-    "firebase_url": "https://funderchat.firebaseio.com",
-    "project_id": "funderchat",
-    "storage_bucket": "funderchat.appspot.com"
+    "project_number": "1048191670407",
+    "firebase_url": "https://funderchat-61a17.firebaseio.com",
+    "project_id": "funderchat-61a17",
+    "storage_bucket": "funderchat-61a17.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030524195413:android:b3704bb812e01db6",
+        "mobilesdk_app_id": "1:1048191670407:android:b3704bb812e01db6",
         "android_client_info": {
           "package_name": "com.team.oleg.funder"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1030524195413-uf09pa7iggg8u5j6d0tgulvl3dqusc00.apps.googleusercontent.com",
+          "client_id": "1048191670407-cev2j4fi7r7lg5i7c71fkvkn1h60rb7i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.team.oleg.funder",
-            "certificate_hash": "a5f9efd1b1612016873ab20918bef20700a8898c"
+            "certificate_hash": "ec1fb6422be5a1e09e9b9d7621c7be0c661c11a5"
           }
         },
         {
-          "client_id": "1030524195413-487ophdnnogijtk9jnd47c9rgv5b7h7i.apps.googleusercontent.com",
+          "client_id": "1048191670407-2v4duv8koptjkatb17395ja6rlthmfk7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBrVbvPoj6hetZfIhAAOOewyka5AIWpnXE"
+          "current_key": "AIzaSyC2ULUi2WhQuQGwFJ6ZWpq_4ApEN7sPyTw"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1030524195413-487ophdnnogijtk9jnd47c9rgv5b7h7i.apps.googleusercontent.com",
+              "client_id": "1048191670407-2v4duv8koptjkatb17395ja6rlthmfk7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -6,23 +6,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".EventOrganizer.Home.HomeFragment">
+            tools:context=".EventOrganizer.Home.HomeFragment">
 
-    <include
-            layout="@layout/main_toolbar"
-            android:id="@+id/include"/>
+        <include
+                layout="@layout/main_toolbar"
+                android:id="@+id/include"/>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-            app:layout_constraintTop_toBottomOf="@+id/include"
-            android:id="@+id/homeSwipeRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvAuction"
+        <android.support.v4.widget.SwipeRefreshLayout
+                app:layout_constraintTop_toBottomOf="@+id/include"
+                android:id="@+id/homeSwipeRefresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        >
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+                android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvAuction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            >
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
 
