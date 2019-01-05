@@ -18,7 +18,7 @@ class ChatEOAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(
-             LayoutInflater.from(parent.context).inflate(R.layout.chat_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.chat_list, parent, false)
         )
     }
 
@@ -54,6 +54,9 @@ class ChatEOAdapter(
             eventName.text = chat.companyVision
             messageChat.text = "selamat pagi"
             unreadMessage.text = "3"
+            itemView.setOnClickListener {
+                listener.onChatClick(chat)
+            }
 
         }
     }

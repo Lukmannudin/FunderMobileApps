@@ -7,20 +7,20 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import com.team.oleg.funder.Login.LoginPresenter
+import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.SharedPreferenceUtils.USER_ID
 import kotlinx.android.synthetic.main.fragment_main_chat.*
 import kotlinx.android.synthetic.main.fragment_main_chat.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.support.v4.intentFor
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +48,6 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("Fragment", "MainChat")
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
@@ -157,7 +156,9 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
     }
 
     override fun showChatDetailUi(chatId: String) {
-
+        startActivity(intentFor<ChatMessageEOActivity>(
+            ChatUtils.CHAT_ID to chatId
+        ))
     }
 
     override fun showNoChat(active: Boolean) {

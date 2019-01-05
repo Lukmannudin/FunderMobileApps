@@ -8,12 +8,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.team.oleg.funder.Company.ChatMessageCompany.ChatMessageCompanyActivity
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
-import kotlinx.android.synthetic.main.fragment_main_chat.*
+import org.jetbrains.anko.support.v4.intentFor
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -114,6 +116,11 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     }
 
     override fun showChatDetailUi(chatId: String) {
+        startActivity(
+            intentFor<ChatMessageCompanyActivity>(
+                ChatUtils.CHAT_ID to chatId
+            )
+        )
     }
 
     override fun showNoChat(active: Boolean) {

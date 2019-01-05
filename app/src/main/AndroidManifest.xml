@@ -37,8 +37,7 @@
                 android:name=".FillForm.FillFormActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Chat_Message.ChatMessageActivity">
-        </activity>
+
         <activity
                 android:name=".EventOrganizer.EventOrganizerProfile"
                 android:theme="@style/Theme.MyEOProfile">
@@ -53,6 +52,14 @@
         </activity>
         <activity android:name=".Company.CompanyActivity">
         </activity>
+        <activity
+                android:name=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity"
+            android:parentActivityName=".Main.MainActivity"
+        >
+        </activity>
+        <activity android:name=".Company.ChatMessageCompany.ChatMessageCompanyActivity"
+            android:parentActivityName=".Company.CompanyActivity"
+        />
     </application>
 
 </manifest>

@@ -10,4 +10,5 @@
     <color name="bidAccepted">#53b636</color>
     <color name="bidRejected">#b63636</color>
     <color name="bidCanceled">#b67a36</color>
+    <color name="colorWhiteBackground">#f5f5f5</color>
 </resources>

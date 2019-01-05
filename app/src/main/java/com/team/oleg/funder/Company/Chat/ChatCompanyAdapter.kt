@@ -50,10 +50,13 @@ class ChatCompanyAdapter(
                     dummyImage
                 ).into(companyImage)
             }
-            titleChat.text = chat.companyName
+            titleChat.text = chat.eoName
             eventName.text = chat.companyVision
             messageChat.text = chat.message
             unreadMessage.text = "3"
+            itemView.setOnClickListener {
+                listener.onChatClick(chat)
+            }
 
 
 //            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")

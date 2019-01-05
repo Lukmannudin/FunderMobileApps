@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhiteBackground"
+        tools:context=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity">
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/chatMessageSwipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/linearLayout2"
+    >
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        >
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:background="@android:color/white"
+            android:id="@+id/linearLayout2"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_alignParentBottom="true"
+    >
+        <ImageView
+                android:id="@+id/ivAddIconCompany"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/add_icon"
+                android:contentDescription="Add Icon"/>
+        <EditText
+                android:id="@+id/edtAddMessage"
+                android:layout_toEndOf="@id/ivAddIconCompany"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Add text to this message"
+                android:layout_toLeftOf="@id/ivSendMessage"
+                android:layout_height="wrap_content" android:layout_toStartOf="@+id/ivSendMessage"/>
+        <ImageView
+                android:id="@+id/ivSendMessage"
+                android:layout_alignParentRight="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/send_icon"
+                android:layout_alignParentEnd="true" android:layout_marginEnd="8dp"/>
+    </RelativeLayout>
+</RelativeLayout>
