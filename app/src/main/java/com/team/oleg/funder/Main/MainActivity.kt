@@ -6,10 +6,10 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
 import android.view.MenuItem
 import com.team.oleg.funder.BaseActivity
-import com.team.oleg.funder.Chat.MainChatFragment
-import com.team.oleg.funder.DealHistory.MainDealHistoryFragment
-import com.team.oleg.funder.Home.HomePresenter
-import com.team.oleg.funder.Home.MainHomeFragment
+import com.team.oleg.funder.EventOrganizer.Chat.MainChatFragment
+import com.team.oleg.funder.EventOrganizer.DealHistory.MainDealHistoryFragment
+import com.team.oleg.funder.EventOrganizer.Home.HomePresenter
+import com.team.oleg.funder.EventOrganizer.Home.HomeFragment
 import com.team.oleg.funder.R
 import com.team.oleg.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -87,7 +87,7 @@ class MainActivity : BaseActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = MainHomeAdapter(supportFragmentManager)
-        adapter.addFragment(MainHomeFragment.newInstance())
+        adapter.addFragment(HomeFragment.newInstance())
         adapter.addFragment(MainChatFragment.newInstance())
         adapter.addFragment(MainDealHistoryFragment.newInstance())
         viewPager.adapter = adapter

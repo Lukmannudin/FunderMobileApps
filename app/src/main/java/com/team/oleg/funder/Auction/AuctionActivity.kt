@@ -20,7 +20,6 @@ import org.jetbrains.anko.intentFor
 
 class AuctionActivity : AppCompatActivity(),AuctionContract.View {
 
-
     override lateinit var presenter: AuctionContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,15 +73,7 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
         ))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    private fun loadFragment(savedInstanceState: Bundle?){
-        if (savedInstanceState == null){
-            supportFragmentManager
-                .beginTransaction()
-        }
+    override fun showNoSponsor() {
     }
 
 }

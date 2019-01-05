@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface RequestApiChat {
     @GET("chat/eo/{eoId}")
-        fun getChatEO(@Path("eoId") eoId : String):
+        fun getChatEO(@Path("eoId") eoId : String?):
             Observable<RootResponse<Chat>>
 
 

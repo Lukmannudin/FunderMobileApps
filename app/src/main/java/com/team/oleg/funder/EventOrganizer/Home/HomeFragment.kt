@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.EventOrganizer.Home
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,24 +14,24 @@ import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.R
-import com.team.oleg.funder.SearchHome.SearchHomeActivity
+import com.team.oleg.funder.EventOrganizer.SearchHome.SearchHomeActivity
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.startActivity
 
 
-class MainHomeFragment : Fragment(), HomeContract.View {
+class HomeFragment : Fragment(), HomeContract.View {
 
     override lateinit var presenter: HomeContract.Presenter
 
     private val topFunderList: MutableList<Sponsor> = mutableListOf()
     private val auctionList: MutableList<Sponsor> = mutableListOf()
 
-    private var itemListener: SponsorItemListener = object : SponsorItemListener {
+    private var itemListener: SponsorItemListener = object :
+        SponsorItemListener {
         override fun onSponsorClick(clickedAuction: Sponsor) {
             presenter.openSponsorDetail(clickedAuction)
         }
@@ -55,7 +55,12 @@ class MainHomeFragment : Fragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listAdapter = SponsorAdapter(context, topFunderList, auctionList, itemListener)
+        listAdapter = SponsorAdapter(
+            context,
+            topFunderList,
+            auctionList,
+            itemListener
+        )
         rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
@@ -87,7 +92,7 @@ class MainHomeFragment : Fragment(), HomeContract.View {
 
     companion object {
         @JvmStatic
-        fun newInstance() = MainHomeFragment().apply {
+        fun newInstance() = HomeFragment().apply {
             arguments = Bundle().apply {
 
             }

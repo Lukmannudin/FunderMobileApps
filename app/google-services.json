@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1030524195413",
+    "firebase_url": "https://funderchat.firebaseio.com",
+    "project_id": "funderchat",
+    "storage_bucket": "funderchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030524195413:android:b3704bb812e01db6",
+        "android_client_info": {
+          "package_name": "com.team.oleg.funder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030524195413-uf09pa7iggg8u5j6d0tgulvl3dqusc00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.oleg.funder",
+            "certificate_hash": "a5f9efd1b1612016873ab20918bef20700a8898c"
+          }
+        },
+        {
+          "client_id": "1030524195413-487ophdnnogijtk9jnd47c9rgv5b7h7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrVbvPoj6hetZfIhAAOOewyka5AIWpnXE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030524195413-487ophdnnogijtk9jnd47c9rgv5b7h7i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

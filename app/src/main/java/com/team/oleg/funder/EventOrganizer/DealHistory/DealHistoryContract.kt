@@ -1,4 +1,4 @@
-package com.team.oleg.funder.DealHistory
+package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView

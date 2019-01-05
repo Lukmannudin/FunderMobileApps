@@ -1,4 +1,4 @@
-package com.team.oleg.funder.DealHistory
+package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import android.content.Context
 import android.graphics.Color

@@ -13,6 +13,8 @@ interface AuctionContract {
 
         fun showSponsor(sponsor: SponsorResponse)
 
+        fun showNoSponsor()
+
         fun clickedInterested(sponsorId: String?, sponsor: Sponsor)
 
     }

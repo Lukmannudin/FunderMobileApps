@@ -1,11 +1,11 @@
-package com.team.oleg.funder.Chat
+package com.team.oleg.funder.EventOrganizer.Chat
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.Model.DealHistory
 
-interface ChatContract {
+interface ChatEOContract {
     interface View: BaseView<Presenter>{
 
         fun setLoadingIndicator(active: Boolean)

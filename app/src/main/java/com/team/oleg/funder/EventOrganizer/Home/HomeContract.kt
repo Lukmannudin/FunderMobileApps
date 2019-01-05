@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.EventOrganizer.Home
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView

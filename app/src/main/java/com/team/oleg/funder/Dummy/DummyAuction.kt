@@ -143,6 +143,7 @@ object DummyAuction {
             ""
         )
     )
+
     fun getListData(): MutableList<Sponsor> {
         val list = mutableListOf<Sponsor>()
         for (i in 0 until data.size) {

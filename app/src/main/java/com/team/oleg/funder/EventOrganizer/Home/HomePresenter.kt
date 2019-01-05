@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.EventOrganizer.Home
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.RequestApiChat
@@ -79,7 +79,7 @@ class HomePresenter(
 
     private fun processTopFunder(sponsor: List<Sponsor>) {
         if (sponsor.isEmpty()) {
-            Log.i("cek", "isEmpty")
+            auctionView.showNoAuction()
         } else {
             auctionView.showTopFunder(sponsor)
         }
@@ -87,15 +87,13 @@ class HomePresenter(
 
     private fun processAuction(sponsor: List<Sponsor>) {
         if (sponsor.isEmpty()) {
-            Log.i("cek", "isEmpty")
+            auctionView.showNoAuction()
         } else {
             auctionView.showAuction(sponsor)
         }
     }
 
     override fun openSponsorDetail(requestedAuction: Sponsor) {
-        Log.i("cekoprat", "openSponsorDetail:${requestedAuction.sponsorId}")
-
         auctionView.showAuctionDetailsUi(requestedAuction)
     }
 
@@ -106,11 +104,11 @@ class HomePresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("unread",result.data.unread)
+                    Log.i("unread", result.data.unread)
                     processUnreadChat(result.data.unread)
                 },
                 { error ->
-                    Log.i("unread:Error",error.toString())
+                    Log.i("unread:Error", error.toString())
                 }
             )
     }

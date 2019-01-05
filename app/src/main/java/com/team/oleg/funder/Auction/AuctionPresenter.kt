@@ -79,7 +79,7 @@ class AuctionPresenter(
 
     private fun processSponsor(sponsor: SponsorResponse) {
         if (sponsor == null) {
-            Log.i("cek", "isEmpty")
+            sponsorView.showNoSponsor()
         } else {
             sponsorView.showSponsor(sponsor)
         }

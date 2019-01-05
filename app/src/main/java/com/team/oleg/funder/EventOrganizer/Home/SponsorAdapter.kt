@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.EventOrganizer.Home
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
@@ -18,7 +18,7 @@ class SponsorAdapter(
     private val context: Context?,
     private val items: List<Sponsor>,
     private val sponsor: List<Sponsor>,
-    private val listener: MainHomeFragment.SponsorItemListener
+    private val listener: HomeFragment.SponsorItemListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -73,9 +73,10 @@ class SponsorAdapter(
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val TopFunderRecyclerView = view.rvTopFunder
 
-        fun bindItem(context: Context?, items: List<Sponsor>, listener: MainHomeFragment.SponsorItemListener) {
+        fun bindItem(context: Context?, items: List<Sponsor>, listener: HomeFragment.SponsorItemListener) {
             TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            TopFunderRecyclerView.adapter = TopFunderAdapter(context, items, listener)
+            TopFunderRecyclerView.adapter =
+                    TopFunderAdapter(context, items, listener)
 
         }
     }
@@ -88,7 +89,7 @@ class SponsorAdapter(
         private val sponsorCompanyName = view.tvAuctionCompanyList
         private val sponsorDatePost = view.tvDateAuctionList
 
-        fun bindItem(context: Context?, sponsor: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
+        fun bindItem(context: Context?, sponsor: Sponsor, listener: HomeFragment.SponsorItemListener) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             context?.let {

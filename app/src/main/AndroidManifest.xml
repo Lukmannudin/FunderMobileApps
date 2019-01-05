@@ -26,7 +26,7 @@
                 android:name=".Main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-                android:name=".SearchHome.SearchHomeActivity"
+                android:name=".EventOrganizer.SearchHome.SearchHomeActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".Auction.AuctionActivity"

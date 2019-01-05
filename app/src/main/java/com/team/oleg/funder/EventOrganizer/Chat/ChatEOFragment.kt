@@ -1,4 +1,4 @@
-package com.team.oleg.funder.DealHistory
+package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.app.ActionBar
 import android.content.Intent
@@ -13,48 +13,61 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import com.team.oleg.funder.Model.DealHistory
+import com.team.oleg.funder.Login.LoginPresenter
+import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
-import kotlinx.android.synthetic.main.fragment_deal_history.*
-import kotlinx.android.synthetic.main.fragment_deal_history.view.*
+import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.Utils.SharedPreferenceUtils.USER_ID
+import kotlinx.android.synthetic.main.fragment_main_chat.*
+import kotlinx.android.synthetic.main.fragment_main_chat.view.*
 import kotlinx.android.synthetic.main.toolbar.*
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
-class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
+/**
+ * A simple [Fragment] subclass.
+ * Activities that contain this fragment must implement the
+ * [MainChatFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [MainChatFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ *
+ */
+class MainChatFragment : Fragment(), ChatEOContract.View {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
-    override lateinit var presenter: DealHistoryContract.Presenter
-    private val dealHistoryList: MutableList<DealHistory> = mutableListOf()
+    override lateinit var presenter: ChatEOContract.Presenter
+    private val chatList: MutableList<Chat> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("Fragment", "MainDeal")
+        Log.i("Fragment", "MainChat")
 
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
 
-        presenter = DealHistoryPresenter(this)
+        val sharedPref = this.activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
+        val userId = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
+        presenter = ChatEOPresenter(userId,this)
     }
 
-    private val itemListener: DealHistoryItemListener = object : DealHistoryItemListener {
-        override fun onDealHistoryClick(clickedDealHistory: DealHistory) {
-            presenter.openDetailHistoryDetail(clickedDealHistory)
+    private val itemListener: chatItemListener = object :
+        chatItemListener {
+        override fun onChatClick(clicked: Chat) {
+            presenter.openChatDetail(clicked)
         }
     }
 
-    private lateinit var listAdapter: DealHistoryAdapter
+    private lateinit var listEOAdapter: ChatEOAdapter
 
     override fun onPause() {
         super.onPause()
@@ -68,8 +81,8 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listAdapter = DealHistoryAdapter(context, dealHistoryList, itemListener)
-        rvDealHistory.adapter = listAdapter
+        listEOAdapter = ChatEOAdapter(context, chatList, itemListener)
+        rvMainChat.adapter = listEOAdapter
         setupSearchView()
     }
 
@@ -79,49 +92,14 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
-        val view = inflater.inflate(R.layout.fragment_deal_history, container, false)
-        view.rvDealHistory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        view.dealHistorySwipeRefresh.setOnRefreshListener {
-            presenter.loadDealHistory(false)
+        setHasOptionsMenu(true);
+        val view =  inflater.inflate(R.layout.fragment_main_chat, container, false)
+        view.rvMainChat.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        view.chatSwipeRefresh.setOnRefreshListener {
+            presenter.loadChat(false)
         }
+        view.no_main_chat.visibility = View.VISIBLE
         return view
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = MainDealHistoryFragment().apply {
-            arguments = Bundle().apply {
-                putString(ARG_PARAM1, param1)
-                putString(ARG_PARAM2, param2)
-            }
-        }
-    }
-
-
-    override fun setLoadingIndicator(active: Boolean) {
-        dealHistorySwipeRefresh.isRefreshing = active
-    }
-
-    override fun showDealHistory(dealHistory: List<DealHistory>) {
-        dealHistoryList.clear()
-        dealHistoryList.addAll(dealHistory)
-        listAdapter.notifyDataSetChanged()
-    }
-
-    override fun showDealHistoryDetailUi(dealHistoryId: String) {
-    }
-
-    override fun showNoDealHistory() {
     }
 
     override fun onResume() {
@@ -129,14 +107,79 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         presenter.start()
     }
 
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+
+    interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment MainChatFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            MainChatFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(ARG_PARAM1, param1)
+//                    putString(ARG_PARAM2, param2)
+//                }
+//            }
+        @JvmStatic
+        fun newInstance() = MainChatFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
+            }
+        }
+    }
+
+    override fun setLoadingIndicator(active: Boolean) {
+        chatSwipeRefresh.isRefreshing = active
+    }
+
+    override fun showChatList(chat: List<Chat>) {
+        chatList.clear()
+        chatList.addAll(chat)
+        listEOAdapter.notifyDataSetChanged()
+    }
+
+    override fun showChatDetailUi(chatId: String) {
+
+    }
+
+    override fun showNoChat(active: Boolean) {
+        if (active){
+            no_main_chat.visibility = View.VISIBLE
+            chatSwipeRefresh.visibility = View.GONE
+        } else {
+            no_main_chat.visibility = View.GONE
+            chatSwipeRefresh.visibility = View.VISIBLE
+        }
+    }
+
+
+
     override fun onDestroy() {
         super.onDestroy()
-        presenter.destroy()
     }
+
     private fun setupSearchView() {
         val searchIconImage = actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_button)
         searchIconImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.icon_search) })
-
+        tbTitle.text = getString(R.string.title_chat)
         val searchIconCloseImage =
             actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
         searchIconCloseImage.setImageDrawable(context?.let {
@@ -160,10 +203,8 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         }
     }
 
-
-    interface DealHistoryItemListener {
-        fun onDealHistoryClick(clickedDealHistory: DealHistory)
+    interface chatItemListener {
+        fun onChatClick(clicked: Chat)
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.team.oleg.funder.SearchHome
+package com.team.oleg.funder.EventOrganizer.SearchHome
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

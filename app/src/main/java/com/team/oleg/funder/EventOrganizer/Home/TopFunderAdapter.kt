@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Home
+package com.team.oleg.funder.EventOrganizer.Home
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -13,10 +13,10 @@ import kotlinx.android.synthetic.main.top_funder_list.view.*
 class TopFunderAdapter(
     private val context: Context?,
     private val items: List<Sponsor>,
-    private val listener: MainHomeFragment.SponsorItemListener
+    private val listener: HomeFragment.SponsorItemListener
 ) :
     RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderAdapter.TopFunderViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderViewHolder {
         return TopFunderViewHolder(
             LayoutInflater.from(context).inflate(R.layout.top_funder_list, parent, false)
         )
@@ -34,7 +34,7 @@ class TopFunderAdapter(
         private val sponsorImage = view.ivSponsorImage
         private val sponsorTitle = view.tvSponsorTitle
         private val sponsorCompany = view.tvSponsorCompany
-        fun bindItem(context: Context?, items: Sponsor, listener: MainHomeFragment.SponsorItemListener) {
+        fun bindItem(context: Context?, items: Sponsor, listener: HomeFragment.SponsorItemListener) {
             val dummyImage ="https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             if (context != null) {
                 sponsorImage.setImageURI(BuildConfig.BASE_URL+"uploads/img/img_sponsor/${items.sponsorImage}")

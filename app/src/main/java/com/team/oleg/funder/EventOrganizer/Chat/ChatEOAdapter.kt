@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Chat
+package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,14 +9,12 @@ import com.bumptech.glide.Glide
 import com.team.oleg.funder.Model.Chat
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
-class ChatAdapter(
+class ChatEOAdapter(
     private val context: Context?,
     private val items: List<Chat>,
     private val listener: MainChatFragment.chatItemListener
-) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+) : RecyclerView.Adapter<ChatEOAdapter.ChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(

@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Chat
+package com.team.oleg.funder.EventOrganizer.Chat
 
 import com.team.oleg.funder.APIRequest.RequestApiChat
 import com.team.oleg.funder.Model.Chat
@@ -7,21 +7,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class ChatPresenter(
-    private val chatView: ChatContract.View
-) : ChatContract.Presenter {
+class ChatEOPresenter(
+    private val userId: String?,
+    private val chatEOView: ChatEOContract.View
+) : ChatEOContract.Presenter {
 
     private var disposable: Disposable? = null
     private var firstLoad = true
 
     init {
-        chatView.presenter = this
+        chatEOView.presenter = this
     }
 
 
     override fun start() {
         loadChat(false)
-        chatView.showNoChat(false)
+        chatEOView.showNoChat(false)
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
@@ -38,38 +39,38 @@ class ChatPresenter(
 
     private fun loadChat(forceUpdate: Boolean, showLoadingUI: Boolean) {
         if (showLoadingUI) {
-            chatView.setLoadingIndicator(true)
+            chatEOView.setLoadingIndicator(true)
         }
 
 //        if (forceUpdate) {
 //        }
 
         val service: RequestApiChat = ChatService.create()
-        disposable = service.getChatEO("1")
+        disposable = service.getChatEO(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
                     processChat(result.data)
-                    chatView.setLoadingIndicator(false)
+                    chatEOView.setLoadingIndicator(false)
                 },
                 { error ->
-                    chatView.showNoChat(true)
+                    chatEOView.showNoChat(true)
                 }
             )
     }
 
     private fun processChat(chat: List<Chat>) {
         if (chat.isEmpty()) {
-            chatView.showNoChat(true)
+            chatEOView.showNoChat(true)
         } else {
-            chatView.showChatList(chat)
+            chatEOView.showChatList(chat)
         }
     }
 
     override fun openChatDetail(requestedChat: Chat) {
         requestedChat.chatId?.let {
-            chatView.showChatDetailUi(it)
+            chatEOView.showChatDetailUi(it)
         }
     }
 

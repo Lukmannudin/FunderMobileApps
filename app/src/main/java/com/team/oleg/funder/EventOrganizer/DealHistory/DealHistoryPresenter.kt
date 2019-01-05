@@ -1,4 +1,4 @@
-package com.team.oleg.funder.DealHistory
+package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.RequestApiDealHistory
@@ -59,7 +59,7 @@ class DealHistoryPresenter(
 
     private fun processDealHistory(dealHistory: List<DealHistory>) {
         if (dealHistory.isEmpty()) {
-            Log.i("cek", "isEmpty")
+            dealHistoryView.showNoDealHistory()
         } else {
             dealHistoryView.showDealHistory(dealHistory)
         }
