@@ -19,8 +19,8 @@ class ChatMessageEOAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val MESSAGE_SENDER = Utils.SENDER_EO
-    private val MESSAGE_RECEIVER = Utils.SENDER_COMPANY
+    private val MESSAGE_SENDER = Utils.SENDER_COMPANY
+    private val MESSAGE_RECEIVER = Utils.SENDER_EO
 
     private val SENDER_VIEW_TYPE = 0
     private val RECEIVER_VIEW_TYPE = 1

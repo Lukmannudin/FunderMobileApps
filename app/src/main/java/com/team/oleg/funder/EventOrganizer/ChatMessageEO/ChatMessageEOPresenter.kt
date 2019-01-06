@@ -12,6 +12,7 @@ class ChatMessageEOPresenter(
     private val chatEOView: ChatMessageEOContract.View
 ) : ChatMessageEOContract.Presenter {
 
+
     private var disposable: Disposable? = null
     private var firstLoad = true
 
@@ -68,6 +69,8 @@ class ChatMessageEOPresenter(
         }
     }
 
-
+    override fun sendChat(message: Message) {
+        chatEOView.showNewChat(message)
+    }
 
 }

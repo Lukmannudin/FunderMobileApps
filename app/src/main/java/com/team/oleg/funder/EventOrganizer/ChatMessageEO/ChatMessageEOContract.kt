@@ -12,6 +12,8 @@ interface ChatMessageEOContract {
         fun showChatList(chat: List<Message>)
 
         fun showNoChat(active: Boolean)
+
+        fun showNewChat(chat: Message)
     }
 
     interface Presenter : BasePresenter {
@@ -20,5 +22,6 @@ interface ChatMessageEOContract {
 
         fun loadChat(forceUpdate: Boolean)
 
+        fun sendChat(message: Message)
     }
 }

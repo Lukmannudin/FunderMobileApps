@@ -49,18 +49,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
         ivSendMessage.setOnClickListener {
-            presenter.sendChat(
-                Message(
-                    null,
-                    messageList[0].chatId,
-                    Utils.SENDER_EO,
-                    edtAddMessage.text.toString(),
-                    Date().toString(),
-                    "sent",
-                    "0"
-                )
-            )
-            sendMessage()
+            setMessage()
             edtAddMessage.text.clear()
         }
 
@@ -73,6 +62,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     override fun onStart() {
         super.onStart()
+        presenter.start()
 
     }
 
@@ -105,7 +95,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         FirebaseFirestore.getInstance().collection(COLLECTION_KEY).document(DOCUMENT_KEY)
     }
 
-    private fun sendMessage(){
+    private fun setMessage() {
 
         val newMesage = mapOf(
             MESSAGE_ID to null,
@@ -115,38 +105,39 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             MESSAGE_TIME to Date().toString(),
             MESSAGE_STATUS to "sent",
             MESSAGE_READ to "0"
-            )
+        )
 
         firestoreChat.set(newMesage)
             .addOnSuccessListener {
-                Toast.makeText(this@ChatMessageCompanyActivity,"Message Sent",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
             }
-            .addOnFailureListener {
-                e -> Log.i("ERROR",e.message)
+            .addOnFailureListener { e ->
+                Log.i("ERROR", e.message)
             }
     }
 
-    private fun realtimeUpdateListener(){
-        firestoreChat.addSnapshotListener {
-                documentSnapshot,
-                firebaseFirestoreException ->
+    private fun realtimeUpdateListener() {
+        firestoreChat.addSnapshotListener { documentSnapshot,
+                                            firebaseFirestoreException ->
             when {
                 firebaseFirestoreException != null -> Log.i("ERROR", firebaseFirestoreException.message)
                 documentSnapshot != null && documentSnapshot.exists() -> {
-                    with(documentSnapshot){
-//                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-                        if (data?.get(CHAT_ID) == messageList[0].chatId){
-                            presenter.sendChat(
-                                Message(
-                                    null,
-                                    messageList[0].chatId,
-                                    data?.get(SENDER).toString(),
-                                    data?.get(MESSAGE).toString(),
-                                    data?.get(MESSAGE_TIME).toString(),
-                                    data?.get(MESSAGE_STATUS).toString(),
-                                    data?.get(MESSAGE_READ).toString()
+                    with(documentSnapshot) {
+                        //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
+                        if (data?.get(CHAT_ID) != null && messageList.size > 0) {
+                            if (data?.get(CHAT_ID) == messageList[0].chatId) {
+                                presenter.sendChat(
+                                    Message(
+                                        null,
+                                        messageList[0].chatId,
+                                        data?.get(SENDER).toString(),
+                                        data?.get(MESSAGE).toString(),
+                                        data?.get(MESSAGE_TIME).toString(),
+                                        data?.get(MESSAGE_STATUS).toString(),
+                                        data?.get(MESSAGE_READ).toString()
+                                    )
                                 )
-                            )
+                            }
                         }
                     }
                 }
