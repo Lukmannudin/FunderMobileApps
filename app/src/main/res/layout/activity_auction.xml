@@ -77,7 +77,7 @@
                     android:id="@+id/auctionRequirement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     android:text="1. Dapat mengundang sebanyak 1000 peserta"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

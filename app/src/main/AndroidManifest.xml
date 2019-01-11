@@ -34,7 +34,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".FillForm.FillFormActivity"
+                android:name=".EventOrganizer.FillForm.FillFormActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

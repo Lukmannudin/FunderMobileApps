@@ -21,7 +21,7 @@ class FunderChatDatabaseHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "Fun
     override fun onCreate(db: SQLiteDatabase?) {
         db?.createTable(
             ChatUtils.TABLE_CHAT, true,
-            ChatUtils.MESSAGE_ID to TEXT + PRIMARY_KEY,
+            ChatUtils.MESSAGE_ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             ChatUtils.CHAT_ID to TEXT,
             ChatUtils.SENDER to TEXT,
             ChatUtils.MESSAGE to TEXT,

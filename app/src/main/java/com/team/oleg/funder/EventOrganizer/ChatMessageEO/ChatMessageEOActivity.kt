@@ -1,17 +1,20 @@
 package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.Model.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
+import org.jetbrains.anko.db.insert
 import java.util.*
 
 class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
@@ -30,24 +33,21 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listAdapter = ChatMessageEOAdapter(this, messageList)
-        presenter = ChatMessageEOPresenter(chatId, this)
+        presenter = ChatMessageEOPresenter(this,chatId, this)
         rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         presenter.loadChat(false)
-        chatMessageSwipeRefresh.setOnRefreshListener {
-            presenter.loadChat(false)
-        }
 
         rvMessage.adapter = listAdapter
-
 
         ivSendMessage.setOnClickListener {
             setMessage()
             edtAddMessage.text.clear()
         }
+
     }
 
     override fun setLoadingIndicator(active: Boolean) {
-        chatMessageSwipeRefresh.isRefreshing = active
+//        chatMessageSwipeRefresh.isRefreshing = active
     }
 
     override fun onStart() {
@@ -100,9 +100,12 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
             ChatUtils.MESSAGE_READ to "0"
         )
 
+        addToDatabase(newMesage)
         firestoreChat.set(newMesage)
             .addOnSuccessListener {
                 Toast.makeText(this@ChatMessageEOActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+
+
             }
             .addOnFailureListener { e ->
                 Log.i("ERROR", e.message)
@@ -142,4 +145,25 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
         }
     }
+
+    private fun addToDatabase(message : Map<String,String?>){
+        try {
+            database.use {
+                insert(
+                    ChatUtils.TABLE_CHAT,
+                    ChatUtils.MESSAGE_ID to message.get(ChatUtils.MESSAGE_ID),
+                    ChatUtils.CHAT_ID to message.get(ChatUtils.CHAT_ID),
+                    ChatUtils.SENDER to message.get(ChatUtils.SENDER),
+                    ChatUtils.MESSAGE to message.get(ChatUtils.MESSAGE),
+                    ChatUtils.MESSAGE_TIME to message.get(ChatUtils.MESSAGE_TIME),
+                    ChatUtils.MESSAGE_STATUS to message.get(ChatUtils.MESSAGE_STATUS),
+                    ChatUtils.MESSAGE_READ to message.get(ChatUtils.MESSAGE_READ)
+                )
+            }
+        } catch (e: SQLiteConstraintException){
+            Log.i("coco",e.localizedMessage)
+        }
+    }
+
+
 }
