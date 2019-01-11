@@ -31,7 +31,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     override lateinit var presenter: ChatMessageCompanyContract.Presenter
 
     private lateinit var listAdapter: ChatMessageCompanyAdapter
-    private var chatId:String? = null
+    private var chatId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +47,9 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         presenter = ChatMessageCompanyPresenter(chatId, this)
         rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         presenter.loadChat(false)
-        chatMessageSwipeRefresh.setOnRefreshListener {
-            presenter.loadChat(false)
-        }
+//        chatMessageSwipeRefresh.setOnRefreshListener {
+//            presenter.loadChat(false)
+//        }
 
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
@@ -103,22 +103,19 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     private fun setMessage() {
 
         val newMesage = mapOf(
-            MESSAGE_ID to null,
-            CHAT_ID to chatId,
-            SENDER to Utils.SENDER_EO,
-            MESSAGE to edtAddMessage.text.toString(),
-            MESSAGE_TIME to Date().toString(),
-            MESSAGE_STATUS to "sent",
-            MESSAGE_READ to "0"
+                ChatUtils.CHAT_ID to chatId,
+                ChatUtils.SENDER to Utils.SENDER_COMPANY,
+                ChatUtils.MESSAGE to edtAddMessage.text.toString(),
+                ChatUtils.MESSAGE_STATUS to "sent"
         )
 
         firestoreChat.set(newMesage)
-            .addOnSuccessListener {
-                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                Log.i("ERROR", e.message)
-            }
+                .addOnSuccessListener {
+                    Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Log.i("ERROR", e.message)
+                }
     }
 
     private fun realtimeUpdateListener() {
@@ -129,19 +126,18 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
                         //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-                        "ahahah"
                         if (chatId == data?.get(CHAT_ID)) {
-                                presenter.sendChat(
+                            presenter.sendChat(
                                     Message(
-                                        null,
-                                        data?.get(CHAT_ID).toString(),
-                                        data?.get(SENDER).toString(),
-                                        data?.get(MESSAGE).toString(),
-                                        data?.get(MESSAGE_TIME).toString(),
-                                        data?.get(MESSAGE_STATUS).toString(),
-                                        data?.get(MESSAGE_READ).toString()
+                                            null,
+                                            data?.get(ChatUtils.CHAT_ID).toString(),
+                                            data?.get(ChatUtils.SENDER).toString(),
+                                            data?.get(ChatUtils.MESSAGE).toString(),
+                                            null,
+                                            data?.get(ChatUtils.MESSAGE_STATUS).toString(),
+                                            null
                                     )
-                                )
+                            )
                         }
                     }
                 }

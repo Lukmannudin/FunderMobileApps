@@ -1,5 +1,6 @@
 package com.team.oleg.funder.Company.ChatMessageCompany
 
+import android.util.Log
 import com.team.oleg.funder.APIRequest.ChatService
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.Service.ApiService
@@ -69,7 +70,24 @@ class ChatMessageCompanyPresenter(
     }
 
     override fun sendChat(message: Message) {
-        chatEOView.showNewChat(message)
+        val service: ChatService = ApiService.chatService
+        disposable = service.sendMessage(message)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result ->
+                            chatEOView.showNewChat(message)
+                        },
+                        { error ->
+                            Log.i("cek","GAGAL CHAT")
+                            Log.i("cek g",error.localizedMessage)
+                            Log.i("cek c",error.message)
+                            Log.i("cek k",error.stackTrace[0].className)
+
+
+//                            chatEOView.showNoChat(true)
+                        }
+                )
     }
 
 }
