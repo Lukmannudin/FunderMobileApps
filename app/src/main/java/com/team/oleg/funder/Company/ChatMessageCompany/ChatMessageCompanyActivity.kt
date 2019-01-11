@@ -129,7 +129,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
                         //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-                            if (chatId == data?.get(CHAT_ID)) {
+                        "ahahah"
+                        if (chatId == data?.get(CHAT_ID)) {
                                 presenter.sendChat(
                                     Message(
                                         null,
