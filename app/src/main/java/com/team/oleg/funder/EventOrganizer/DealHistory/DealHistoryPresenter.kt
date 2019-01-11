@@ -1,9 +1,9 @@
 package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestApiDealHistory
-import com.team.oleg.funder.Model.DealHistory
-import com.team.oleg.funder.Service.DealHistoryService
+import com.team.oleg.funder.APIRequest.DealHistoryService
+import com.team.oleg.funder.Data.DealHistory
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +42,7 @@ class DealHistoryPresenter(
 //
 //        }
 
-        val service: RequestApiDealHistory = DealHistoryService.create()
+        val service: DealHistoryService = ApiService.dealHistoryService
         disposable = service.getDealHistory("1")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

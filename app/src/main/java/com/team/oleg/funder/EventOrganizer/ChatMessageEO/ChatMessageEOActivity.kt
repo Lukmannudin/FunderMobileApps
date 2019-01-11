@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.team.oleg.funder.Database.database
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.Utils
@@ -26,11 +26,15 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
     private lateinit var listAdapter: ChatMessageEOAdapter
 
+    private var chatId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_message_eo)
-        val chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
+        chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        Log.i("cek chatIdEO",chatId)
 
         listAdapter = ChatMessageEOAdapter(this, messageList)
         presenter = ChatMessageEOPresenter(this,chatId, this)
@@ -92,7 +96,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
         val newMesage = mapOf(
             ChatUtils.MESSAGE_ID to null,
-            ChatUtils.CHAT_ID to messageList[0].chatId,
+            ChatUtils.CHAT_ID to chatId,
             ChatUtils.SENDER to Utils.SENDER_COMPANY,
             ChatUtils.MESSAGE to edtAddMessage.text.toString(),
             ChatUtils.MESSAGE_TIME to Date().toString(),
@@ -124,10 +128,9 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 //                        if (data != null){
 //                            Toast.makeText(this@ChatMessageEOActivity,"${data?.get(ChatUtils.MESSAGE)}", Toast.LENGTH_SHORT).show()
 //                        }
-                        if (data?.get(ChatUtils.CHAT_ID) != null) {
-//                            if (data?.get(ChatUtils.CHAT_ID)) {
+                        if (data?.get(ChatUtils.CHAT_ID) == chatId) {
                                 presenter.sendChat(
-                                    com.team.oleg.funder.Model.Message(
+                                    Message(
                                         null,
                                         data?.get(ChatUtils.CHAT_ID).toString(),
                                         data?.get(ChatUtils.SENDER).toString(),
@@ -137,7 +140,6 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                                         data?.get(ChatUtils.MESSAGE_READ).toString()
                                     )
                                 )
-//                            }
                         }
                     }
                 }

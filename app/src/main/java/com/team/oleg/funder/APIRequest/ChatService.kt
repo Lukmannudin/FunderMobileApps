@@ -1,14 +1,14 @@
 package com.team.oleg.funder.APIRequest
 
-import com.team.oleg.funder.Model.Chat
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.Response.ChatUnreadResponse
 import com.team.oleg.funder.Response.RootResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface RequestApiChat {
+interface ChatService {
     @GET("chat/eo/{eoId}")
     fun getChatEO(@Path("eoId") eoId: String?):
             Observable<RootResponse<Chat>>

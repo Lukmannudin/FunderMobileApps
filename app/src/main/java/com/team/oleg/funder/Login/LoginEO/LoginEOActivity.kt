@@ -7,7 +7,7 @@ import android.widget.Toast
 import com.team.oleg.funder.Login.LoginCompany.LoginCompanyActivity
 import com.team.oleg.funder.Login.SignUp.SignUpActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Model.User
+import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_eo.*

@@ -1,9 +1,9 @@
 package com.team.oleg.funder.EventOrganizer.FillForm
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestApiEvent
-import com.team.oleg.funder.Model.Event
-import com.team.oleg.funder.Service.EventService
+import com.team.oleg.funder.APIRequest.EventService
+import com.team.oleg.funder.Data.Event
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -18,7 +18,7 @@ class FillFormPresenter(
     }
 
     override fun addEvent(event: Event) {
-        val service: RequestApiEvent = EventService.create()
+        val service: EventService = ApiService.eventService
         disposable = service.setEvent(event)
             .subscribeOn(Schedulers.io())
             .subscribe(

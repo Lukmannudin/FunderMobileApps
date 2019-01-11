@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.chat_message_receive.view.*

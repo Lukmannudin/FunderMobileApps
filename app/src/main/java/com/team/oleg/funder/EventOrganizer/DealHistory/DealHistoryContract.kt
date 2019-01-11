@@ -2,7 +2,7 @@ package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.DealHistory
+import com.team.oleg.funder.Data.DealHistory
 
 interface DealHistoryContract {
     interface View: BaseView<Presenter>{
@@ -22,6 +22,6 @@ interface DealHistoryContract {
 
         fun loadDealHistory(forceUpdate: Boolean)
 
-        fun openDetailHistoryDetail(requestedDealHistory:DealHistory)
+        fun openDetailHistoryDetail(requestedDealHistory: DealHistory)
     }
 }

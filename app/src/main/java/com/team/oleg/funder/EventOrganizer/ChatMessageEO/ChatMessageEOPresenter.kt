@@ -2,10 +2,10 @@ package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
 import android.content.Context
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestApiChat
+import com.team.oleg.funder.APIRequest.ChatService
 import com.team.oleg.funder.Database.database
-import com.team.oleg.funder.Model.Message
-import com.team.oleg.funder.Service.ChatService
+import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.Service.ApiService
 import com.team.oleg.funder.Utils.ChatUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -52,7 +52,7 @@ class ChatMessageEOPresenter(
 //        if (forceUpdate) {
 //        }
 
-        val service: RequestApiChat = ChatService.create()
+        val service: ChatService = ApiService.chatService
         disposable = service.getMessageEO(chatId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

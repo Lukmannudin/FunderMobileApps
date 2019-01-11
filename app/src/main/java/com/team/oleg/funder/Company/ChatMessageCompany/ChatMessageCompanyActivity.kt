@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.ChatUtils.CHAT_ID
@@ -31,11 +31,16 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     override lateinit var presenter: ChatMessageCompanyContract.Presenter
 
     private lateinit var listAdapter: ChatMessageCompanyAdapter
+    private var chatId:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_message_eo)
-        val chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
+        chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
+
+        Log.i("cek chatIdCompany", chatId)
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listAdapter = ChatMessageCompanyAdapter(this, messageList)
@@ -99,7 +104,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
         val newMesage = mapOf(
             MESSAGE_ID to null,
-            CHAT_ID to messageList[0].chatId,
+            CHAT_ID to chatId,
             SENDER to Utils.SENDER_EO,
             MESSAGE to edtAddMessage.text.toString(),
             MESSAGE_TIME to Date().toString(),
@@ -124,12 +129,11 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
                         //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-                        if (data?.get(CHAT_ID) != null && messageList.size > 0) {
-                            if (data?.get(CHAT_ID) == messageList[0].chatId) {
+                            if (chatId == data?.get(CHAT_ID)) {
                                 presenter.sendChat(
                                     Message(
                                         null,
-                                        messageList[0].chatId,
+                                        data?.get(CHAT_ID).toString(),
                                         data?.get(SENDER).toString(),
                                         data?.get(MESSAGE).toString(),
                                         data?.get(MESSAGE_TIME).toString(),
@@ -137,7 +141,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                         data?.get(MESSAGE_READ).toString()
                                     )
                                 )
-                            }
                         }
                     }
                 }

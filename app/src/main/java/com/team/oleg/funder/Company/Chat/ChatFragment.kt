@@ -5,11 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.team.oleg.funder.Company.ChatMessageCompany.ChatMessageCompanyActivity
-import com.team.oleg.funder.Model.Chat
+import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
@@ -116,6 +117,7 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     }
 
     override fun showChatDetailUi(chatId: String) {
+        Log.i("cek chatCompanyBefore:",chatId)
         startActivity(
             intentFor<ChatMessageCompanyActivity>(
                 ChatUtils.CHAT_ID to chatId

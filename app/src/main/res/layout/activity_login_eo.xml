@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0" android:id="@+id/loginCompanyLink"/>
+            app:layout_constraintVertical_bias="1.0" android:id="@+id/loginCompanyLink"/>
     <ImageView
             android:src="@drawable/logo"
             android:layout_width="269dp"
@@ -121,23 +121,31 @@
     <TextView
             android:text="Login as company"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="18dp"
             android:id="@+id/loginCompany"
-            android:layout_marginBottom="24dp"
             android:textColor="@android:color/white"
             android:layout_marginStart="20dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            tools:text="Login as company"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Login as company"
+            android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.942"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton"/>
     <TextView
             android:text="New here? Signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:id="@+id/LoginSignupLink" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"
-            android:layout_marginBottom="24dp" app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="New here? Signup"/>
+            android:id="@+id/LoginSignupLink"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="New here? Signup"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            app:layout_constraintVertical_bias="0.942"/>
     <ProgressBar
             android:visibility="gone"
             android:id="@+id/loginLoading"

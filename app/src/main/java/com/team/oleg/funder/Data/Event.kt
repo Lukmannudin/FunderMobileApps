@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Model
+package com.team.oleg.funder.Data
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

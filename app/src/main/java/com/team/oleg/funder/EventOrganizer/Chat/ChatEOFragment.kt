@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
-import com.team.oleg.funder.Model.Chat
+import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils

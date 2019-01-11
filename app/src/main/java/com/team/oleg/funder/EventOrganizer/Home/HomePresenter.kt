@@ -1,11 +1,10 @@
 package com.team.oleg.funder.EventOrganizer.Home
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestApiChat
-import com.team.oleg.funder.APIRequest.RequestApiSponsor
-import com.team.oleg.funder.Model.Sponsor
-import com.team.oleg.funder.Service.ChatService
-import com.team.oleg.funder.Service.SponsorService
+import com.team.oleg.funder.APIRequest.ChatService
+import com.team.oleg.funder.APIRequest.SponsorService
+import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -43,7 +42,8 @@ class HomePresenter(
 //
 //        }
 
-        val service: RequestApiSponsor = SponsorService.create()
+//        val service: RequestApiSponsor = SponsorService.create()
+        val service: SponsorService = ApiService.sponsorService
         disposable = service.getSponsor()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -98,7 +98,7 @@ class HomePresenter(
     }
 
     override fun loadUnreadChat() {
-        val service: RequestApiChat = ChatService.create()
+        val service: ChatService = ApiService.chatService
         disposable = service.getUnreadChatEO("1")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

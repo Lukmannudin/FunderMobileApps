@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import com.team.oleg.funder.Model.DealHistory
+import com.team.oleg.funder.Data.DealHistory
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.fragment_deal_history.*
 import kotlinx.android.synthetic.main.fragment_deal_history.view.*
