@@ -24,5 +24,7 @@ interface ChatMessageCompanyContract {
 
         fun sendChat(message: Message)
 
+        fun receiveChat(message: Message)
+
     }
 }

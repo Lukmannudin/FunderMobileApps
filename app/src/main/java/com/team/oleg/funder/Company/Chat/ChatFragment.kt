@@ -117,7 +117,6 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     }
 
     override fun showChatDetailUi(chatId: String) {
-        Log.i("cek chatCompanyBefore:",chatId)
         startActivity(
             intentFor<ChatMessageCompanyActivity>(
                 ChatUtils.CHAT_ID to chatId

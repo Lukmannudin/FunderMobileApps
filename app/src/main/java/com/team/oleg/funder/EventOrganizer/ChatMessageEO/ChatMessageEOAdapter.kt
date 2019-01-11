@@ -39,7 +39,6 @@ class ChatMessageEOAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        Log.i("cek",items[0].message)
         when (viewType) {
             SENDER_VIEW_TYPE -> {
                 return MessageSenderViewHolder(
@@ -76,7 +75,6 @@ class ChatMessageEOAdapter(
         private val tvMessage = view.tv_item_chat_message_receive
 
         fun bindItem(context: Context?, items: Message) {
-            Log.i("cek receiver",items.message)
             tvMessage.text = items.message
         }
     }

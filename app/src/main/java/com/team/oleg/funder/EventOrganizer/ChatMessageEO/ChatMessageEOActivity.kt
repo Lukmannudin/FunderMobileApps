@@ -33,8 +33,6 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        Log.i("cek chatIdEO", chatId)
-
         listAdapter = ChatMessageEOAdapter(this, messageList)
         presenter = ChatMessageEOPresenter(this, chatId, this)
         rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -94,21 +92,20 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
     private fun setMessage() {
 
-        val newMesage = mapOf(
-                ChatUtils.CHAT_ID to chatId,
-                ChatUtils.SENDER to Utils.SENDER_EO,
-                ChatUtils.MESSAGE to edtAddMessage.text.toString(),
-                ChatUtils.MESSAGE_STATUS to "sent"
-        )
+        val message = Message()
+        message.chatId = chatId
+        message.sender = Utils.SENDER_EO
+        message.message = edtAddMessage.text.toString()
+        message.messageStatus = "sent"
 
-        addToDatabase(newMesage)
-        firestoreChat.set(newMesage)
-                .addOnSuccessListener {
-                    Toast.makeText(this@ChatMessageEOActivity, "Message Sent", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Log.i("ERROR", e.message)
-                }
+        showNewChat(message)
+        firestoreChat.set(message)
+            .addOnSuccessListener {
+                Toast.makeText(this@ChatMessageEOActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Log.i("ERROR", e.message)
+            }
     }
 
 
@@ -120,16 +117,16 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
                         if (data?.get(ChatUtils.CHAT_ID) == chatId) {
-                            presenter.sendChat(
-                                    Message(
-                                            null,
-                                            data?.get(ChatUtils.CHAT_ID).toString(),
-                                            data?.get(ChatUtils.SENDER).toString(),
-                                            data?.get(ChatUtils.MESSAGE).toString(),
-                                            null,
-                                            data?.get(ChatUtils.MESSAGE_STATUS).toString(),
-                                            null
-                                    )
+                            showNewChat(
+                                Message(
+                                    null,
+                                    data?.get(ChatUtils.CHAT_ID).toString(),
+                                    data?.get(ChatUtils.SENDER).toString(),
+                                    data?.get(ChatUtils.MESSAGE).toString(),
+                                    null,
+                                    data?.get(ChatUtils.MESSAGE_STATUS).toString(),
+                                    null
+                                )
                             )
                         }
                     }
@@ -143,14 +140,14 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         try {
             database.use {
                 insert(
-                        ChatUtils.TABLE_CHAT,
-                        ChatUtils.MESSAGE_ID to message.get(ChatUtils.MESSAGE_ID),
-                        ChatUtils.CHAT_ID to message.get(ChatUtils.CHAT_ID),
-                        ChatUtils.SENDER to message.get(ChatUtils.SENDER),
-                        ChatUtils.MESSAGE to message.get(ChatUtils.MESSAGE),
-                        ChatUtils.MESSAGE_TIME to message.get(ChatUtils.MESSAGE_TIME),
-                        ChatUtils.MESSAGE_STATUS to message.get(ChatUtils.MESSAGE_STATUS),
-                        ChatUtils.MESSAGE_READ to message.get(ChatUtils.MESSAGE_READ)
+                    ChatUtils.TABLE_CHAT,
+                    ChatUtils.MESSAGE_ID to message.get(ChatUtils.MESSAGE_ID),
+                    ChatUtils.CHAT_ID to message.get(ChatUtils.CHAT_ID),
+                    ChatUtils.SENDER to message.get(ChatUtils.SENDER),
+                    ChatUtils.MESSAGE to message.get(ChatUtils.MESSAGE),
+                    ChatUtils.MESSAGE_TIME to message.get(ChatUtils.MESSAGE_TIME),
+                    ChatUtils.MESSAGE_STATUS to message.get(ChatUtils.MESSAGE_STATUS),
+                    ChatUtils.MESSAGE_READ to message.get(ChatUtils.MESSAGE_READ)
                 )
             }
         } catch (e: SQLiteConstraintException) {

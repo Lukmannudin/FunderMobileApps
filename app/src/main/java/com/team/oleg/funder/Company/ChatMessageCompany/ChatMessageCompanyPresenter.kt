@@ -10,20 +10,23 @@ import io.reactivex.schedulers.Schedulers
 
 class ChatMessageCompanyPresenter(
     private val chatId: String?,
-    private val chatEOView: ChatMessageCompanyContract.View
+    private val chatCompanyView: ChatMessageCompanyContract.View
 ) : ChatMessageCompanyContract.Presenter {
+   
 
     private var disposable: Disposable? = null
     private var firstLoad = true
 
     init {
-        chatEOView.presenter = this
+        chatCompanyView.presenter = this
     }
 
 
     override fun start() {
         loadChat(false)
-//        chatEOView.showNoChat(false)
+        Log.i("cek FirstLoad",firstLoad.toString())
+
+//        chatCompanyView.showNoChat(false)
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
@@ -40,8 +43,9 @@ class ChatMessageCompanyPresenter(
 
     private fun loadChat(forceUpdate: Boolean, showLoadingUI: Boolean) {
         if (showLoadingUI) {
-            chatEOView.setLoadingIndicator(true)
+            chatCompanyView.setLoadingIndicator(true)
         }
+
 
 //        if (forceUpdate) {
 //        }
@@ -53,41 +57,39 @@ class ChatMessageCompanyPresenter(
             .subscribe(
                 { result ->
                     processChat(result.data)
-                    chatEOView.setLoadingIndicator(false)
+                    chatCompanyView.setLoadingIndicator(false)
                 },
                 { error ->
-                    chatEOView.showNoChat(true)
+                    chatCompanyView.showNoChat(true)
                 }
             )
     }
 
     private fun processChat(chat: List<Message>) {
         if (chat.isEmpty()) {
-            chatEOView.showNoChat(true)
+            chatCompanyView.showNoChat(true)
         } else {
-            chatEOView.showChatList(chat)
+            chatCompanyView.showChatList(chat)
         }
     }
 
     override fun sendChat(message: Message) {
         val service: ChatService = ApiService.chatService
         disposable = service.sendMessage(message)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result ->
-                            chatEOView.showNewChat(message)
-                        },
-                        { error ->
-                            Log.i("cek","GAGAL CHAT")
-                            Log.i("cek g",error.localizedMessage)
-                            Log.i("cek c",error.message)
-                            Log.i("cek k",error.stackTrace[0].className)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
 
+                },
+                { error ->
+                    println(error.localizedMessage)
+                }
+            )
+    }
 
-//                            chatEOView.showNoChat(true)
-                        }
-                )
+    override fun receiveChat(message: Message) {
+        chatCompanyView.showNewChat(message)
     }
 
 }

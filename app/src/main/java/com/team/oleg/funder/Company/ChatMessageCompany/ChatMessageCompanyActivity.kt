@@ -38,8 +38,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         setContentView(R.layout.activity_chat_message_eo)
         chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
 
-        Log.i("cek chatIdCompany", chatId)
-
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -62,7 +60,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     }
 
     override fun setLoadingIndicator(active: Boolean) {
-        chatMessageSwipeRefresh.isRefreshing = active
     }
 
     override fun onStart() {
@@ -87,6 +84,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     }
 
     override fun showNewChat(chat: Message) {
+        Log.i("cek","showNewChat")
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
     }
@@ -102,19 +100,20 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     private fun setMessage() {
 
-        val newMesage = mapOf(
-                ChatUtils.CHAT_ID to chatId,
-                ChatUtils.SENDER to Utils.SENDER_COMPANY,
-                ChatUtils.MESSAGE to edtAddMessage.text.toString(),
-                ChatUtils.MESSAGE_STATUS to "sent"
-        )
+        val message = Message()
+        message.chatId = chatId
+        message.sender = Utils.SENDER_COMPANY
+        message.message = edtAddMessage.text.toString()
+        message.messageStatus = "sent"
 
-        firestoreChat.set(newMesage)
+        showNewChat(message)
+        firestoreChat.set(message)
                 .addOnSuccessListener {
                     Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+                    presenter.sendChat(message)
                 }
                 .addOnFailureListener { e ->
-                    Log.i("ERROR", e.message)
+                    Log.i("cek Error", e.message)
                 }
     }
 
@@ -127,7 +126,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                     with(documentSnapshot) {
                         //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
                         if (chatId == data?.get(CHAT_ID)) {
-                            presenter.sendChat(
+                            showNewChat(
                                     Message(
                                             null,
                                             data?.get(ChatUtils.CHAT_ID).toString(),
