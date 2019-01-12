@@ -13,15 +13,8 @@ import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.ChatUtils.CHAT_ID
 import com.team.oleg.funder.Utils.ChatUtils.COLLECTION_KEY
 import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
-import com.team.oleg.funder.Utils.ChatUtils.MESSAGE
-import com.team.oleg.funder.Utils.ChatUtils.MESSAGE_ID
-import com.team.oleg.funder.Utils.ChatUtils.MESSAGE_READ
-import com.team.oleg.funder.Utils.ChatUtils.MESSAGE_STATUS
-import com.team.oleg.funder.Utils.ChatUtils.MESSAGE_TIME
-import com.team.oleg.funder.Utils.ChatUtils.SENDER
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
-import java.util.*
 
 class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContract.View {
 
@@ -84,7 +77,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     }
 
     override fun showNewChat(chat: Message) {
-        Log.i("cek","showNewChat")
+        Log.i("cek", "showNewChat")
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
     }
@@ -108,13 +101,13 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
         showNewChat(message)
         firestoreChat.set(message)
-                .addOnSuccessListener {
-                    Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
-                    presenter.sendChat(message)
-                }
-                .addOnFailureListener { e ->
-                    Log.i("cek Error", e.message)
-                }
+            .addOnSuccessListener {
+                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+                presenter.sendChat(message)
+            }
+            .addOnFailureListener { e ->
+                Log.i("cek Error", e.message)
+            }
     }
 
     private fun realtimeUpdateListener() {
@@ -124,18 +117,17 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 firebaseFirestoreException != null -> Log.i("ERROR", firebaseFirestoreException.message)
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
-                        //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-                        if (chatId == data?.get(CHAT_ID)) {
+                        if (chatId == data?.get(CHAT_ID) && Utils.SENDER_EO == data?.get(ChatUtils.SENDER)) {
                             showNewChat(
-                                    Message(
-                                            null,
-                                            data?.get(ChatUtils.CHAT_ID).toString(),
-                                            data?.get(ChatUtils.SENDER).toString(),
-                                            data?.get(ChatUtils.MESSAGE).toString(),
-                                            null,
-                                            data?.get(ChatUtils.MESSAGE_STATUS).toString(),
-                                            null
-                                    )
+                                Message(
+                                    null,
+                                    data?.get(ChatUtils.CHAT_ID).toString(),
+                                    data?.get(ChatUtils.SENDER).toString(),
+                                    data?.get(ChatUtils.MESSAGE).toString(),
+                                    null,
+                                    data?.get(ChatUtils.MESSAGE_STATUS).toString(),
+                                    null
+                                )
                             )
                         }
                     }

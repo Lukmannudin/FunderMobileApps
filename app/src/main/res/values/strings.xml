@@ -18,4 +18,6 @@
     <string name="chats">Chats</string>
     <string name="request">Request</string>
     <string name="logout">Logout</string>
+    <string name="channel_name">Funder Channel</string>
+    <string name="channel_description">Funder Channel Description</string>
 </resources>

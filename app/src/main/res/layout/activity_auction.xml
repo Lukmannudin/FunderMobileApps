@@ -23,7 +23,7 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
                 android:src="@drawable/image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
