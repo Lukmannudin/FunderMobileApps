@@ -2,8 +2,7 @@ package com.team.oleg.funder.Company.Chat
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Chat
-import com.team.oleg.funder.Model.DealHistory
+import com.team.oleg.funder.Data.Chat
 
 interface ChatCompanyContract {
     interface View: BaseView<Presenter>{
@@ -23,7 +22,7 @@ interface ChatCompanyContract {
 
         fun loadChat(forceUpdate: Boolean)
 
-        fun openChatDetail(requestedChat:Chat)
+        fun openChatDetail(requestedChat: Chat)
 
     }
 }

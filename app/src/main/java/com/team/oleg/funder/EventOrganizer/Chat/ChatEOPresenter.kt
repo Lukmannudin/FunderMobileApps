@@ -1,8 +1,8 @@
 package com.team.oleg.funder.EventOrganizer.Chat
 
-import com.team.oleg.funder.APIRequest.RequestApiChat
-import com.team.oleg.funder.Model.Chat
-import com.team.oleg.funder.Service.ChatService
+import com.team.oleg.funder.APIRequest.ChatService
+import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -45,7 +45,7 @@ class ChatEOPresenter(
 //        if (forceUpdate) {
 //        }
 
-        val service: RequestApiChat = ChatService.create()
+        val service: ChatService = ApiService.chatService
         disposable = service.getChatEO(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

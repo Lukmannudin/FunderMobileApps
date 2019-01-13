@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.Model.DealHistory
+import com.team.oleg.funder.Data.DealHistory
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.deal_history_list.view.*
 

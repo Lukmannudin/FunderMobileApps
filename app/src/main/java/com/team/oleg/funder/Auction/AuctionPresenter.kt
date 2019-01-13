@@ -1,11 +1,10 @@
-package com.team.oleg.funder.Sponsor
+package com.team.oleg.funder.Auction
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestApiSponsor
+import com.team.oleg.funder.APIRequest.SponsorService
 import com.team.oleg.funder.Auction.AuctionContract
-import com.team.oleg.funder.Model.Sponsor
 import com.team.oleg.funder.Response.SponsorResponse
-import com.team.oleg.funder.Service.SponsorService
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -43,13 +42,13 @@ class AuctionPresenter(
 //
 //        }
 
-        val service: RequestApiSponsor = SponsorService.create()
+        val service: SponsorService = ApiService.sponsorService
         disposable = service.getSponsorById(sponsorId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("idIn",sponsorId)
+                    Log.i("idIn", sponsorId)
                     processSponsor(result)
                     sponsorView.setLoadingIndicator(false)
                 },

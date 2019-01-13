@@ -1,9 +1,9 @@
 package com.team.oleg.funder.Login.LoginEO
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestUser
-import com.team.oleg.funder.Model.User
-import com.team.oleg.funder.Service.UserService
+import com.team.oleg.funder.APIRequest.UserService
+import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -33,11 +33,11 @@ class LoginEOPresenter(
         loadUser(user,true)
     }
 
-    private fun loadUser(user:User,showLoadingUI: Boolean) {
+    private fun loadUser(user: User, showLoadingUI: Boolean) {
         if (showLoadingUI) {
             loginEOView.setLoadingIndicator(true)
         }
-        val service: RequestUser = UserService.login()
+        val service: UserService = ApiService.userService
         disposable = service.login(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -55,7 +55,7 @@ class LoginEOPresenter(
         }
     }
 
-    private fun processUser(user:User){
+    private fun processUser(user: User){
         if (user.eoEmail == null){
             loginEOView.showIsFailed("Username or password wrong")
         } else {

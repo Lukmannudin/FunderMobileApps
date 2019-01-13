@@ -1,9 +1,9 @@
 package com.team.oleg.funder.Login.LoginCompany
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.RequestUser
-import com.team.oleg.funder.Model.Company
-import com.team.oleg.funder.Service.UserService
+import com.team.oleg.funder.APIRequest.UserService
+import com.team.oleg.funder.Data.Company
+import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -32,11 +32,11 @@ class LoginCompanyPresenter(
         loadUser(company,true)
     }
 
-    private fun loadUser(company: Company,showLoadingUI: Boolean) {
+    private fun loadUser(company: Company, showLoadingUI: Boolean) {
         if (showLoadingUI) {
             loginView.setLoadingIndicator(true)
         }
-        val service: RequestUser = UserService.login()
+        val service: UserService = ApiService.userService
         disposable = service.loginCompany(company)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -1,13 +1,21 @@
 package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
-import com.team.oleg.funder.APIRequest.RequestApiChat
-import com.team.oleg.funder.Model.Message
-import com.team.oleg.funder.Service.ChatService
+import android.content.Context
+import android.util.Log
+import com.team.oleg.funder.APIRequest.ChatService
+import com.team.oleg.funder.Database.database
+import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.Utils.ChatUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
+
 
 class ChatMessageEOPresenter(
+    private val context: Context,
     private val chatId: String?,
     private val chatEOView: ChatMessageEOContract.View
 ) : ChatMessageEOContract.Presenter {
@@ -36,17 +44,15 @@ class ChatMessageEOPresenter(
 
     override fun loadChat(forceUpdate: Boolean) {
         loadChat(forceUpdate || firstLoad, true)
+        firstLoad = false
     }
 
     private fun loadChat(forceUpdate: Boolean, showLoadingUI: Boolean) {
-        if (showLoadingUI) {
-            chatEOView.setLoadingIndicator(true)
-        }
 
 //        if (forceUpdate) {
 //        }
 
-        val service: RequestApiChat = ChatService.create()
+        val service: ChatService = ApiService.chatService
         disposable = service.getMessageEO(chatId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -54,6 +60,14 @@ class ChatMessageEOPresenter(
                 { result ->
                     processChat(result.data)
                     chatEOView.setLoadingIndicator(false)
+                    var cau: String? = null
+                    context.database.use {
+                        val resulte = select(ChatUtils.TABLE_CHAT)
+                        val message = resulte.parseList(classParser<Message>())
+                        cau = message[0].message
+                    }
+                    Log.i("coco", cau)
+
                 },
                 { error ->
                     chatEOView.showNoChat(true)
@@ -69,8 +83,26 @@ class ChatMessageEOPresenter(
         }
     }
 
-    override fun sendChat(message: Message) {
-        chatEOView.showNewChat(message)
+    override fun sendChat(message: Message)
+    {
+        val service: ChatService = ApiService.chatService
+        disposable = service.sendMessage(message)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { result ->
+                            chatEOView.showNewChat(message)
+                        },
+                        { error ->
+                            Log.i("cek","GAGAL CHAT")
+                            Log.i("cek g",error.localizedMessage)
+                            Log.i("cek c",error.message)
+                            Log.i("cek k",error.stackTrace[0].className)
+                            Log.i("cek k",error.stackTrace[0].methodName)
+
+//                            chatEOView.showNoChat(true)
+                        }
+                )
     }
 
 }

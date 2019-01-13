@@ -2,8 +2,7 @@ package com.team.oleg.funder.Login.LoginEO
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Company
-import com.team.oleg.funder.Model.User
+import com.team.oleg.funder.Data.User
 
 interface LoginEOContract {
 
@@ -11,7 +10,7 @@ interface LoginEOContract {
 
         fun setLoadingIndicator(active: Boolean)
 
-        fun showIsSuccessfull(user:User)
+        fun showIsSuccessfull(user: User)
 
         fun showIsFailed(message: String)
 

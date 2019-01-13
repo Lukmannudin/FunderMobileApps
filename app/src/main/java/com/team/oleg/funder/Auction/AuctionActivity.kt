@@ -2,17 +2,14 @@ package com.team.oleg.funder.Auction
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.FillForm.FillFormActivity
+import com.team.oleg.funder.EventOrganizer.FillForm.FillFormActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Model.Sponsor
+import com.team.oleg.funder.Data.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Response.SponsorResponse
-import com.team.oleg.funder.Sponsor.AuctionPresenter
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_auction.*
 import kotlinx.android.synthetic.main.toolbar_detail.*
@@ -67,7 +64,6 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
     }
 
     override fun clickedInterested(sponsorId: String?, sponsor: Sponsor) {
-        Toast.makeText(this,sponsorId,Toast.LENGTH_SHORT).show()
         startActivity(intentFor<FillFormActivity>(
             Utils.INTENT_PARCELABLE to sponsor
         ))

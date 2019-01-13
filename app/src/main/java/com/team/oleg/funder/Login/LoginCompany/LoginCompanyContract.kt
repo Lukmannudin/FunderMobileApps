@@ -2,8 +2,7 @@ package com.team.oleg.funder.Login.LoginCompany
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Company
-import com.team.oleg.funder.Model.User
+import com.team.oleg.funder.Data.Company
 
 interface LoginCompanyContract {
 

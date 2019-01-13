@@ -1,8 +1,8 @@
-package com.team.oleg.funder.FillForm
+package com.team.oleg.funder.EventOrganizer.FillForm
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Sponsor
+import com.team.oleg.funder.Data.Event
 
 interface FillFormContract {
 
@@ -20,6 +20,8 @@ interface FillFormContract {
     interface Presenter : BasePresenter {
 
         fun result(requestCode: Int,resultCode: Int)
+
+        fun addEvent(event: Event)
 
         fun downloadFile()
 

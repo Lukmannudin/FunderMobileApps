@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.chat_message_receive.view.*
@@ -19,8 +19,7 @@ class ChatMessageEOAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val MESSAGE_SENDER = Utils.SENDER_COMPANY
-    private val MESSAGE_RECEIVER = Utils.SENDER_EO
+    private val MESSAGE_SENDER = Utils.SENDER_EO
 
     private val SENDER_VIEW_TYPE = 0
     private val RECEIVER_VIEW_TYPE = 1
@@ -40,7 +39,6 @@ class ChatMessageEOAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        Log.i("cek",items[0].message)
         when (viewType) {
             SENDER_VIEW_TYPE -> {
                 return MessageSenderViewHolder(
@@ -77,7 +75,6 @@ class ChatMessageEOAdapter(
         private val tvMessage = view.tv_item_chat_message_receive
 
         fun bindItem(context: Context?, items: Message) {
-            Log.i("cek receiver",items.message)
             tvMessage.text = items.message
         }
     }

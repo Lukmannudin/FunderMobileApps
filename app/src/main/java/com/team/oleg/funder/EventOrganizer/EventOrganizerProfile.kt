@@ -20,6 +20,7 @@ class EventOrganizerProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_organizer_profile)
+        initView()
         val content = SpannableString("View Track Record")
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         tvEOTrackRecordLink.text = content
@@ -52,6 +53,17 @@ class EventOrganizerProfile : AppCompatActivity() {
         }
     }
 
+    private fun initView(){
+        val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
+        val username = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
+        val userEmail = sharedPref.getString(SharedPreferenceUtils.USER_EMAIL, SharedPreferenceUtils.EMPTY)
+        val userPoint = sharedPref.getString(SharedPreferenceUtils.USER_POINT, SharedPreferenceUtils.EMPTY)
+        val userPhoto = sharedPref.getString(SharedPreferenceUtils.USER_PHOTO, SharedPreferenceUtils.EMPTY)
+        tvEOName.text = username
+        tvEOEmail.text = userEmail
+        tvEOPoints.text = userPoint
+
+    }
     private fun logout(){
         val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN,0)
         if (sharedPref.getString(SharedPreferenceUtils.USER_ID,SharedPreferenceUtils.EMPTY)!= SharedPreferenceUtils.EMPTY){

@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.team.oleg.funder.Company.CompanyActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
-import com.team.oleg.funder.Model.Company
+import com.team.oleg.funder.Data.Company
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_company.*

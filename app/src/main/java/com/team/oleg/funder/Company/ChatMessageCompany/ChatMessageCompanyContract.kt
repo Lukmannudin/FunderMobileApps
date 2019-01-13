@@ -2,7 +2,7 @@ package com.team.oleg.funder.Company.ChatMessageCompany
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
 
 interface ChatMessageCompanyContract {
     interface View : BaseView<Presenter> {
@@ -23,6 +23,8 @@ interface ChatMessageCompanyContract {
         fun loadChat(forceUpdate: Boolean)
 
         fun sendChat(message: Message)
+
+        fun receiveChat(message: Message)
 
     }
 }

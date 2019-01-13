@@ -1,18 +1,28 @@
 package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
-import com.team.oleg.funder.Model.Message
+import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
-import java.util.*
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.notificationManager
 
 class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
@@ -23,31 +33,30 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
     private lateinit var listAdapter: ChatMessageEOAdapter
 
+    private var chatId: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_message_eo)
-        val chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
+        chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listAdapter = ChatMessageEOAdapter(this, messageList)
-        presenter = ChatMessageEOPresenter(chatId, this)
+        presenter = ChatMessageEOPresenter(this, chatId, this)
         rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         presenter.loadChat(false)
-        chatMessageSwipeRefresh.setOnRefreshListener {
-            presenter.loadChat(false)
-        }
 
         rvMessage.adapter = listAdapter
-
-
+        realtimeUpdateListener()
         ivSendMessage.setOnClickListener {
             setMessage()
             edtAddMessage.text.clear()
         }
+
     }
 
     override fun setLoadingIndicator(active: Boolean) {
-        chatMessageSwipeRefresh.isRefreshing = active
+//        chatMessageSwipeRefresh.isRefreshing = active
     }
 
     override fun onStart() {
@@ -59,7 +68,9 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         super.onPause()
         presenter.destroy()
     }
+
     override fun showNewChat(chat: Message) {
+        Log.i("message showNewChat", chat.message.toString())
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
     }
@@ -81,7 +92,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun onResume() {
         super.onResume()
         presenter.start()
-        realtimeUpdateListener()
+
     }
 
     private val firestoreChat by lazy {
@@ -90,17 +101,15 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
     private fun setMessage() {
 
-        val newMesage = mapOf(
-            ChatUtils.MESSAGE_ID to null,
-            ChatUtils.CHAT_ID to messageList[0].chatId,
-            ChatUtils.SENDER to Utils.SENDER_COMPANY,
-            ChatUtils.MESSAGE to edtAddMessage.text.toString(),
-            ChatUtils.MESSAGE_TIME to Date().toString(),
-            ChatUtils.MESSAGE_STATUS to "sent",
-            ChatUtils.MESSAGE_READ to "0"
-        )
+        val message = Message()
+        message.chatId = chatId
+        message.sender = Utils.SENDER_EO
+        message.message = edtAddMessage.text.toString()
+        message.messageStatus = "sent"
 
-        firestoreChat.set(newMesage)
+        Log.i("message setMessage", message.message.toString())
+        showNewChat(message)
+        firestoreChat.set(message)
             .addOnSuccessListener {
                 Toast.makeText(this@ChatMessageEOActivity, "Message Sent", Toast.LENGTH_SHORT).show()
             }
@@ -117,29 +126,73 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                 firebaseFirestoreException != null -> Log.i("ERROR", firebaseFirestoreException.message)
                 documentSnapshot != null && documentSnapshot.exists() -> {
                     with(documentSnapshot) {
-                        //                        displayMessage.text = "${data?.get(NAME_FIELD)}:${data?.get(TEXT_FIELD)}"
-//                        if (data != null){
-//                            Toast.makeText(this@ChatMessageEOActivity,"${data?.get(ChatUtils.MESSAGE)}", Toast.LENGTH_SHORT).show()
-//                        }
-                        if (data?.get(ChatUtils.CHAT_ID) != null) {
-//                            if (data?.get(ChatUtils.CHAT_ID)) {
-                                presenter.sendChat(
-                                    com.team.oleg.funder.Model.Message(
-                                        null,
-                                        data?.get(ChatUtils.CHAT_ID).toString(),
-                                        data?.get(ChatUtils.SENDER).toString(),
-                                        data?.get(ChatUtils.MESSAGE).toString(),
-                                        data?.get(ChatUtils.MESSAGE_TIME).toString(),
-                                        data?.get(ChatUtils.MESSAGE_STATUS).toString(),
-                                        data?.get(ChatUtils.MESSAGE_READ).toString()
-                                    )
+                        if (chatId == data?.get(ChatUtils.CHAT_ID) && Utils.SENDER_COMPANY == data?.get(ChatUtils.SENDER)) {
+                            showNewChat(
+                                Message(
+                                    null,
+                                    data?.get(ChatUtils.CHAT_ID).toString(),
+                                    data?.get(ChatUtils.SENDER).toString(),
+                                    data?.get(ChatUtils.MESSAGE).toString(),
+                                    null,
+                                    data?.get(ChatUtils.MESSAGE_STATUS).toString(),
+                                    null
                                 )
-//                            }
+                            )
+
+                            val mBuilder =
+                                NotificationCompat.Builder(this@ChatMessageEOActivity, "com.team.oleg.funder")
+                                    .setSmallIcon(R.drawable.logo)
+                                    .setContentTitle("Funder notification")
+                                    .setContentText(data?.get(ChatUtils.MESSAGE).toString())
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            // Set the intent that will fire when the user taps the notification
+
+                            with(NotificationManagerCompat.from(this@ChatMessageEOActivity)) {
+                                // notificationId is a unique int for each notification that you must define
+                                notify(101, mBuilder.build())
+                            }
+
+                            createNotificationChannel(ChatUtils.MESSAGE)
                         }
                     }
                 }
             }
-
         }
     }
+
+       private fun createNotificationChannel(messages: String){
+            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+                val name = getString(R.string.channel_name)
+                val descriptionText = messages
+                val importance = NotificationManager.IMPORTANCE_DEFAULT
+                val channel = NotificationChannel("1", name, importance).apply {
+                    description = descriptionText
+                }
+                // Register the channel with the system
+                val notificationManager: NotificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+            }
+        }
+
+    private fun addToDatabase(message: Map<String, String?>) {
+        try {
+            database.use {
+                insert(
+                    ChatUtils.TABLE_CHAT,
+                    ChatUtils.MESSAGE_ID to message.get(ChatUtils.MESSAGE_ID),
+                    ChatUtils.CHAT_ID to message.get(ChatUtils.CHAT_ID),
+                    ChatUtils.SENDER to message.get(ChatUtils.SENDER),
+                    ChatUtils.MESSAGE to message.get(ChatUtils.MESSAGE),
+                    ChatUtils.MESSAGE_TIME to message.get(ChatUtils.MESSAGE_TIME),
+                    ChatUtils.MESSAGE_STATUS to message.get(ChatUtils.MESSAGE_STATUS),
+                    ChatUtils.MESSAGE_READ to message.get(ChatUtils.MESSAGE_READ)
+                )
+            }
+        } catch (e: SQLiteConstraintException) {
+            Log.i("coco", e.localizedMessage)
+        }
+    }
+
+
 }
