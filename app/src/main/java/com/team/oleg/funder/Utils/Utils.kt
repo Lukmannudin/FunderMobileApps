@@ -8,4 +8,6 @@ object Utils {
 
     const val SENDER_EO = "eo"
     const val SENDER_COMPANY = "company"
+
+    const val STATUS_AVAILABLE = "available"
 }

@@ -14,7 +14,9 @@ interface FillFormContract {
 
         fun showMessageSuccess(message: String)
 
-        fun showMessage(message: String)
+        fun showSuccessMessage(message: String)
+
+        fun showFailedMessage(message: String)
     }
 
     interface Presenter : BasePresenter {

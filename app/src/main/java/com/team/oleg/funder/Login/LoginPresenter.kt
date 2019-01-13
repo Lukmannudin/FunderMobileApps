@@ -35,6 +35,6 @@ class LoginPresenter : AppCompatActivity() {
         } else {
             startActivity(intentFor<LoginEOActivity>())
         }
-
     }
+
 }

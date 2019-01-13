@@ -1,6 +1,5 @@
 package com.team.oleg.funder.EventOrganizer.FillForm
 
-import android.util.Log
 import com.team.oleg.funder.APIRequest.EventService
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Service.ApiService
@@ -23,10 +22,14 @@ class FillFormPresenter(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { result ->
-                    Log.i("cek","BERHASIL")
+                    if (result.data == "1"){
+                        FillFormView.showMessageSuccess("Success")
+                    } else {
+                        FillFormView.showFailedMessage("Failed")
+                    }
                 },
                 { error ->
-                    Log.i("cek","GAGAL: ${error.localizedMessage}")
+                    FillFormView.showMessageError(error.localizedMessage)
 
                 }
             )
@@ -46,11 +49,10 @@ class FillFormPresenter(
     }
 
     override fun start() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun destroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        disposable?.dispose()
     }
 
 }
