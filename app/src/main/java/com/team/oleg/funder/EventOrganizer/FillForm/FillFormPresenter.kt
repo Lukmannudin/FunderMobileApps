@@ -3,6 +3,7 @@ package com.team.oleg.funder.EventOrganizer.FillForm
 import com.team.oleg.funder.APIRequest.EventService
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Service.ApiService
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -19,13 +20,14 @@ class FillFormPresenter(
     override fun addEvent(event: Event) {
         val service: EventService = ApiService.eventService
         disposable = service.setEvent(event)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { result ->
-                    if (result.data == "1"){
-                        FillFormView.showMessageSuccess("Success")
+                    if (result.data == "1") {
+                        successMessage()
                     } else {
-                        FillFormView.showFailedMessage("Failed")
+//                        FillFormView.showFailedMessage("Failed")
                     }
                 },
                 { error ->
@@ -33,7 +35,11 @@ class FillFormPresenter(
 
                 }
             )
+    }
 
+    private fun successMessage() {
+//        FillFormView.showFailedMessage("asd")
+        FillFormView.showMessageSuccess("BABI")
     }
 
     override fun result(requestCode: Int, resultCode: Int) {

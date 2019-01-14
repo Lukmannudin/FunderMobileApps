@@ -14,8 +14,6 @@ interface FillFormContract {
 
         fun showMessageSuccess(message: String)
 
-        fun showSuccessMessage(message: String)
-
         fun showFailedMessage(message: String)
     }
 
