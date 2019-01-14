@@ -1,6 +1,7 @@
 package com.team.oleg.funder.EventOrganizer.FillForm
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +11,7 @@ import android.provider.OpenableColumns
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.DatePicker
 import android.widget.Toast
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_fill_form.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -72,7 +75,38 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         btnUploadProposal.setOnClickListener {
             chooseFile()
         }
+
+        val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(
+                view: DatePicker, year: Int, monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            }
+        }
+
+        edtEventDate.setOnFocusChangeListener { v, hasFocus ->
+            DatePickerDialog(
+                this@FillFormActivity,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+            updateDateInView()
+            edtEventDate.clearFocus()
+        }
     }
+
+    private fun updateDateInView() {
+        val myFormat = "yyyy-dd-MM"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        edtEventDate.setText(sdf.format(cal.time))
+    }
+
 
     override fun setLoadingIndicator(active: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -120,6 +154,9 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
             }
         }
     }
+
+    var cal = Calendar.getInstance()
+
 
     private fun alertDialog() {
         val builder = AlertDialog.Builder(this)
