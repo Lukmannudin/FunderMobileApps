@@ -102,7 +102,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
     }
 
     private fun updateDateInView() {
-        val myFormat = "yyyy-dd-MM"
+        val myFormat = "dd MMMM yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edtEventDate.setText(sdf.format(cal.time))
     }
