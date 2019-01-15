@@ -30,7 +30,7 @@ interface HomeContract {
 
         fun openSponsorDetail(requestedAuction: Sponsor)
 
-        fun loadUnreadChat()
+        fun loadUnreadChat(userId:String)
     }
 }
 

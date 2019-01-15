@@ -37,6 +37,7 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class MainChatFragment : Fragment(), ChatEOContract.View {
+    override  var lastMessage: String? = null
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -61,6 +62,11 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     private val itemListener: chatItemListener = object :
         chatItemListener {
+        override fun getLastMessage(chatId: String?):String? {
+            presenter.loadLastMessage(chatId)
+            return this@MainChatFragment.lastMessage
+        }
+
         override fun onChatClick(clicked: Chat) {
             presenter.openChatDetail(clicked)
         }
@@ -175,6 +181,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        presenter.destroy()
     }
 
     private fun setupSearchView() {
@@ -206,6 +213,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     interface chatItemListener {
         fun onChatClick(clicked: Chat)
+        fun getLastMessage(chatId: String?):String?
     }
 
 }

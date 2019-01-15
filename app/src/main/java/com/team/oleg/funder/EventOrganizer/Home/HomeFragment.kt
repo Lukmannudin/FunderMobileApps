@@ -10,11 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.team.oleg.funder.Auction.AuctionActivity
-import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
-import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.R
+import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
 import com.team.oleg.funder.EventOrganizer.SearchHome.SearchHomeActivity
+import com.team.oleg.funder.Main.MainActivity
+import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.android.synthetic.main.fragment_main_home.view.*
@@ -47,6 +48,13 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = HomePresenter(this)
+        val sharedPref = context?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
+        val USER_ID = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
+        if (USER_ID != null){
+            presenter.loadUnreadChat(USER_ID)
+        }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,12 +63,15 @@ class HomeFragment : Fragment(), HomeContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
         listAdapter = SponsorAdapter(
             context,
             topFunderList,
             auctionList,
             itemListener
         )
+
         rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
@@ -80,9 +91,11 @@ class HomeFragment : Fragment(), HomeContract.View {
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
         view.rvAuction.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.tbUnreadChat.setOnClickListener {
-            startActivity(intentFor<MainActivity>(
-                Utils.NAME to Utils.TOCHAT
-            ))
+            startActivity(
+                intentFor<MainActivity>(
+                    Utils.NAME to Utils.TOCHAT
+                )
+            )
         }
         view.homeSwipeRefresh.setOnRefreshListener {
             presenter.loadSponsor(false)
@@ -116,13 +129,15 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showAuctionDetailsUi(sponsor: Sponsor) {
-        startActivity(intentFor<AuctionActivity>(
-            Utils.INTENT_PARCELABLE to sponsor
-        ))
+        startActivity(
+            intentFor<AuctionActivity>(
+                Utils.INTENT_PARCELABLE to sponsor
+            )
+        )
     }
 
-    private fun showToast(message: String){
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showNoAuction() {

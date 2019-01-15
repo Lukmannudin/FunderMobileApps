@@ -12,6 +12,7 @@ class ChatEOPresenter(
     private val chatEOView: ChatEOContract.View
 ) : ChatEOContract.Presenter {
 
+
     private var disposable: Disposable? = null
     private var firstLoad = true
 
@@ -73,6 +74,18 @@ class ChatEOPresenter(
             chatEOView.showChatDetailUi(it)
         }
     }
-
+    override fun loadLastMessage(chatId:String?) {
+        val service: ChatService = ApiService.chatService
+        disposable = service.getLastMessage(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    chatEOView.lastMessage = result.data[0].message
+                },
+                { error ->
+                }
+            )
+    }
 
 }

@@ -7,6 +7,8 @@ import com.team.oleg.funder.Data.Chat
 interface ChatEOContract {
     interface View: BaseView<Presenter>{
 
+        var lastMessage:String?
+
         fun setLoadingIndicator(active: Boolean)
 
         fun showChatList(chat: List<Chat>)
@@ -23,6 +25,8 @@ interface ChatEOContract {
         fun loadChat(forceUpdate: Boolean)
 
         fun openChatDetail(requestedChat: Chat)
+
+        fun loadLastMessage(chatId:String?)
 
     }
 }

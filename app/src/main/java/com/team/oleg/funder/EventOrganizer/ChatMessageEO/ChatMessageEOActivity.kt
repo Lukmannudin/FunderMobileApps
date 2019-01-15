@@ -83,6 +83,8 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun showChatList(chat: List<Message>) {
         messageList.clear()
         messageList.addAll(chat)
+
+
         listAdapter.notifyDataSetChanged()
     }
 
@@ -100,7 +102,6 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     }
 
     private fun setMessage() {
-
         val message = Message()
         message.chatId = chatId
         message.sender = Utils.SENDER_EO
