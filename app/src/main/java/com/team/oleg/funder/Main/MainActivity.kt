@@ -95,9 +95,6 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
 //        super.onBackPressed()
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            this.finishAndRemoveTask()
-//        }
         this.finishAffinity()
     }
 }
