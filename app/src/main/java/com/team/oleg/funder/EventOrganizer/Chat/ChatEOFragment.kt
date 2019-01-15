@@ -7,13 +7,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
 import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
@@ -37,7 +38,25 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class MainChatFragment : Fragment(), ChatEOContract.View {
-    override  var lastMessage: String? = null
+    private var chaS: Int = 0
+    override fun showChat(chat: Chat, chatSize: Int) {
+        chaS += 1
+        Log.i("cha", chaS.toString())
+        if (chaS >= chatSize) {
+            chatListB.clear()
+            chaS = 0
+        } else if (chaS<chatSize) {
+            chatListB.add(chat)
+            Log.i("BABI", "BABI:${chatSize}:${chat.message}:${chat.companyName}:${chatListB.size}")
+            if (chatListB.size == chatSize - 1) {
+                chatListB.add(chatList[chatSize - 1])
+                listEOAdapter.notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    override var lastMessage: String? = null
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -46,6 +65,8 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     override lateinit var presenter: ChatEOContract.Presenter
     private val chatList: MutableList<Chat> = mutableListOf()
+    private val chatListB: MutableList<Chat> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +78,14 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
         val sharedPref = this.activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
         val userId = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
-        presenter = ChatEOPresenter(userId,this)
+        presenter = ChatEOPresenter(userId, this)
     }
 
     private val itemListener: chatItemListener = object :
         chatItemListener {
-        override fun getLastMessage(chatId: String?):String? {
-            presenter.loadLastMessage(chatId)
+        override fun getLastMessage(chatId: String?): String? {
+//            presenter.loadLastMessage(chatId)
+            listEOAdapter.notifyDataSetChanged()
             return this@MainChatFragment.lastMessage
         }
 
@@ -86,7 +108,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listEOAdapter = ChatEOAdapter(context, chatList, itemListener)
+        listEOAdapter = ChatEOAdapter(context, chatListB, itemListener)
         rvMainChat.adapter = listEOAdapter
         setupSearchView()
     }
@@ -98,8 +120,8 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
-        val view =  inflater.inflate(R.layout.fragment_main_chat, container, false)
-        view.rvMainChat.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        val view = inflater.inflate(R.layout.fragment_main_chat, container, false)
+        view.rvMainChat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.chatSwipeRefresh.setOnRefreshListener {
             presenter.loadChat(false)
         }
@@ -162,13 +184,15 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
     }
 
     override fun showChatDetailUi(chatId: String) {
-        startActivity(intentFor<ChatMessageEOActivity>(
-            ChatUtils.CHAT_ID to chatId
-        ))
+        startActivity(
+            intentFor<ChatMessageEOActivity>(
+                ChatUtils.CHAT_ID to chatId
+            )
+        )
     }
 
     override fun showNoChat(active: Boolean) {
-        if (active){
+        if (active) {
             no_main_chat.visibility = View.VISIBLE
             chatSwipeRefresh.visibility = View.GONE
         } else {
@@ -176,7 +200,6 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
             chatSwipeRefresh.visibility = View.VISIBLE
         }
     }
-
 
 
     override fun onDestroy() {
@@ -213,7 +236,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     interface chatItemListener {
         fun onChatClick(clicked: Chat)
-        fun getLastMessage(chatId: String?):String?
+        fun getLastMessage(chatId: String?): String?
     }
 
 }

@@ -2,16 +2,12 @@ package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.ChatUtils
-import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class ChatEOAdapter(
@@ -34,9 +30,6 @@ class ChatEOAdapter(
         holder.bindItem(context, items[position], listener)
     }
 
-    private val firestoreChat by lazy {
-        FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
-    }
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val companyImage = view.ivChatList
@@ -60,32 +53,13 @@ class ChatEOAdapter(
             }
             titleChat.text = chat.companyName
             eventName.text = chat.companyVision
-//            messageChat.text = "selamat pagi"
+            messageChat.text = chat.message
             unreadMessage.text = "3"
             itemView.setOnClickListener {
                 listener.onChatClick(chat)
 //                messageChat.text = listener.getLastMessage(chat.chatId)
             }
 
-            val firestoreChat =
-                FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
-            firestoreChat.addSnapshotListener { documentSnapshot,
-                                                firebaseFirestoreException ->
-                when {
-                    firebaseFirestoreException != null -> Log.i("ERROR", firebaseFirestoreException.message)
-                    documentSnapshot != null && documentSnapshot.exists() -> {
-                        with(documentSnapshot) {
-                            if (chat.chatId == data?.get(ChatUtils.CHAT_ID) && Utils.SENDER_COMPANY == data?.get(
-                                    ChatUtils.SENDER
-                                )
-                            ) {
-                                Log.i("cek",data?.get(ChatUtils.MESSAGE).toString())
-                                messageChat.text = data?.get(ChatUtils.MESSAGE).toString()
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 }

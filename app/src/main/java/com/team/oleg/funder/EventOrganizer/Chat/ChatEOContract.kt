@@ -16,6 +16,8 @@ interface ChatEOContract {
         fun showChatDetailUi(chatId: String)
 
         fun showNoChat(active: Boolean)
+
+        fun showChat(chat: Chat, chatSize: Int)
     }
 
     interface Presenter: BasePresenter {
@@ -26,7 +28,7 @@ interface ChatEOContract {
 
         fun openChatDetail(requestedChat: Chat)
 
-        fun loadLastMessage(chatId:String?)
+        fun loadLastMessage(chat: List<Chat>)
 
     }
 }

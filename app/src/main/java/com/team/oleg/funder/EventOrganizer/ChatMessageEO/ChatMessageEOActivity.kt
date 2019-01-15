@@ -1,6 +1,5 @@
 package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -22,7 +21,6 @@ import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.notificationManager
 
 class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
@@ -83,7 +81,6 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun showChatList(chat: List<Message>) {
         messageList.clear()
         messageList.addAll(chat)
-
 
         listAdapter.notifyDataSetChanged()
     }
