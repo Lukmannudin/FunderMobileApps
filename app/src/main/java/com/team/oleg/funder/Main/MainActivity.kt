@@ -8,8 +8,8 @@ import android.view.MenuItem
 import com.team.oleg.funder.BaseActivity
 import com.team.oleg.funder.EventOrganizer.Chat.MainChatFragment
 import com.team.oleg.funder.EventOrganizer.DealHistory.MainDealHistoryFragment
-import com.team.oleg.funder.EventOrganizer.Home.HomePresenter
 import com.team.oleg.funder.EventOrganizer.Home.HomeFragment
+import com.team.oleg.funder.EventOrganizer.Home.HomePresenter
 import com.team.oleg.funder.R
 import com.team.oleg.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -93,4 +93,11 @@ class MainActivity : BaseActivity() {
         viewPager.adapter = adapter
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            this.finishAndRemoveTask()
+//        }
+        this.finishAffinity()
+    }
 }

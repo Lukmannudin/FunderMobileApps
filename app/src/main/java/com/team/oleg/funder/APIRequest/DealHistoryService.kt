@@ -8,6 +8,6 @@ import retrofit2.http.Path
 
 interface DealHistoryService {
     @GET("bidder/{userid}")
-    fun getDealHistory(@Path("userid") userid: String):
+    fun getDealHistory(@Path("userid") userid: String?):
             Observable<RootResponse<DealHistory>>
 }

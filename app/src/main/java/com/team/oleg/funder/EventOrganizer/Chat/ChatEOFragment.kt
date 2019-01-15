@@ -123,7 +123,8 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
         val view = inflater.inflate(R.layout.fragment_main_chat, container, false)
         view.rvMainChat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.chatSwipeRefresh.setOnRefreshListener {
-            presenter.loadChat(false)
+//            presenter.loadChat(false)
+            chatSwipeRefresh.isRefreshing = false
         }
         view.no_main_chat.visibility = View.VISIBLE
         return view

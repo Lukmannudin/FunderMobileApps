@@ -9,6 +9,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class DealHistoryPresenter(
+    private val userId:String?,
     private val dealHistoryView: DealHistoryContract.View
 ) : DealHistoryContract.Presenter {
 
@@ -43,7 +44,8 @@ class DealHistoryPresenter(
 //        }
 
         val service: DealHistoryService = ApiService.dealHistoryService
-        disposable = service.getDealHistory("1")
+        Log.i("cokodot",userId)
+        disposable = service.getDealHistory(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

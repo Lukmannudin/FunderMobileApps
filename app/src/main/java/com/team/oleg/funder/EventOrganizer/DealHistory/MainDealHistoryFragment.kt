@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import com.team.oleg.funder.Data.DealHistory
 import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.fragment_deal_history.*
 import kotlinx.android.synthetic.main.fragment_deal_history.view.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -39,8 +40,9 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        presenter = DealHistoryPresenter(this)
+        val sharedPref = this.activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
+        val userId = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
+        presenter = DealHistoryPresenter(userId,this)
     }
 
     private val itemListener: DealHistoryItemListener = object :
