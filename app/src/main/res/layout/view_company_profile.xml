@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/meleng"
+            android:scaleType="fitXY"
+            android:id="@+id/backgroundCompanyProfile"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/notificationCompanyImage"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/image_placeholder"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+            android:text="PEMERINTAH KOTA BANDUNG"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:gravity="center"
+            android:id="@+id/tvCompanyName"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/notificationCompanyImage"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:text="VISI"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/tvCompanyVision"
+            app:layout_constraintTop_toBottomOf="@+id/tvCompanyName"
+            android:layout_marginTop="36dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:text="TERWUJUDNYA KOTA BANDUNG  YANG UNGGUL, NYAMAN,
+DAN SEJAHTERA"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:id="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/tvCompanyVision"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+    <TextView
+            android:text="Misi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvCompanyMission"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+    <TextView
+            android:text="1. Mewujudkan Bandung nyaman melalui perencanaan tataruang, pembangunan infrastruktur serta pengendalian pemanfaatan ruang yang berkualitas dan berwawasan lingkungan.
+
+2. Menghadirkan tata kelola pemerintahan yang akuntabel, bersih dan melayani
+
+3. Membangun masyarakat yang mandiri, berkualitas dan berdaya saing
+
+4. Membangun perekonomian yang kokoh, maju, dan berkeadilan."
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvCompanyMissionValue"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvCompanyMission" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <TextView
+            android:text="Sponsorship"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvCompanySponsorhsip"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvCompanyMissionValue"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+
+</android.support.constraint.ConstraintLayout>
