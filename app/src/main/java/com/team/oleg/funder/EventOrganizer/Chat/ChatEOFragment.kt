@@ -38,7 +38,6 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class MainChatFragment : Fragment(), ChatEOContract.View {
-    override  var lastMessage: String? = null
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
