@@ -91,7 +91,8 @@ class ChatMessageEOPresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { result ->
-                            chatEOView.showNewChat(message)
+                            Log.i("coconot","BERHASIL CHAT")
+//                            chatEOView.showNewChat(message)
                         },
                         { error ->
                             Log.i("cek","GAGAL CHAT")

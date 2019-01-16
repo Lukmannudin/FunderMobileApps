@@ -93,4 +93,8 @@ class MainActivity : BaseActivity() {
         viewPager.adapter = adapter
     }
 
+    override fun onBackPressed() {
+        this.finishAffinity()
+    }
+
 }

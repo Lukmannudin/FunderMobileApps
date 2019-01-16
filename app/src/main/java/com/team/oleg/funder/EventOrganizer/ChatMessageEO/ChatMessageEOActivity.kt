@@ -1,6 +1,5 @@
 package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -22,7 +21,6 @@ import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.notificationManager
 
 class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
@@ -70,9 +68,9 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     }
 
     override fun showNewChat(chat: Message) {
-        Log.i("message showNewChat", chat.message.toString())
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
+        rvMessage.smoothScrollToPosition(messageList.size)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -83,9 +81,8 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun showChatList(chat: List<Message>) {
         messageList.clear()
         messageList.addAll(chat)
-
-
         listAdapter.notifyDataSetChanged()
+        rvMessage.smoothScrollToPosition(messageList.size)
     }
 
     override fun showNoChat(active: Boolean) {
@@ -110,6 +107,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
         Log.i("message setMessage", message.message.toString())
         showNewChat(message)
+        presenter.sendChat(message)
         firestoreChat.set(message)
             .addOnSuccessListener {
                 Toast.makeText(this@ChatMessageEOActivity, "Message Sent", Toast.LENGTH_SHORT).show()
@@ -161,20 +159,20 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         }
     }
 
-       private fun createNotificationChannel(messages: String){
-            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
-                val name = getString(R.string.channel_name)
-                val descriptionText = messages
-                val importance = NotificationManager.IMPORTANCE_DEFAULT
-                val channel = NotificationChannel("1", name, importance).apply {
-                    description = descriptionText
-                }
-                // Register the channel with the system
-                val notificationManager: NotificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.createNotificationChannel(channel)
+    private fun createNotificationChannel(messages: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = messages
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("1", name, importance).apply {
+                description = descriptionText
             }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
+    }
 
     private fun addToDatabase(message: Map<String, String?>) {
         try {

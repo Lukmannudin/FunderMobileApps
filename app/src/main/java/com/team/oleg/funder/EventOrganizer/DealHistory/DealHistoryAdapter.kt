@@ -62,6 +62,9 @@ class DealHistoryAdapter(
                 "accepted" -> {
                     bidStatus.setTextColor(Color.parseColor("#53b636"))
                 }
+                "waiting" -> {
+                    bidStatus.setTextColor(Color.parseColor("#525456"))
+                }
             }
             bidName.text = dealHistory.sponsorName
             companyName.text = dealHistory.companyName

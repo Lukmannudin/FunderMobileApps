@@ -3,6 +3,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_margin="10dp"
               android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
@@ -12,7 +13,14 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chat_sent_balon"
             android:textColor="@android:color/black"
-            android:layout_margin="10dp"
             android:padding="10dp"
             tools:text="Pagi, Iya benar mas !" />
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_item_chat_message_read"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/colorWhiteLight"
+            tools:text="Read" />
 </LinearLayout>

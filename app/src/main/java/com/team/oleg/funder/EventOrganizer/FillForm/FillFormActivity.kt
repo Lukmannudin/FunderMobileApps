@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.OpenableColumns
@@ -27,6 +28,8 @@ import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -34,6 +37,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
 
     override lateinit var presenter: FillFormContract.Presenter
     private var filePath: Uri? = null
+    private var fileNameImage: String? = null
     private val PICK_IMAGE_REQUEST = 71
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +55,13 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
         val USER_ID = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
         val USER_NAME = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
+        Log.i("username",USER_NAME)
 
         presenter = FillFormPresenter(this)
 
+        val myFormat = "yyyy-MM-dd HH:mm:ss"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val now = sdf.format(Date())
 
         btnSubmitFillForm.setOnClickListener {
             presenter.addEvent(
@@ -66,7 +74,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
                     edtEventSpeaker.text.toString(),
                     edtEventMp.text.toString(),
                     edtEventDesc.text.toString(),
-                    "${sponsorData.sponsorName}-${USER_NAME}" + Date().toString(),
+                    "$USER_NAME-$now",
                     Utils.STATUS_AVAILABLE
                 )
             )
@@ -102,7 +110,8 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
     }
 
     private fun updateDateInView() {
-        val myFormat = "dd MMMM yyyy"
+//        val myFormat = "dd MMMM yyyy"
+        val myFormat = "yyyy-MM-dd"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edtEventDate.setText(sdf.format(cal.time))
     }
@@ -140,10 +149,13 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
                  * move to the first row in the Cursor, get the data,
                  * and display it.
                  */
-                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+//                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                 val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
                 cursor.moveToFirst()
-                fileChooserFillForm.text = cursor.getString(nameIndex)
+
+                fileNameImage = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                fileChooserFillForm.text = fileNameImage
+
             }
 
             try {
@@ -179,7 +191,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
             progressDialog.setTitle("Uploading...")
             progressDialog.show()
 
-            val ref = storageReference?.child("proposal/" + UUID.randomUUID().toString())
+            val ref = storageReference?.child("proposal/$fileNameImage")
             ref?.putFile(filePath!!)
                 ?.addOnSuccessListener {
                     progressDialog.dismiss()

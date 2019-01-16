@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
@@ -34,10 +35,6 @@ class ChatEOAdapter(
         holder.bindItem(context, items[position], listener)
     }
 
-    private val firestoreChat by lazy {
-        FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
-    }
-
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val companyImage = view.ivChatList
         private val titleChat = view.tvTitleChatList
@@ -53,39 +50,27 @@ class ChatEOAdapter(
         ) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
+
             context?.let {
                 Glide.with(it).load(
-                    dummyImage
+                    BuildConfig.BASE_URL + "uploads/photo/company_photo/"+chat.companyPhoto
                 ).into(companyImage)
             }
+            Log.i("coconot",BuildConfig.BASE_URL + "uploads/photo/company_photo/"+chat.companyPhoto)
             titleChat.text = chat.companyName
             eventName.text = chat.companyVision
-//            messageChat.text = "selamat pagi"
-            unreadMessage.text = "3"
-            itemView.setOnClickListener {
-                listener.onChatClick(chat)
-//                messageChat.text = listener.getLastMessage(chat.chatId)
+            unreadMessage.text = chat.unread
+            if (chat.unread.equals("0")){
+                unreadMessage.visibility = View.GONE
+            } else {
+                unreadMessage.visibility = View.VISIBLE
             }
 
-            val firestoreChat =
-                FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
-            firestoreChat.addSnapshotListener { documentSnapshot,
-                                                firebaseFirestoreException ->
-                when {
-                    firebaseFirestoreException != null -> Log.i("ERROR", firebaseFirestoreException.message)
-                    documentSnapshot != null && documentSnapshot.exists() -> {
-                        with(documentSnapshot) {
-                            if (chat.chatId == data?.get(ChatUtils.CHAT_ID) && Utils.SENDER_COMPANY == data?.get(
-                                    ChatUtils.SENDER
-                                )
-                            ) {
-                                Log.i("cek",data?.get(ChatUtils.MESSAGE).toString())
-                                messageChat.text = data?.get(ChatUtils.MESSAGE).toString()
-                            }
-                        }
-                    }
-                }
+            messageChat.text = chat.lastMessage
+            itemView.setOnClickListener {
+                listener.onChatClick(chat)
             }
+
         }
     }
 }

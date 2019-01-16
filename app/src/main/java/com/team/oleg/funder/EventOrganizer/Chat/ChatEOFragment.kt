@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,15 +59,11 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
         val sharedPref = this.activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
         val userId = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
         presenter = ChatEOPresenter(userId,this)
+        Log.i("cocomot",userId)
     }
 
     private val itemListener: chatItemListener = object :
         chatItemListener {
-        override fun getLastMessage(chatId: String?):String? {
-            presenter.loadLastMessage(chatId)
-            return this@MainChatFragment.lastMessage
-        }
-
         override fun onChatClick(clicked: Chat) {
             presenter.openChatDetail(clicked)
         }
@@ -213,7 +210,6 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     interface chatItemListener {
         fun onChatClick(clicked: Chat)
-        fun getLastMessage(chatId: String?):String?
     }
 
 }
