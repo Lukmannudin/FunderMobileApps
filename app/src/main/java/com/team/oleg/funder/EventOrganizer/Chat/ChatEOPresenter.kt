@@ -53,6 +53,7 @@ class ChatEOPresenter(
             .subscribe(
                 { result ->
                     processChat(result.data)
+                    loadLastMessage(result.data)
                     chatEOView.setLoadingIndicator(false)
                 },
                 { error ->
@@ -65,6 +66,9 @@ class ChatEOPresenter(
         if (chat.isEmpty()) {
             chatEOView.showNoChat(true)
         } else {
+            for (i in 0 until chat.size) {
+
+            }
             chatEOView.showChatList(chat)
         }
     }
@@ -74,18 +78,22 @@ class ChatEOPresenter(
             chatEOView.showChatDetailUi(it)
         }
     }
-    override fun loadLastMessage(chatId:String?) {
+    override fun loadLastMessage(chat: List<Chat>) {
         val service: ChatService = ApiService.chatService
-        disposable = service.getLastMessage(chatId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { result ->
-                    chatEOView.lastMessage = result.data[0].message
-                },
-                { error ->
-                }
-            )
+        for (i in 0 until chat.size){
+            disposable = service.getLastMessage(chat[i].chatId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { result ->
+                        chat[i].message = result.data[0].message
+                        chatEOView.showChat(chat[i], chat.size)
+                        Thread.sleep(1000)
+                    },
+                    { error ->
+                    }
+                )
+        }
     }
 
 }

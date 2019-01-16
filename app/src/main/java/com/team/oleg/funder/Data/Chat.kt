@@ -61,7 +61,7 @@ data class Chat(
     val sender: String? = null,
 
     @SerializedName("message")
-    val message: String? = null,
+    var message: String? = null,
 
     @SerializedName("message_time")
     val messageTime: String? = null,
