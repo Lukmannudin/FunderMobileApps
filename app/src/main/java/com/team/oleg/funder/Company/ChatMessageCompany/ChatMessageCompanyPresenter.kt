@@ -12,7 +12,8 @@ class ChatMessageCompanyPresenter(
     private val chatId: String?,
     private val chatCompanyView: ChatMessageCompanyContract.View
 ) : ChatMessageCompanyContract.Presenter {
-   
+
+
 
     private var disposable: Disposable? = null
     private var firstLoad = true
@@ -49,6 +50,7 @@ class ChatMessageCompanyPresenter(
 
 //        if (forceUpdate) {
 //        }
+        Log.i("firsload",firstLoad.toString())
 
         val service: ChatService = ApiService.chatService
         disposable = service.getMessageEO(chatId)
@@ -63,6 +65,8 @@ class ChatMessageCompanyPresenter(
                     chatCompanyView.showNoChat(true)
                 }
             )
+        firstLoad = false
+        Log.i("firsload",firstLoad.toString())
     }
 
     private fun processChat(chat: List<Message>) {
@@ -90,6 +94,22 @@ class ChatMessageCompanyPresenter(
 
     override fun receiveChat(message: Message) {
         chatCompanyView.showNewChat(message)
+    }
+
+    override fun realAllMessage(chatId: String) {
+        val service: ChatService = ApiService.chatService
+        disposable = service.readAllMessage(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("berhasil","berhasilread")
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil",error.localizedMessage)
+                }
+            )
     }
 
 }

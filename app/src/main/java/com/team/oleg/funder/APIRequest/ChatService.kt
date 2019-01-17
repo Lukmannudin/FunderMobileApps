@@ -1,7 +1,6 @@
 package com.team.oleg.funder.APIRequest
 
 import com.team.oleg.funder.Data.Chat
-import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.Response.ChatUnreadResponse
 import com.team.oleg.funder.Response.Response
@@ -36,4 +35,8 @@ interface ChatService {
     @GET("message/last/{chatId}")
     fun getLastMessage(@Path("chatId") chatId: String?):
             Observable<RootResponse<Message>>
+
+    @POST("message/readall/{chatId}")
+    fun readAllMessage(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
 }

@@ -156,11 +156,16 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                             if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
                                 && data?.get(ChatUtils.CHAT_ID) == chatId
                             ){
+                                chatId?.let {
+                                    presenter.realAllMessage(it)
+                                }
                                 for (i in 0 until messageList.size){
                                     if (messageList[i].sender == Utils.SENDER_EO){
                                         messageList[i].messageRead = "1"
                                     }
                                 }
+
+                                listAdapter.notifyDataSetChanged()
                             }
                         }
                     }

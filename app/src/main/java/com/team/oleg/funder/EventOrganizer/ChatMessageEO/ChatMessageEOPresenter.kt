@@ -3,8 +3,8 @@ package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 import android.content.Context
 import android.util.Log
 import com.team.oleg.funder.APIRequest.ChatService
-import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.Service.ApiService
 import com.team.oleg.funder.Utils.ChatUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +19,6 @@ class ChatMessageEOPresenter(
     private val chatId: String?,
     private val chatEOView: ChatMessageEOContract.View
 ) : ChatMessageEOContract.Presenter {
-
 
     private var disposable: Disposable? = null
     private var firstLoad = true
@@ -95,15 +94,24 @@ class ChatMessageEOPresenter(
 //                            chatEOView.showNewChat(message)
                         },
                         { error ->
-                            Log.i("cek","GAGAL CHAT")
-                            Log.i("cek g",error.localizedMessage)
-                            Log.i("cek c",error.message)
-                            Log.i("cek k",error.stackTrace[0].className)
-                            Log.i("cek k",error.stackTrace[0].methodName)
-
 //                            chatEOView.showNoChat(true)
                         }
                 )
+    }
+    override fun realAllMessage(chatId: String) {
+        val service: ChatService = ApiService.chatService
+        disposable = service.readAllMessage(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("berhasil","berhasilread")
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil",error.localizedMessage)
+                }
+            )
     }
 
 }

@@ -78,6 +78,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         Log.i("cek", "showNewChat")
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
+        rvMessage.smoothScrollToPosition(messageList.size)
     }
 
     override fun onResume() {
@@ -144,14 +145,17 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                 )
                             )
                         }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
-                            if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
-                                && data?.get(ChatUtils.CHAT_ID) == chatId
+                            if (data?.get(ChatUtils.CHAT_ID) == chatId
                             ){
+                                chatId?.let {
+                                    presenter.realAllMessage(it)
+                                }
                                 for (i in 0 until messageList.size){
-                                    if (messageList[i].sender == Utils.SENDER_EO){
+                                    if (messageList[i].sender == Utils.SENDER_COMPANY){
                                         messageList[i].messageRead = "1"
                                     }
                                 }
+                                listAdapter.notifyDataSetChanged()
                             }
                         }
                     }

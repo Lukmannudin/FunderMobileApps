@@ -23,5 +23,8 @@ interface ChatMessageEOContract {
         fun loadChat(forceUpdate: Boolean)
 
         fun sendChat(message: Message)
+
+        fun realAllMessage(chatId:String)
+
     }
 }
