@@ -7,8 +7,6 @@ import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -51,6 +49,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
             edtAddMessage.text.clear()
         }
 
+
     }
 
     override fun setLoadingIndicator(active: Boolean) {
@@ -91,11 +90,27 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun onResume() {
         super.onResume()
         presenter.start()
+        readMessage()
 
     }
 
     private val firestoreChat by lazy {
         FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
+    }
+
+    private fun readMessage(){
+        val map = HashMap<String,Any?>()
+        map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
+        map[ChatUtils.CHAT_ID] = chatId
+
+        firestoreChat.set(map)
+            .addOnSuccessListener {
+                //                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+//                presenter.sendChat(message)
+            }
+            .addOnFailureListener { e ->
+                //                Log.i("cek Error", e.message)
+            }
     }
 
     private fun setMessage() {
@@ -137,21 +152,16 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                                     null
                                 )
                             )
-
-                            val mBuilder =
-                                NotificationCompat.Builder(this@ChatMessageEOActivity, "com.team.oleg.funder")
-                                    .setSmallIcon(R.drawable.logo)
-                                    .setContentTitle("Funder notification")
-                                    .setContentText(data?.get(ChatUtils.MESSAGE).toString())
-                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            // Set the intent that will fire when the user taps the notification
-
-                            with(NotificationManagerCompat.from(this@ChatMessageEOActivity)) {
-                                // notificationId is a unique int for each notification that you must define
-                                notify(101, mBuilder.build())
+                        } else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
+                            if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
+                                && data?.get(ChatUtils.CHAT_ID) == chatId
+                            ){
+                                for (i in 0 until messageList.size){
+                                    if (messageList[i].sender == Utils.SENDER_EO){
+                                        messageList[i].messageRead = "1"
+                                    }
+                                }
                             }
-
-                            createNotificationChannel(ChatUtils.MESSAGE)
                         }
                     }
                 }

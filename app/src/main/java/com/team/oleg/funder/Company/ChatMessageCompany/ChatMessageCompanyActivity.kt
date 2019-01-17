@@ -48,7 +48,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             setMessage()
             edtAddMessage.text.clear()
         }
-        readMessage()
     }
 
     override fun setLoadingIndicator(active: Boolean) {
@@ -84,6 +83,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     override fun onResume() {
         super.onResume()
         presenter.start()
+        readMessage()
     }
 
     private val firestoreChat by lazy {
@@ -91,10 +91,9 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     }
 
     private fun readMessage(){
-        val map = HashMap<Int,Any?>()
-        map[ChatUtils.MESSAGE_READ_SUCCESS_CODE] = 200
-//        map[ChatUtils.MESSAGE_STATUS_SENDING] = chatId
-//        map[ChatUtils.MESSAGE_READ] = true
+        val map = HashMap<String,Any?>()
+        map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
+        map[ChatUtils.CHAT_ID] = chatId
 
         firestoreChat.set(map)
             .addOnSuccessListener {
@@ -144,9 +143,15 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                     null
                                 )
                             )
-                        }else if(data?.get("messageForRead") != null){
-                            if (data?.get("messageForRead") == 200){
-
+                        }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
+                            if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
+                                && data?.get(ChatUtils.CHAT_ID) == chatId
+                            ){
+                                for (i in 0 until messageList.size){
+                                    if (messageList[i].sender == Utils.SENDER_EO){
+                                        messageList[i].messageRead = "1"
+                                    }
+                                }
                             }
                         }
                     }
