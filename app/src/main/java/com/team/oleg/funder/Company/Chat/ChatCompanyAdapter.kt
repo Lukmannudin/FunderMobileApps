@@ -53,7 +53,8 @@ class ChatCompanyAdapter(
             titleChat.text = chat.eoName
             eventName.text = chat.companyVision
             messageChat.text = chat.message
-            unreadMessage.text = "3"
+            unreadMessage.text = chat.unread
+            messageChat.text = chat.lastMessage
             itemView.setOnClickListener {
                 listener.onChatClick(chat)
             }

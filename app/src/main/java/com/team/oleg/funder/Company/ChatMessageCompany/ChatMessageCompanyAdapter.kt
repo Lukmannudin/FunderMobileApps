@@ -84,11 +84,15 @@ class ChatMessageCompanyAdapter(
 
     class MessageSenderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val tvMessage = view.tv_item_chat_message_sent
+        private val statusMessage = view.tv_item_chat_message_read
 
         fun bindItem(context: Context?, items: Message) {
-            Log.i("cek sender",items.message)
-
             tvMessage.text = items.message
+            if (items.messageRead.equals("1")){
+                statusMessage.text = "Read"
+            } else {
+                statusMessage.text = "Sent"
+            }
         }
     }
 

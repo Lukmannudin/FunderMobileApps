@@ -48,8 +48,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             setMessage()
             edtAddMessage.text.clear()
         }
-
-
+        readMessage()
     }
 
     override fun setLoadingIndicator(active: Boolean) {
@@ -91,13 +90,29 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         FirebaseFirestore.getInstance().collection(COLLECTION_KEY).document(DOCUMENT_KEY)
     }
 
+    private fun readMessage(){
+        val map = HashMap<Int,Any?>()
+        map[ChatUtils.MESSAGE_READ_SUCCESS_CODE] = 200
+//        map[ChatUtils.MESSAGE_STATUS_SENDING] = chatId
+//        map[ChatUtils.MESSAGE_READ] = true
+
+        firestoreChat.set(map)
+            .addOnSuccessListener {
+//                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+//                presenter.sendChat(message)
+            }
+            .addOnFailureListener { e ->
+//                Log.i("cek Error", e.message)
+            }
+    }
+
     private fun setMessage() {
 
         val message = Message()
         message.chatId = chatId
         message.sender = Utils.SENDER_COMPANY
         message.message = edtAddMessage.text.toString()
-        message.messageStatus = "sent"
+        message.messageStatus = ChatUtils.MESSAGE_STATUS_SENT
 
         showNewChat(message)
         firestoreChat.set(message)
@@ -129,6 +144,10 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                     null
                                 )
                             )
+                        }else if(data?.get("messageForRead") != null){
+                            if (data?.get("messageForRead") == 200){
+
+                            }
                         }
                     }
                 }
