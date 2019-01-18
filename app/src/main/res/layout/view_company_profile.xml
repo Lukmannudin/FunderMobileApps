@@ -4,6 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
+    <org.jetbrains.anko._ScrollView android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -98,5 +100,5 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="9dp"/>
-
+    </org.jetbrains.anko._ScrollView>
 </android.support.constraint.ConstraintLayout>
