@@ -102,6 +102,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         val map = HashMap<String,Any?>()
         map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
         map[ChatUtils.CHAT_ID] = chatId
+        map[ChatUtils.SENDER] = Utils.SENDER_COMPANY
 
         firestoreChat.set(map)
             .addOnSuccessListener {
@@ -155,6 +156,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                         } else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
                             if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
                                 && data?.get(ChatUtils.CHAT_ID) == chatId
+                                && data?.get(ChatUtils.SENDER) == Utils.SENDER_COMPANY
                             ){
                                 chatId?.let {
                                     presenter.realAllMessage(it)
@@ -164,8 +166,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                                         messageList[i].messageRead = "1"
                                     }
                                 }
-
-                                listAdapter.notifyDataSetChanged()
+                                showChatList(messageList)
                             }
                         }
                     }
