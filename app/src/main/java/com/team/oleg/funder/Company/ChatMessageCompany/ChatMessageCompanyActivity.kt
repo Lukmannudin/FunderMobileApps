@@ -143,7 +143,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                     null
                                 )
                             )
-                        }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
+                        } else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
                             if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
                                 && data?.get(ChatUtils.CHAT_ID) == chatId
                             ){
