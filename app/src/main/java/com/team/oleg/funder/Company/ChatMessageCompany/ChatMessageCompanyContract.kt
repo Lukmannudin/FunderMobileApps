@@ -26,7 +26,7 @@ interface ChatMessageCompanyContract {
 
         fun receiveChat(message: Message)
 
-        fun readAllMessage(chatId: String?)
+        fun realAllMessage(chatId:String)
 
     }
 }

@@ -73,6 +73,11 @@ data class Chat(
     val lastMessage: String? = null,
 
     @SerializedName("unread")
-    val unread: String? = null
+    val unread: String? = null,
 
+    @SerializedName("event_name")
+    val eventName: String? = null,
+
+    @SerializedName("sponsor_name")
+    val sponsorName: String? = null
 ) : Parcelable

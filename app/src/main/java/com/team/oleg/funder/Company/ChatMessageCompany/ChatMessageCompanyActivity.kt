@@ -78,6 +78,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         Log.i("cek", "showNewChat")
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
+        rvMessage.smoothScrollToPosition(messageList.size)
     }
 
     override fun onResume() {
@@ -94,14 +95,12 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         val map = HashMap<String,Any?>()
         map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
         map[ChatUtils.CHAT_ID] = chatId
-//        map[] =
+        map[ChatUtils.SENDER] = Utils.SENDER_EO
 
         firestoreChat.set(map)
             .addOnSuccessListener {
 //                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
 //                presenter.sendChat(message)
-                Log.i("captruk","read")
-                presenter.readAllMessage(chatId)
             }
             .addOnFailureListener { e ->
 //                Log.i("cek Error", e.message)
@@ -146,17 +145,18 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                     null
                                 )
                             )
-                        } else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
-                            if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
-                                && data?.get(ChatUtils.CHAT_ID) == chatId
-                            ){
+                        }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
+                            if (data?.get(ChatUtils.CHAT_ID) == chatId
+                            && data?.get(ChatUtils.SENDER) == Utils.SENDER_EO){
+                                chatId?.let {
+                                    presenter.realAllMessage(it)
+                                }
                                 for (i in 0 until messageList.size){
                                     if (messageList[i].sender == Utils.SENDER_EO){
                                         messageList[i].messageRead = "1"
                                     }
                                 }
-                                Log.i("cekoceko","Data terupdate")
-                                listAdapter.updateDate(messageList)
+                                showChatList(messageList)
                             }
                         }
                     }

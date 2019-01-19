@@ -2,10 +2,9 @@ package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.team.oleg.funder.APIRequest.ChatService
-import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.Service.ApiService
 import com.team.oleg.funder.Utils.ChatUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,8 +19,6 @@ class ChatMessageEOPresenter(
     private val chatId: String?,
     private val chatEOView: ChatMessageEOContract.View
 ) : ChatMessageEOContract.Presenter {
-
-
 
     private var disposable: Disposable? = null
     private var firstLoad = true
@@ -93,25 +90,26 @@ class ChatMessageEOPresenter(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { result ->
-
+                            Log.i("coconot","BERHASIL CHAT")
+//                            chatEOView.showNewChat(message)
                         },
                         { error ->
-
+//                            chatEOView.showNoChat(true)
                         }
                 )
     }
-
-    override fun readAllMessage(chatId: String?) {
+    override fun realAllMessage(chatId: String) {
         val service: ChatService = ApiService.chatService
         disposable = service.readAllMessage(chatId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-
+                    Log.i("berhasil","berhasilread")
                 },
                 { error ->
-
+                    println(error.localizedMessage)
+                    Log.i("berhasil",error.localizedMessage)
                 }
             )
     }

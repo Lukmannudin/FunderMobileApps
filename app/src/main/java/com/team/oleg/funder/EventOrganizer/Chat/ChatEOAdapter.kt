@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
 import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.ChatUtils
-import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class ChatEOAdapter(
@@ -60,6 +57,7 @@ class ChatEOAdapter(
             titleChat.text = chat.companyName
             eventName.text = chat.companyVision
             unreadMessage.text = chat.unread
+            dateChat.text = chat.messageTime
             if (chat.unread.equals("0")){
                 unreadMessage.visibility = View.GONE
             } else {

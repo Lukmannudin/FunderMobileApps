@@ -52,13 +52,14 @@ class ChatCompanyAdapter(
                 ).into(companyImage)
             }
             titleChat.text = chat.eoName
-            eventName.text = chat.companyVision
+            eventName.text = chat.eventName
             messageChat.text = chat.message
             unreadMessage.text = chat.unread
             messageChat.text = chat.lastMessage
             itemView.setOnClickListener {
                 listener.onChatClick(chat)
             }
+            dateChat.text = chat.messageTime
 
 
 //            val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm:ss")
