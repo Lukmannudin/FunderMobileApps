@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.chat_message_sent.view.*
 
 class ChatMessageCompanyAdapter(
     private val context: Context,
-    private val items: List<Message>
+    private val items: MutableList<Message>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -70,6 +70,12 @@ class ChatMessageCompanyAdapter(
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun updateDate(data: List<Message>) {
+        items.clear()
+        items.addAll(data)
+        notifyDataSetChanged()
     }
 
     class MessageReceiverViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -12,7 +12,8 @@ class ChatMessageCompanyPresenter(
     private val chatId: String?,
     private val chatCompanyView: ChatMessageCompanyContract.View
 ) : ChatMessageCompanyContract.Presenter {
-   
+
+
 
     private var disposable: Disposable? = null
     private var firstLoad = true
@@ -91,5 +92,21 @@ class ChatMessageCompanyPresenter(
     override fun receiveChat(message: Message) {
         chatCompanyView.showNewChat(message)
     }
+
+    override fun readAllMessage(chatId: String?) {
+        val service: ChatService = ApiService.chatService
+        disposable = service.readAllMessage(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("capruk","berhasil")
+                },
+                { error ->
+                    Log.i("captruk",error.localizedMessage)
+                }
+            )
+    }
+
 
 }

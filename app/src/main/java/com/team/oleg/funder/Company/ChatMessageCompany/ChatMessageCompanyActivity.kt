@@ -94,11 +94,14 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         val map = HashMap<String,Any?>()
         map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
         map[ChatUtils.CHAT_ID] = chatId
+//        map[] =
 
         firestoreChat.set(map)
             .addOnSuccessListener {
 //                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
 //                presenter.sendChat(message)
+                Log.i("captruk","read")
+                presenter.readAllMessage(chatId)
             }
             .addOnFailureListener { e ->
 //                Log.i("cek Error", e.message)
@@ -152,6 +155,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                         messageList[i].messageRead = "1"
                                     }
                                 }
+                                Log.i("cekoceko","Data terupdate")
+                                listAdapter.updateDate(messageList)
                             }
                         }
                     }

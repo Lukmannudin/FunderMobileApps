@@ -33,7 +33,7 @@ interface ChatService {
     fun sendMessage(@Body message: Message):
             Observable<Response<String>>
 
-    @GET("message/last/{chatId}")
-    fun getLastMessage(@Path("chatId") chatId: String?):
-            Observable<RootResponse<Message>>
+    @POST("message/readall/{chatId}")
+    fun readAllMessage(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
 }
