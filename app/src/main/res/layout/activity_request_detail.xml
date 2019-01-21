@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Company.RequestDetail.RequestDetailActivity"
+>
+    <android.support.constraint.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textStyle="bold"
+                  android:text="Bakti Sosial"
+                  android:textColor="@android:color/black"
+                  android:textSize="25dp"
+                  android:id="@+id/nameEventEO"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:layout_marginStart="11.5dp"
+                  android:layout_marginTop="48dp"
+                  app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="12/12/2018"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateEventEO"
+                app:layout_constraintTop_toBottomOf="@+id/nameEventEO" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="Jl. Djuanda No 100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addressEventEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/dateEventEO"/>
+        <TextView
+                android:text="Dana yang dibutuhkan"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:id="@+id/desFundEO"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/addressEventEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="Rp. 10.000.000"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/totalFundEO"
+                android:layout_marginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/desFundEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="Speaker/Public Figure/Artist"
+                android:textSize="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:id="@+id/speakerEventEO"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/totalFundEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="The Overtunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameSpeakerEO"
+                android:layout_marginStart="11.5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/speakerEventEO"/>
+        <TextView
+                android:text="Media Partner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:id="@+id/mediaPEO"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toBottomOf="@+id/nameSpeakerEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="infounikom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameMediaPartEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"
+                android:layout_marginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/mediaPEO"/>
+        <TextView
+                android:text="Description"
+                android:textSize="17dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/DescEO"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/nameMediaPartEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@android:color/black"
+                android:layout_marginStart="11.5dp"/>
+        <TextView
+                android:text="Kota Bandung kini punya aplikasi baru bernama Ur-Scape. Aplikasi bersifat “open source” ini merupakan peranti pendukung perencanaan ruang yang berbasis data spasial. Melalui aplikasi ini, Kota Bandung kini punya data integratif tentang tata ruang."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionFullEO"
+                android:layout_marginTop="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/DescEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"/>
+        <ImageView
+                android:id="@+id/dlIconProposal"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/download_proposal_icon"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionFullEO"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="11.5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+
+        />
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/dlIconProposal"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent">
+            <Button
+                    android:text="Reject"
+                    android:background="@color/white"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bReject"
+                    android:layout_marginBottom="8dp"
+            />
+            <Button
+                    android:text="Accept"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bAccept"
+                    android:layout_marginBottom="8dp"/>
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

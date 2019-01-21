@@ -12,7 +12,7 @@ interface RequestContract {
 
         fun showBidder(bidder: List<Bidder>)
 
-        fun showBidderDetail(bidderId: String)
+        fun showBidderDetail(eventId: String,bidderId:String)
 
         fun showNoBidder(active: Boolean)
     }

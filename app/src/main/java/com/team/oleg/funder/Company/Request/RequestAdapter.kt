@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.Company.Chat.ChatFragment
 import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class RequestAdapter(
     private val context: Context?,
     private val items: List<Bidder>,
-    private val listener: RequestFragment.bidderItemListener
+    private val listener: RequestFragment.BidderItemListener
 ) : RecyclerView.Adapter<RequestAdapter.BidderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BidderViewHolder {
@@ -44,7 +42,7 @@ class RequestAdapter(
         fun bindItem(
             context: Context?,
             bidder: Bidder,
-            listener: RequestFragment.bidderItemListener
+            listener: RequestFragment.BidderItemListener
         ) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"

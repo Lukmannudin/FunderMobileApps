@@ -12,6 +12,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Company.EOProfile.EoProfileActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+        >
+        </activity>
+        <activity android:name=".Company.DealForm.DealFormActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        >
+        </activity>
+        <activity android:name=".Company.RequestDetail.RequestDetailActivity">
+        </activity>
         <activity
                 android:name=".Login.LoginPresenter"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -37,7 +47,6 @@
                 android:name=".EventOrganizer.FillForm.FillFormActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
                 android:name=".EventOrganizer.EventOrganizerProfile"
                 android:theme="@style/Theme.MyEOProfile">
@@ -54,12 +63,12 @@
         </activity>
         <activity
                 android:name=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity"
-            android:parentActivityName=".Main.MainActivity"
-        >
+                android:parentActivityName=".Main.MainActivity">
         </activity>
-        <activity android:name=".Company.ChatMessageCompany.ChatMessageCompanyActivity"
-            android:parentActivityName=".Company.CompanyActivity"
-        />
+        <activity
+                android:name=".Company.ChatMessageCompany.ChatMessageCompanyActivity"
+                android:parentActivityName=".Company.CompanyActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

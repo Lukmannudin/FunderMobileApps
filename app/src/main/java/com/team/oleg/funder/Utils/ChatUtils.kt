@@ -21,4 +21,7 @@ object ChatUtils {
     const val MESSAGE_READ_SUCCESS_CODE = 200
     const val MESSAGE_READ_FAILED_CODE = 404
 
+    const val STATUS_STATE_MESSAGE_OPEN = 1
+    const val STATUS_STATE_MESSAGE_CLOSE = 0
+
 }

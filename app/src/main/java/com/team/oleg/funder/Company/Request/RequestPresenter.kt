@@ -1,10 +1,9 @@
 package com.team.oleg.funder.Company.Request
 
-import com.team.oleg.funder.APIRequest.ChatService
+import android.util.Log
 import com.team.oleg.funder.APIRequest.DealHistoryService
-import com.team.oleg.funder.Company.Chat.ChatCompanyContract
+import com.team.oleg.funder.Company.RequestDetail.RequestDetailContract
 import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -12,7 +11,7 @@ import io.reactivex.schedulers.Schedulers
 
 class RequestPresenter(
     private val companyId: String?,
-    private val requestView: RequestContract.View
+    private val requestDetailView: RequestContract.View
 ) : RequestContract.Presenter {
 
 
@@ -20,13 +19,13 @@ class RequestPresenter(
     private var firstLoad = true
 
     init {
-        requestView.presenter = this
+        requestDetailView.presenter = this
     }
 
 
     override fun start() {
         loadBidder(false)
-        requestView.showNoBidder(false)
+        requestDetailView.showNoBidder(false)
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
@@ -43,7 +42,7 @@ class RequestPresenter(
 
     private fun loadBidder(forceUpdate: Boolean, showLoadingUI: Boolean) {
         if (showLoadingUI) {
-            requestView.setLoadingIndicator(true)
+            requestDetailView.setLoadingIndicator(true)
         }
 
 //        if (forceUpdate) {
@@ -55,30 +54,31 @@ class RequestPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
+                    Log.i("cekoco",result.data.toString())
+                    Log.i("cekoco",result.data.isEmpty().toString())
                     processChat(result.data)
-                    requestView.setLoadingIndicator(false)
+                    requestDetailView.setLoadingIndicator(false)
                 },
                 { error ->
-                    requestView.showNoBidder(true)
+                    requestDetailView.setLoadingIndicator(false)
+                    requestDetailView.showNoBidder(true)
                 }
             )
     }
 
     private fun processChat(bidder: List<Bidder>) {
         if (bidder.isEmpty()) {
-            requestView.showNoBidder(true)
+            requestDetailView.showNoBidder(true)
         } else {
-            requestView.showBidder(bidder)
+            requestDetailView.showBidder(bidder)
         }
     }
 
     override fun openBidderDetail(requestedBidder: Bidder) {
-        requestedBidder.bidderId?.let {
-            requestView.showBidderDetail(it)
-        }
+        requestedBidder.eventId?.let { requestedBidder.bidderId?.let { it1 ->
+            requestDetailView.showBidderDetail(it,
+                it1
+            )
+        } }
     }
-
-
-
-
 }

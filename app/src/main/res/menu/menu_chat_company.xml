@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+
+    <item
+            android:id="@+id/view_eo_profile"
+            android:title="View EO Profile"
+            app:showAsAction="never"/>
+    <item
+            android:id="@+id/view_search"
+            android:title="Search"
+            app:showAsAction="never"
+    />
+    <item
+            android:id="@+id/view_deal_form"
+            android:title="Deal Form"
+            app:showAsAction="never"
+    />
+    <item
+            android:id="@+id/view_end_deal"
+            android:title="End Deal"
+            app:showAsAction="never"
+    />
+</menu>

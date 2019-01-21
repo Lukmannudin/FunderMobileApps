@@ -14,4 +14,9 @@ object Utils {
     const val SENDER_COMPANY = "company"
 
     const val STATUS_AVAILABLE = "available"
+
+    const val BIDDER_ID = "bidderId"
+
+    const val MESSAGE_EVENT_ACCEPTED = "Congratulations now you has relationship"
+    const val MESSAGE_EVENT_REJECTED = "You rejected that event"
 }

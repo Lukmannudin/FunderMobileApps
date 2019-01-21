@@ -2,17 +2,57 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
         android:background="@color/colorWhiteBackground"
         tools:context=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity">
+    <android.support.v7.widget.Toolbar
+            android:layout_alignParentTop="true"
+            android:id="@+id/chat_message_toolbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:theme="@style/Theme.AppCompat"
+            app:titleTextColor="@color/white"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/eo_image_profile"
+                android:src="@drawable/image_placeholder"
+                android:layout_height="50dp"
+                android:layout_width="50dp"/>
+        <LinearLayout
+                android:paddingStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+        >
+            <TextView
+                    android:id="@+id/chat_eo_name"
+                    android:text="Hipma Unikom"
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/eo_chat_status"
+                    android:textColor="@color/white"
+                    android:text="status: transfered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout2"
-            android:layout_alignParentTop="true">
+            android:layout_below="@+id/chat_message_toolbar">
     </android.support.v7.widget.RecyclerView>
     <RelativeLayout
             android:layout_width="match_parent"

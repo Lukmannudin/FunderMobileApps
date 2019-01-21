@@ -32,11 +32,32 @@ interface ChatService {
     fun sendMessage(@Body message: Message):
             Observable<Response<String>>
 
-    @GET("message/last/{chatId}")
-    fun getLastMessage(@Path("chatId") chatId: String?):
-            Observable<RootResponse<Message>>
-
     @POST("message/readall/{chatId}")
     fun readAllMessage(@Path("chatId") chatId: String?):
             Observable<Response<String>>
+
+    @POST("chat/openEO/{chatId}")
+    fun setOnlineEO(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
+
+    @POST("chat/closeEO/{chatId}")
+    fun setOfflineEO(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
+
+    @POST("chat/openCompany/{chatId}")
+    fun setOnlineCompany(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
+
+    @POST("chat/closeCompany/{chatId}")
+    fun setOfflineCompany(@Path("chatId") chatId: String?):
+            Observable<Response<String>>
+
+    @GET("chat/cekOnlineEO/{chatId}")
+    fun cekOnlineEO(@Path("chatId") chatId: String?):
+            Observable<Response<Boolean>>
+
+    @GET("chat/cekOnlineCompany/{chatId}")
+    fun cekOnlineCompany(@Path("chatId") chatId: String?):
+            Observable<Response<Boolean>>
+
 }

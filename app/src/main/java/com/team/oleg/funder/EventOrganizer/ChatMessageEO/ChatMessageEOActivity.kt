@@ -22,12 +22,13 @@ import org.jetbrains.anko.db.insert
 
 class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
-
     private val messageList: MutableList<Message> = mutableListOf()
 
     override lateinit var presenter: ChatMessageEOContract.Presenter
 
     private lateinit var listAdapter: ChatMessageEOAdapter
+
+    private var status_state_message: Int = ChatUtils.STATUS_STATE_MESSAGE_OPEN
 
     private var chatId: String? = null
 
@@ -45,7 +46,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
         ivSendMessage.setOnClickListener {
-            setMessage()
+            presenter.cekOnline(edtAddMessage.text.toString(), chatId)
             edtAddMessage.text.clear()
         }
 
@@ -64,6 +65,12 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun onPause() {
         super.onPause()
         presenter.destroy()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        status_state_message = ChatUtils.STATUS_STATE_MESSAGE_CLOSE
+        presenter.setOnline(chatId, false)
     }
 
     override fun showNewChat(chat: Message) {
@@ -91,15 +98,15 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         super.onResume()
         presenter.start()
         readMessage()
-
+        presenter.setOnline(chatId, true)
     }
 
     private val firestoreChat by lazy {
         FirebaseFirestore.getInstance().collection(ChatUtils.COLLECTION_KEY).document(ChatUtils.DOCUMENT_KEY)
     }
 
-    private fun readMessage(){
-        val map = HashMap<String,Any?>()
+    private fun readMessage() {
+        val map = HashMap<String, Any?>()
         map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
         map[ChatUtils.CHAT_ID] = chatId
         map[ChatUtils.SENDER] = Utils.SENDER_COMPANY
@@ -114,12 +121,17 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
             }
     }
 
-    private fun setMessage() {
+    override fun setMessage(textMessage: String, status: Boolean) {
         val message = Message()
         message.chatId = chatId
         message.sender = Utils.SENDER_EO
-        message.message = edtAddMessage.text.toString()
-        message.messageStatus = "sent"
+        message.message = textMessage
+        message.messageStatus = ChatUtils.MESSAGE_STATUS_SENT
+        message.messageRead = "0"
+        if (status) {
+            message.messageStatus = ChatUtils.MESSAGE_STATUS_READ
+            message.messageRead = "1"
+        }
 
         Log.i("message setMessage", message.message.toString())
         showNewChat(message)
@@ -153,20 +165,21 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
                                     null
                                 )
                             )
-                        } else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
-                            if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) == 200
-                                && data?.get(ChatUtils.CHAT_ID) == chatId
-                                && data?.get(ChatUtils.SENDER) == Utils.SENDER_COMPANY
-                            ){
+                        } else if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null) {
+                            if (data?.get(ChatUtils.CHAT_ID) == chatId
+                                && data?.get(ChatUtils.SENDER) == Utils.SENDER_EO
+                            ) {
                                 chatId?.let {
                                     presenter.realAllMessage(it)
                                 }
-                                for (i in 0 until messageList.size){
-                                    if (messageList[i].sender == Utils.SENDER_EO){
-                                        messageList[i].messageRead = "1"
-                                    }
-                                }
-                                showChatList(messageList)
+//                                for (i in 0 until messageList.size){
+//                                    if (messageList[i].sender == Utils.SENDER_EO){
+//                                        messageList[i].messageRead = "1"
+//                                    }
+//                                }
+                                Log.i("ADAA", status_state_message.toString())
+                                presenter.realAllMessage(chatId)
+                                presenter.loadChat(false)
                             }
                         }
                     }

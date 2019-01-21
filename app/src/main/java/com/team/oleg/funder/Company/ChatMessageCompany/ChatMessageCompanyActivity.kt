@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import com.team.oleg.funder.Company.DealForm.DealFormActivity
+import com.team.oleg.funder.Company.EOProfile.EoProfileActivity
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
@@ -15,9 +19,10 @@ import com.team.oleg.funder.Utils.ChatUtils.COLLECTION_KEY
 import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 
 class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContract.View {
-
 
     private val messageList: MutableList<Message> = mutableListOf()
 
@@ -28,11 +33,19 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.title = "EO name"
+//        supportActionBar?.subtitle = "Status: Not Transfered"
+//        supportActionBar?.setDisplayUseLogoEnabled(true)
+//        supportActionBar?.setIcon(R.drawable.image_placeholder)
+
+
+
         setContentView(R.layout.activity_chat_message_eo)
         chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
 
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listAdapter = ChatMessageCompanyAdapter(this, messageList)
         presenter = ChatMessageCompanyPresenter(chatId, this)
@@ -45,9 +58,13 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
         ivSendMessage.setOnClickListener {
-            setMessage()
+            presenter.cekOnline(edtAddMessage.text.toString(),chatId)
             edtAddMessage.text.clear()
         }
+
+        setSupportActionBar(chat_message_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
     }
 
     override fun setLoadingIndicator(active: Boolean) {
@@ -69,13 +86,13 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         messageList.clear()
         messageList.addAll(chat)
         listAdapter.notifyDataSetChanged()
+        rvMessage.smoothScrollToPosition(messageList.size)
     }
 
     override fun showNoChat(active: Boolean) {
     }
 
     override fun showNewChat(chat: Message) {
-        Log.i("cek", "showNewChat")
         messageList.add(chat)
         listAdapter.notifyDataSetChanged()
         rvMessage.smoothScrollToPosition(messageList.size)
@@ -85,6 +102,12 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         super.onResume()
         presenter.start()
         readMessage()
+        presenter.setOnline(chatId,true)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.setOnline(chatId,false)
     }
 
     private val firestoreChat by lazy {
@@ -103,18 +126,23 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 //                presenter.sendChat(message)
             }
             .addOnFailureListener { e ->
-//                Log.i("cek Error", e.message)
+                Log.i("cek",e.localizedMessage)
             }
     }
 
-    private fun setMessage() {
 
+    override fun setMessage(textMessage: String, status: Boolean) {
         val message = Message()
         message.chatId = chatId
         message.sender = Utils.SENDER_COMPANY
-        message.message = edtAddMessage.text.toString()
+        message.message = textMessage
         message.messageStatus = ChatUtils.MESSAGE_STATUS_SENT
+        message.messageRead = "0"
 
+        if (status){
+            message.messageStatus = ChatUtils.MESSAGE_STATUS_READ
+            message.messageRead = "1"
+        }
         showNewChat(message)
         firestoreChat.set(message)
             .addOnSuccessListener {
@@ -125,6 +153,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 Log.i("cek Error", e.message)
             }
     }
+
 
     private fun realtimeUpdateListener() {
         firestoreChat.addSnapshotListener { documentSnapshot,
@@ -147,7 +176,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                             )
                         }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
                             if (data?.get(ChatUtils.CHAT_ID) == chatId
-                            && data?.get(ChatUtils.SENDER) == Utils.SENDER_EO){
+                            && data?.get(ChatUtils.SENDER) == Utils.SENDER_COMPANY){
                                 chatId?.let {
                                     presenter.realAllMessage(it)
                                 }
@@ -156,7 +185,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                         messageList[i].messageRead = "1"
                                     }
                                 }
-                                showChatList(messageList)
+                                presenter.realAllMessage(chatId)
+                                presenter.loadChat(false)
                             }
                         }
                     }
@@ -164,5 +194,30 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_chat_company,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            R.id.view_eo_profile -> {
+                startActivity(intentFor<EoProfileActivity>())
+            }
+            R.id.view_search -> {
+                Toast.makeText(this,"EO SEARCH",Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.view_deal_form -> {
+                startActivity(intentFor<DealFormActivity>())
+            }
+
+            R.id.view_end_deal -> {
+                Toast.makeText(this,"EO END DEAL",Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

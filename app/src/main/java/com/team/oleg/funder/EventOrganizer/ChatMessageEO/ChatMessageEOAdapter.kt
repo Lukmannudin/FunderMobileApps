@@ -15,10 +15,15 @@ import kotlinx.android.synthetic.main.chat_message_sent.view.*
 
 class ChatMessageEOAdapter(
     private val context: Context,
-    private val items: List<Message>
+    private val items: MutableList<Message>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    fun updateData(data: List<Message>) {
+        items.clear()
+        items.addAll(data)
+        notifyDataSetChanged()
+    }
     private val MESSAGE_SENDER = Utils.SENDER_EO
 
     private val SENDER_VIEW_TYPE = 0
@@ -78,6 +83,8 @@ class ChatMessageEOAdapter(
             tvMessage.text = items.message
         }
     }
+
+
 
 
     class MessageSenderViewHolder(view: View) : RecyclerView.ViewHolder(view) {

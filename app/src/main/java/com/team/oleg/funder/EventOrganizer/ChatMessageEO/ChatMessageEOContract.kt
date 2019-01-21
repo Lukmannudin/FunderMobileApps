@@ -14,6 +14,9 @@ interface ChatMessageEOContract {
         fun showNoChat(active: Boolean)
 
         fun showNewChat(chat: Message)
+
+        fun setMessage(textMessage:String,status:Boolean)
+
     }
 
     interface Presenter : BasePresenter {
@@ -24,7 +27,10 @@ interface ChatMessageEOContract {
 
         fun sendChat(message: Message)
 
-        fun realAllMessage(chatId:String)
+        fun realAllMessage(chatId:String?)
 
+        fun cekOnline(message:String, chatId: String?)
+
+        fun setOnline(chatId: String?,status:Boolean )
     }
 }

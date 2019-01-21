@@ -1,6 +1,5 @@
 package com.team.oleg.funder.Company.Request
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,16 +8,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.team.oleg.funder.Company.Chat.ChatCompanyPresenter
-import com.team.oleg.funder.Company.Chat.ChatFragment
+import com.team.oleg.funder.Company.RequestDetail.RequestDetailActivity
+import com.team.oleg.funder.Company.RequestDetail.RequestDetailContract
+import com.team.oleg.funder.Company.RequestDetail.RequestDetailPresenter
 import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.Data.Chat
 
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_request.*
 import kotlinx.android.synthetic.main.fragment_request.view.*
+import org.jetbrains.anko.support.v4.intentFor
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,11 +34,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class RequestFragment : Fragment(),RequestContract.View {
+class RequestFragment : Fragment(), RequestContract.View {
 
     override lateinit var presenter: RequestContract.Presenter
     private val bidderList : MutableList<Bidder> = mutableListOf()
-    private lateinit var listAdapter: RequestAdapter
+    private lateinit var listDetailAdapter: RequestAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -57,8 +57,8 @@ class RequestFragment : Fragment(),RequestContract.View {
         presenter = RequestPresenter(userId, this)
     }
 
-    private val itemListener: RequestFragment.bidderItemListener = object :
-        bidderItemListener {
+    private val itemListener: RequestFragment.BidderItemListener = object :
+        BidderItemListener {
         override fun onBidderClick(clicked: Bidder) {
             presenter.openBidderDetail(clicked)
         }
@@ -76,8 +76,8 @@ class RequestFragment : Fragment(),RequestContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listAdapter = RequestAdapter(context,bidderList,itemListener)
-        rvBidder.adapter = listAdapter
+        listDetailAdapter = RequestAdapter(context,bidderList,itemListener)
+        rvBidder.adapter = listDetailAdapter
     }
 
     override fun onCreateView(
@@ -108,32 +108,12 @@ class RequestFragment : Fragment(),RequestContract.View {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RequestFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
             RequestFragment().apply {
@@ -151,14 +131,19 @@ class RequestFragment : Fragment(),RequestContract.View {
     override fun showBidder(bidder: List<Bidder>) {
         bidderList.clear()
         bidderList.addAll(bidder)
-        listAdapter.notifyDataSetChanged()
+        listDetailAdapter.notifyDataSetChanged()
     }
 
-    override fun showBidderDetail(bidderId: String) {
-        Toast.makeText(context,bidderId,Toast.LENGTH_SHORT).show()
+    override fun showBidderDetail(eventId: String,bidderId:String) {
+        startActivity(intentFor<RequestDetailActivity>(
+            Utils.ID to eventId,
+            Utils.BIDDER_ID to bidderId
+        ))
     }
 
     override fun showNoBidder(active: Boolean) {
+        bidderList.clear()
+        listDetailAdapter.notifyDataSetChanged()
         if (active){
             no_bidder.visibility = View.VISIBLE
         } else {
@@ -166,7 +151,7 @@ class RequestFragment : Fragment(),RequestContract.View {
         }
     }
 
-    interface bidderItemListener {
+    interface BidderItemListener {
         fun onBidderClick(clicked: Bidder)
     }
 }

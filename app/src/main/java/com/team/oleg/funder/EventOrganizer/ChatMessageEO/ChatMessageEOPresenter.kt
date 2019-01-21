@@ -82,36 +82,77 @@ class ChatMessageEOPresenter(
         }
     }
 
-    override fun sendChat(message: Message)
-    {
+    override fun sendChat(message: Message) {
         val service: ChatService = ApiService.chatService
         disposable = service.sendMessage(message)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result ->
-                            Log.i("coconot","BERHASIL CHAT")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("coconot", "BERHASIL CHAT")
 //                            chatEOView.showNewChat(message)
-                        },
-                        { error ->
-//                            chatEOView.showNoChat(true)
-                        }
-                )
+                },
+                { error ->
+                    //                            chatEOView.showNoChat(true)
+                }
+            )
     }
-    override fun realAllMessage(chatId: String) {
+
+    override fun realAllMessage(chatId: String?) {
         val service: ChatService = ApiService.chatService
         disposable = service.readAllMessage(chatId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("berhasil","berhasilread")
+                    Log.i("berhasil", "berhasilread")
                 },
                 { error ->
                     println(error.localizedMessage)
-                    Log.i("berhasil",error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
                 }
             )
     }
+
+    override fun cekOnline(message: String, chatId: String?) {
+        val service: ChatService = ApiService.chatService
+
+        disposable = service.cekOnlineCompany(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    chatEOView.setMessage(message,result.data)
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
+                }
+            )
+    }
+
+
+    override fun setOnline(chatId: String?, status: Boolean) {
+        val service: ChatService = ApiService.chatService
+        var statusOnline = service.setOnlineEO(chatId)
+
+        if (!status){
+            statusOnline = service.setOfflineEO(chatId)
+        }
+
+        disposable = statusOnline
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("berhasil", "berhasilread")
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
+                }
+            )
+    }
+
 
 }

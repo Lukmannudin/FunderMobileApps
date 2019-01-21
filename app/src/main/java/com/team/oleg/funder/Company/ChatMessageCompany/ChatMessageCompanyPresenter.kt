@@ -13,8 +13,6 @@ class ChatMessageCompanyPresenter(
     private val chatCompanyView: ChatMessageCompanyContract.View
 ) : ChatMessageCompanyContract.Presenter {
 
-
-
     private var disposable: Disposable? = null
     private var firstLoad = true
 
@@ -25,7 +23,7 @@ class ChatMessageCompanyPresenter(
 
     override fun start() {
         loadChat(false)
-        Log.i("cek FirstLoad",firstLoad.toString())
+        Log.i("cek FirstLoad", firstLoad.toString())
 
 //        chatCompanyView.showNoChat(false)
     }
@@ -50,7 +48,7 @@ class ChatMessageCompanyPresenter(
 
 //        if (forceUpdate) {
 //        }
-        Log.i("firsload",firstLoad.toString())
+        Log.i("firsload", firstLoad.toString())
 
         val service: ChatService = ApiService.chatService
         disposable = service.getMessageEO(chatId)
@@ -66,7 +64,7 @@ class ChatMessageCompanyPresenter(
                 }
             )
         firstLoad = false
-        Log.i("firsload",firstLoad.toString())
+        Log.i("firsload", firstLoad.toString())
     }
 
     private fun processChat(chat: List<Message>) {
@@ -92,22 +90,58 @@ class ChatMessageCompanyPresenter(
             )
     }
 
-    override fun receiveChat(message: Message) {
-        chatCompanyView.showNewChat(message)
-    }
 
-    override fun realAllMessage(chatId: String) {
+    override fun realAllMessage(chatId: String?) {
         val service: ChatService = ApiService.chatService
         disposable = service.readAllMessage(chatId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("berhasil","berhasilread")
+                    Log.i("berhasil", "berhasilread")
                 },
                 { error ->
                     println(error.localizedMessage)
-                    Log.i("berhasil",error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
+                }
+            )
+    }
+
+    override fun cekOnline(message:String,chatId: String?) {
+        val service: ChatService = ApiService.chatService
+
+        disposable = service.cekOnlineEO(chatId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    chatCompanyView.setMessage(message,result.data)
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
+                }
+            )
+    }
+
+    override fun setOnline(chatId: String?, status: Boolean) {
+        val service: ChatService = ApiService.chatService
+        var statusOnline = service.setOnlineCompany(chatId)
+
+        if (!status) {
+            statusOnline = service.setOfflineCompany(chatId)
+        }
+
+        disposable = statusOnline
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("berhasil", "berhasilread")
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
                 }
             )
     }
