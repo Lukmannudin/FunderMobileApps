@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
+import com.team.oleg.funder.Company.CompanyActivity
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
@@ -60,7 +61,7 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         val view = layoutInflater.inflate(R.layout.custom_dialog, null)
         view.titleFillFormSubmitted.text = message
         view.btnSubmitFillForm.setOnClickListener {
-            startActivity(intentFor<MainActivity>())
+            startActivity(intentFor<CompanyActivity>())
 
         }
         builder.setView(view)

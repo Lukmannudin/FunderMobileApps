@@ -25,6 +25,8 @@ data class Message(
     var messageStatus: String? = null,
 
     @SerializedName("message_read")
-    var messageRead: String? = null
+    var messageRead: String? = null,
+
+    var messageSenderUsername: String? = null
 ) : Parcelable
 

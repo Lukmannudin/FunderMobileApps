@@ -116,10 +116,11 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
         listAdapter.notifyDataSetChanged()
     }
 
-    override fun showChatDetailUi(chatId: String) {
+    override fun showChatDetailUi(chatId: String, companyName:String) {
         startActivity(
             intentFor<ChatMessageCompanyActivity>(
-                ChatUtils.CHAT_ID to chatId
+                ChatUtils.CHAT_ID to chatId,
+                ChatUtils.USER_NAME to companyName
             )
         )
     }

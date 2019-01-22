@@ -1,7 +1,13 @@
 package com.team.oleg.funder.Company.ChatMessageCompany
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -20,7 +26,6 @@ import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
 class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContract.View {
 
@@ -30,6 +35,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     private lateinit var listAdapter: ChatMessageCompanyAdapter
     private var chatId: String? = null
+    private var companyName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +47,9 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 //        supportActionBar?.setIcon(R.drawable.image_placeholder)
 
 
-
         setContentView(R.layout.activity_chat_message_eo)
         chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
-
-
+        companyName = intent.getStringExtra(ChatUtils.USER_NAME)
 
         listAdapter = ChatMessageCompanyAdapter(this, messageList)
         presenter = ChatMessageCompanyPresenter(chatId, this)
@@ -58,7 +62,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
         ivSendMessage.setOnClickListener {
-            presenter.cekOnline(edtAddMessage.text.toString(),chatId)
+            presenter.cekOnline(edtAddMessage.text.toString(), chatId)
             edtAddMessage.text.clear()
         }
 
@@ -102,31 +106,31 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         super.onResume()
         presenter.start()
         readMessage()
-        presenter.setOnline(chatId,true)
+        presenter.setOnline(chatId, true)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.setOnline(chatId,false)
+        presenter.setOnline(chatId, false)
     }
 
     private val firestoreChat by lazy {
         FirebaseFirestore.getInstance().collection(COLLECTION_KEY).document(DOCUMENT_KEY)
     }
 
-    private fun readMessage(){
-        val map = HashMap<String,Any?>()
+    private fun readMessage() {
+        val map = HashMap<String, Any?>()
         map[ChatUtils.MESSAGE_STATUS_SENDING] = 200
         map[ChatUtils.CHAT_ID] = chatId
         map[ChatUtils.SENDER] = Utils.SENDER_EO
 
         firestoreChat.set(map)
             .addOnSuccessListener {
-//                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
+                //                Toast.makeText(this@ChatMessageCompanyActivity, "Message Sent", Toast.LENGTH_SHORT).show()
 //                presenter.sendChat(message)
             }
             .addOnFailureListener { e ->
-                Log.i("cek",e.localizedMessage)
+                Log.i("cek", e.localizedMessage)
             }
     }
 
@@ -135,11 +139,12 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         val message = Message()
         message.chatId = chatId
         message.sender = Utils.SENDER_COMPANY
+        message.messageSenderUsername = companyName
         message.message = textMessage
         message.messageStatus = ChatUtils.MESSAGE_STATUS_SENT
         message.messageRead = "0"
 
-        if (status){
+        if (status) {
             message.messageStatus = ChatUtils.MESSAGE_STATUS_READ
             message.messageRead = "1"
         }
@@ -174,17 +179,31 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                     null
                                 )
                             )
-                        }else if(data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null){
+
+//                            var mBuilder =
+//                                chatId?.let {
+//                                    NotificationCompat.Builder(this@ChatMessageCompanyActivity, it)
+//                                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+//                                        .setContentTitle(data?.get(ChatUtils.USER_NAME).toString())
+//                                        .setContentText(data?.get(ChatUtils.MESSAGE).toString())
+//                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                                }
+//
+
+
+                        } else if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null) {
                             if (data?.get(ChatUtils.CHAT_ID) == chatId
-                            && data?.get(ChatUtils.SENDER) == Utils.SENDER_COMPANY){
+                                && data?.get(ChatUtils.SENDER) == Utils.SENDER_COMPANY
+                            ) {
                                 chatId?.let {
                                     presenter.realAllMessage(it)
                                 }
-                                for (i in 0 until messageList.size){
-                                    if (messageList[i].sender == Utils.SENDER_EO){
+                                for (i in 0 until messageList.size) {
+                                    if (messageList[i].sender == Utils.SENDER_EO) {
                                         messageList[i].messageRead = "1"
                                     }
                                 }
+
                                 presenter.realAllMessage(chatId)
                                 presenter.loadChat(false)
                             }
@@ -192,22 +211,38 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                     }
                 }
             }
+        }
+    }
 
+    private fun createNotificationChannel(channelId: String,userName:String,message:String) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = userName
+            val descriptionText = message
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_chat_company,menu)
+        menuInflater.inflate(R.menu.menu_chat_company, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId){
+        when (item?.itemId) {
             R.id.view_eo_profile -> {
                 startActivity(intentFor<EoProfileActivity>())
             }
             R.id.view_search -> {
-                Toast.makeText(this,"EO SEARCH",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "EO SEARCH", Toast.LENGTH_SHORT).show()
             }
 
             R.id.view_deal_form -> {
@@ -215,7 +250,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
             R.id.view_end_deal -> {
-                Toast.makeText(this,"EO END DEAL",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "EO END DEAL", Toast.LENGTH_SHORT).show()
             }
         }
         return super.onOptionsItemSelected(item)

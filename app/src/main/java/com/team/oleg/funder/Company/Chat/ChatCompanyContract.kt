@@ -11,7 +11,7 @@ interface ChatCompanyContract {
 
         fun showChatList(chat: List<Chat>)
 
-        fun showChatDetailUi(chatId: String)
+        fun showChatDetailUi(chatId: String,companyName:String)
 
         fun showNoChat(active: Boolean)
     }

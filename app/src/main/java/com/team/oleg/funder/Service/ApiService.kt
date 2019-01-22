@@ -5,6 +5,7 @@ import com.team.oleg.funder.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 object ApiService {
     private val client = Retrofit.Builder()
@@ -18,4 +19,5 @@ object ApiService {
     val dealHistoryService: DealHistoryService = client.create(DealHistoryService::class.java)
     val eventService: EventService = client.create(EventService::class.java)
     val userService: UserService = client.create(UserService::class.java)
+    val utilService: UtilsService = client.create(UtilsService::class.java)
 }

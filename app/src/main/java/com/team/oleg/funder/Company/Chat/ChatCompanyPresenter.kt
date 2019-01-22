@@ -69,9 +69,8 @@ class ChatCompanyPresenter(
     }
 
     override fun openChatDetail(requestedChat: Chat) {
-        requestedChat.chatId?.let {
-            chatView.showChatDetailUi(it)
-        }
+
+        chatView.showChatDetailUi(requestedChat.chatId!!,requestedChat.companyName!!)
     }
 
 

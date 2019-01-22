@@ -19,6 +19,6 @@ interface DealFormContract {
 
         fun result(requestCode:Int,resultCode:Int)
 
-        fun sendTransfer(money:HashMap<String,String>,goods:HashMap<String,String>)
+        fun sendTransfer(bidderId:String,funding:HashMap<String,String>)
     }
 }

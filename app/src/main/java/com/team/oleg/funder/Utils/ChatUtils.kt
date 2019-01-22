@@ -9,6 +9,7 @@ object ChatUtils {
     const val MESSAGE_TIME = "messageTime"
     const val MESSAGE_STATUS = "messageStatus"
     const val MESSAGE_READ = "messageRead"
+    const val USER_NAME = "username"
 
     const val SENDEREO = "eo"
     const val SENDERCOMPANY = "company"
