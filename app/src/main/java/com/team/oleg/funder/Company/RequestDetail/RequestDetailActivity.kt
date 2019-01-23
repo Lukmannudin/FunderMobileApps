@@ -52,6 +52,8 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
     override fun onDestroy() {
         super.onDestroy()
         presenter.destroy()
+
+        
     }
 
     override fun showDialogMessage(message: String) {
