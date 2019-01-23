@@ -4,6 +4,7 @@ import MainHomeAdapter
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.team.oleg.funder.BaseActivity
 import com.team.oleg.funder.EventOrganizer.Chat.MainChatFragment
@@ -15,7 +16,7 @@ import com.team.oleg.funder.R.id.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
     var prevMenuItem: MenuItem? = null
     private lateinit var homePresenter: HomePresenter
     override fun onCreate(savedInstanceState: Bundle?) {

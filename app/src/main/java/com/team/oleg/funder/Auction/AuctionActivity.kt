@@ -22,6 +22,7 @@ class AuctionActivity : AppCompatActivity(),AuctionContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auction)
+
         val sponsorData = intent.getParcelableExtra<Sponsor>(Utils.INTENT_PARCELABLE)
 
         backButton.setOnClickListener {
