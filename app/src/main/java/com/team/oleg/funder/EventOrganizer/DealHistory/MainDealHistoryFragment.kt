@@ -33,6 +33,8 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
 
     override lateinit var presenter: DealHistoryContract.Presenter
     private val dealHistoryList: MutableList<DealHistory> = mutableListOf()
+    private lateinit var listAdapter: DealHistoryAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,6 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         }
     }
 
-    private lateinit var listAdapter: DealHistoryAdapter
 
     override fun onPause() {
         super.onPause()

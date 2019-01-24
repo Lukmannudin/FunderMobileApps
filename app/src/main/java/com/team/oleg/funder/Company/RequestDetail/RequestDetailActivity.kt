@@ -1,12 +1,11 @@
 package com.team.oleg.funder.Company.RequestDetail
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.team.oleg.funder.Company.CompanyActivity
 import com.team.oleg.funder.Data.Event
-import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_request_detail.*
@@ -24,14 +23,14 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         setContentView(R.layout.activity_request_detail)
         val eventId = intent.getStringExtra(Utils.ID)
         bidderId = intent.getStringExtra(Utils.BIDDER_ID)
-        presenter = RequestDetailPresenter(eventId,this)
+        presenter = RequestDetailPresenter(eventId, this)
 
         bReject.setOnClickListener {
             presenter.eventApproval(false, bidderId)
         }
 
         bAccept.setOnClickListener {
-            presenter.eventApproval(true,bidderId)
+            presenter.eventApproval(true, bidderId)
         }
     }
 
@@ -49,15 +48,14 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         super.onResume()
         presenter.start()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.destroy()
-
-        
     }
 
     override fun showDialogMessage(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         val builder = AlertDialog.Builder(this)
         builder.setCancelable(false)
         val view = layoutInflater.inflate(R.layout.custom_dialog, null)

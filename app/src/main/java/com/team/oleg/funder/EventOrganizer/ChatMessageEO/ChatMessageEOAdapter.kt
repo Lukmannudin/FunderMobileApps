@@ -19,13 +19,7 @@ class ChatMessageEOAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    fun updateData(data: List<Message>) {
-        items.clear()
-        items.addAll(data)
-        notifyDataSetChanged()
-    }
     private val MESSAGE_SENDER = Utils.SENDER_EO
-
     private val SENDER_VIEW_TYPE = 0
     private val RECEIVER_VIEW_TYPE = 1
 

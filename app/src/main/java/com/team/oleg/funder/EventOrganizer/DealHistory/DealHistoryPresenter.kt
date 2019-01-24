@@ -33,8 +33,7 @@ class DealHistoryPresenter(
         loadDealHistory(forceUpdate || firstLoad, true)
     }
 
-
-    private fun loadDealHistory(forceUpdate: Boolean, showLoadingUI: Boolean) {
+        private fun loadDealHistory(forceUpdate: Boolean, showLoadingUI: Boolean) {
         if (showLoadingUI) {
             dealHistoryView.setLoadingIndicator(true)
         }

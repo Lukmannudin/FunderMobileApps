@@ -104,7 +104,7 @@
             android:textColor="@android:color/white"
             android:id="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/signUpButton"
             android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"/>
     <Button
             android:text="@string/login"
@@ -116,7 +116,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:clickable="true"
-            android:id="@+id/loginButton" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:id="@+id/signUpButton" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
     <TextView
@@ -132,7 +132,7 @@
             tools:text="Login as company"
             android:layout_marginTop="8dp"
             app:layout_constraintVertical_bias="0.867"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton"/>
+            app:layout_constraintTop_toBottomOf="@+id/signUpButton"/>
     <TextView
             android:text="New here? Signup"
             android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="New here? Signup"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton"
+            app:layout_constraintTop_toBottomOf="@+id/signUpButton"
             app:layout_constraintVertical_bias="0.867"/>
     <ProgressBar
             android:visibility="gone"

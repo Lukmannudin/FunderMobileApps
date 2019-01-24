@@ -46,6 +46,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
 
     override lateinit var presenter: ChatEOContract.Presenter
     private val chatList: MutableList<Chat> = mutableListOf()
+    private lateinit var listEOAdapter: ChatEOAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +69,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
         }
     }
 
-    private lateinit var listEOAdapter: ChatEOAdapter
+
 
     override fun onPause() {
         super.onPause()

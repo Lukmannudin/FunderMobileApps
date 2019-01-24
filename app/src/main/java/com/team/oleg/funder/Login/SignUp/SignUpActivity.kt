@@ -1,15 +1,169 @@
 package com.team.oleg.funder.Login.SignUp
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.Login.LoginPresenter
+import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
+import org.jetbrains.anko.intentFor
+import java.text.SimpleDateFormat
+import java.util.*
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity(), SignUpContract.View {
+
+    private var filePath: Uri? = null
+    private var fileNameImage: String? = null
+    private val PICK_IMAGE_REQUEST = 71
+    private val user = User()
+
+    override fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setLoadingIndicator(active: Boolean) {
+    }
+
+    override lateinit var presenter: SignUpContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Sign Up"
+        presenter = SignUpPresenter(this)
+        passwordStatus.visibility = View.GONE
+        signUpButton.visibility = View.INVISIBLE
+        passwordRetype.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                passwordStatus.visibility = View.VISIBLE
+                if (password.text.toString() == s.toString()) {
+                    passwordStatus.text = "Password match"
+                    signUpButton.visibility = View.VISIBLE
+                } else {
+                    passwordStatus.text = "Password incorrect"
+                    signUpButton.visibility = View.INVISIBLE
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        btnUploadImageSignUp.setOnClickListener {
+            chooseFile()
+        }
+        val myFormat = "yyyy-MM-dd HH:mm:ss"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        val now = sdf.format(Date())
+
+        signUpButton.setOnClickListener {
+            user.eoEmail = email.text.toString()
+            user.eoName = username.text.toString()
+            user.eoPassword = passwordRetype.text.toString()
+            user.eoPoint = "0"
+            user.eoVision = misi.text.toString()
+            user.eoMission = visi.text.toString()
+            user.accountName = accountName.text.toString()
+            user.bankName = accountBankName.text.toString()
+            user.accountRek = accountNumber.text.toString()
+
+
+            uploadImage()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+            && data != null && data.data != null
+        ) {
+            filePath = data.data
+
+
+            data.data?.let { returnUri ->
+                contentResolver.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                /*
+                 * Get the column indexes of the data in the Cursor,
+                 * move to the first row in the Cursor, get the data,
+                 * and display it.
+                 */
+//                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                cursor.moveToFirst()
+
+                fileNameImage = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                fileNameUpload.text = fileNameImage
+                user.eoPhoto = fileNameImage
+            }
+        }
+    }
+
+    private fun uploadImage() {
+        presenter.addUser(user)
+        val storage = FirebaseStorage.getInstance()
+        var storageReference: StorageReference? = storage.reference
+        if (filePath != null) {
+            Log.i("cek", filePath.toString())
+            val progressDialog = ProgressDialog(this)
+            progressDialog.setTitle("Uploading...")
+            progressDialog.show()
+
+            val ref = storageReference?.child("userProfileImage/"+user.eoPhoto)
+            ref?.putFile(filePath!!)
+                ?.addOnSuccessListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(applicationContext, "Uploaded", Toast.LENGTH_SHORT).show()
+                    alertDialog()
+                }
+                ?.addOnFailureListener { e ->
+                    progressDialog.dismiss()
+                    Toast.makeText(applicationContext, "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                }
+                ?.addOnProgressListener { taskSnapshot ->
+                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot
+                        .totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                }
+        }
+    }
+
+    private fun chooseFile() {
+        val intent = Intent()
+        intent.type = "*/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+    }
+
+    private fun alertDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setCancelable(false)
+        val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+        view.titleFillFormSubmitted.text = "Congratulation's now your accout is added"
+        view.btnSubmitFillForm.setOnClickListener {
+            startActivity(intentFor<LoginPresenter>())
+
+        }
+        builder.setView(view)
+        builder.show()
     }
 }

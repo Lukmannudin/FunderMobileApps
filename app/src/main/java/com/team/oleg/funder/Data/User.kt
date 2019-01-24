@@ -29,5 +29,14 @@ data class User(
     var eoMission: String? = null,
 
     @SerializedName("eo_photo")
-    var eoPhoto: String? = null
+    var eoPhoto: String? = null,
+
+    @SerializedName("account_rek")
+    var accountRek:String? = null,
+
+    @SerializedName("account_name")
+    var accountName:String? = null,
+
+    @SerializedName("bank_name")
+    var bankName:String? = null
 ) : Parcelable

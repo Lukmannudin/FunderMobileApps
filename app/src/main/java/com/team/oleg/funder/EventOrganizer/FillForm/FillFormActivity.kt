@@ -35,6 +35,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
     private var filePath: Uri? = null
     private var fileNameImage: String? = null
     private val PICK_IMAGE_REQUEST = 71
+    private var USER_NAME: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +51,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
 
         val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
         val USER_ID = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
-        val USER_NAME = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
-        Log.i("username",USER_NAME)
+        USER_NAME = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
 
         presenter = FillFormPresenter(this)
 
@@ -109,7 +109,6 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
 
 
     override fun setLoadingIndicator(active: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showMessageError(message: String) {
@@ -181,8 +180,10 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
             val progressDialog = ProgressDialog(this)
             progressDialog.setTitle("Uploading...")
             progressDialog.show()
-
-            val ref = storageReference?.child("proposal/$fileNameImage")
+            val myFormat = "yyyy-MM-dd HH:mm:ss"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            val now = sdf.format(Date())
+            val ref = storageReference?.child("proposal/{$USER_NAME}-{$now}")
             ref?.putFile(filePath!!)
                 ?.addOnSuccessListener {
                     progressDialog.dismiss()

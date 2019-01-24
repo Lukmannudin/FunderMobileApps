@@ -34,7 +34,7 @@ class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
 
         val user = User()
         presenter = LoginEOPresenter(this)
-        loginButton.setOnClickListener {
+        signUpButton.setOnClickListener {
             user.eoEmail = edtUsername.text.toString()
             user.eoPassword = edtPassword.text.toString()
             presenter.loadUser(user)

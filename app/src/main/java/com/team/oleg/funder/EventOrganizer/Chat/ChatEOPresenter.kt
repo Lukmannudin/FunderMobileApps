@@ -12,7 +12,6 @@ class ChatEOPresenter(
     private val chatEOView: ChatEOContract.View
 ) : ChatEOContract.Presenter {
 
-
     private var disposable: Disposable? = null
     private var firstLoad = true
 
