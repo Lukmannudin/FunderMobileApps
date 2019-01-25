@@ -24,11 +24,20 @@ class ChatCompanyAdapter(
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        var a = 0
+        for (i in 0 until items.size)
+        {
+            if (items[i].bidderStatus != "finished" ){
+                a++
+            }
+        }
+        return a
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.bindItem(context, items[position], listener)
+        if (items[position].bidderStatus != "finished") {
+            holder.bindItem(context, items[position], listener)
+        }
     }
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -48,7 +57,7 @@ class ChatCompanyAdapter(
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
             context?.let {
                 Glide.with(it).load(
-                    BuildConfig.BASE_URL + "uploads/photo/eo_photo/"+chat.eoPhoto
+                    BuildConfig.BASE_URL + "uploads/photo/eo_photo/" + chat.eoPhoto
                 ).into(companyImage)
             }
             titleChat.text = chat.eoName

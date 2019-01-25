@@ -60,4 +60,9 @@ interface ChatService {
     fun cekOnlineCompany(@Path("chatId") chatId: String?):
             Observable<Response<Boolean>>
 
+
+    @POST("enddeal/{bidderId}")
+    fun setEndDeal(@Path("bidderId") bidderId: String?):
+            Observable<Response<String>>
+
 }

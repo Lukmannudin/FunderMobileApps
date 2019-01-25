@@ -39,19 +39,16 @@ class FillFormPresenter(
 
     private fun successMessage() {
 //        FillFormView.showFailedMessage("asd")
-        FillFormView.showMessageSuccess("BABI")
+        FillFormView.showMessageSuccess("BERHASIL")
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun downloadFile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun uploadFile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun start() {

@@ -33,5 +33,7 @@ interface ChatMessageCompanyContract {
 
         fun setOnline(chatId: String?,status:Boolean )
 
+        fun endDeal(bidderId:String?)
+
     }
 }

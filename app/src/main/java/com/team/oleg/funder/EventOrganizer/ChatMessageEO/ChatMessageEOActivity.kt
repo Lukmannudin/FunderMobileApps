@@ -46,7 +46,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         chatId = data.chatId
 
         chat_eo_name.text = data.eoName
-
+        eo_chat_status.text = "status : ${data.bidderStatus}"
         storageRef?.child("userProfileImage/"+data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
             Glide.with(this).load(
                 BuildConfig.BASE_URL

@@ -13,6 +13,7 @@ class ChatMessageCompanyPresenter(
     private val chatCompanyView: ChatMessageCompanyContract.View
 ) : ChatMessageCompanyContract.Presenter {
 
+
     private var disposable: Disposable? = null
     private var firstLoad = true
 
@@ -133,6 +134,23 @@ class ChatMessageCompanyPresenter(
         }
 
         disposable = statusOnline
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result ->
+                    Log.i("berhasil", "berhasilread")
+                },
+                { error ->
+                    println(error.localizedMessage)
+                    Log.i("berhasil", error.localizedMessage)
+                }
+            )
+    }
+
+    override fun endDeal(bidderId: String?) {
+        val service: ChatService = ApiService.chatService
+
+        disposable = service.setEndDeal(bidderId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -52,10 +50,11 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         chatId = data.chatId
         companyName = data.companyName
         chat_eo_name.text = data.eoName
-
-        storageRef?.child("userProfileImage/"+data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
+        eo_chat_status.text = "status : ${data.bidderStatus}"
+        storageRef?.child("userProfileImage/" + data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
             Glide.with(this).load(it).into(eo_image_profile)
         }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
+
 
 
 
@@ -223,7 +222,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         }
     }
 
-    private fun createNotificationChannel(channelId: String,userName:String,message:String) {
+    private fun createNotificationChannel(channelId: String, userName: String, message: String) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -248,6 +247,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
+        Log.i("cek", data.bidderId)
         when (item?.itemId) {
             R.id.view_eo_profile -> {
                 startActivity(intentFor<EoProfileActivity>())
@@ -261,7 +262,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
             R.id.view_end_deal -> {
-                Toast.makeText(this, "EO END DEAL", Toast.LENGTH_SHORT).show()
+                presenter.endDeal(data.bidderId)
             }
         }
         return super.onOptionsItemSelected(item)

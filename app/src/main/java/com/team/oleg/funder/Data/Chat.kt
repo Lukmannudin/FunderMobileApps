@@ -79,5 +79,11 @@ data class Chat(
     val eventName: String? = null,
 
     @SerializedName("sponsor_name")
-    val sponsorName: String? = null
-) : Parcelable
+    val sponsorName: String? = null,
+
+    @SerializedName("bidder_id")
+    val bidderId: String? = null,
+
+    @SerializedName("bidder_status")
+    val bidderStatus:String? = null
+    ) : Parcelable

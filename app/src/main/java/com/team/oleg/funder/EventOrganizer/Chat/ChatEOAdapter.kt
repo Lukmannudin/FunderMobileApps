@@ -25,7 +25,14 @@ class ChatEOAdapter(
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        var a = 0
+        for (i in 0 until items.size)
+        {
+            if (items[i].bidderStatus != "finished" ){
+                a++
+            }
+        }
+        return a
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
