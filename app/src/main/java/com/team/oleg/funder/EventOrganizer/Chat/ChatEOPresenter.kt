@@ -72,9 +72,7 @@ class ChatEOPresenter(
     }
 
     override fun openChatDetail(requestedChat: Chat) {
-        requestedChat.chatId?.let {
-            chatEOView.showChatDetailUi(it)
-        }
+        chatEOView.showChatDetailUi(requestedChat)
     }
 
 }

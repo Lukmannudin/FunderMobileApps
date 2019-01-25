@@ -14,9 +14,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Company.DealForm.DealFormActivity
 import com.team.oleg.funder.Company.EOProfile.EoProfileActivity
+import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
@@ -39,17 +43,21 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.title = "EO name"
-//        supportActionBar?.subtitle = "Status: Not Transfered"
-//        supportActionBar?.setDisplayUseLogoEnabled(true)
-//        supportActionBar?.setIcon(R.drawable.image_placeholder)
-
-
         setContentView(R.layout.activity_chat_message_eo)
-        chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
-        companyName = intent.getStringExtra(ChatUtils.USER_NAME)
+        val storage = FirebaseStorage.getInstance()
+        val storageRef: StorageReference? = storage.reference
+
+
+        val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
+        chatId = data.chatId
+        companyName = data.companyName
+        chat_eo_name.text = data.eoName
+
+        storageRef?.child("userProfileImage/"+data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
+            Glide.with(this).load(it).into(eo_image_profile)
+        }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
+
+
 
         listAdapter = ChatMessageCompanyAdapter(this, messageList)
         presenter = ChatMessageCompanyPresenter(chatId, this)
@@ -70,6 +78,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
     }
+
 
     override fun setLoadingIndicator(active: Boolean) {
     }
@@ -233,6 +242,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_chat_company, menu)
+
+//        supportActionBar?.setIcon(R.drawable.image_placeholder)
         return super.onCreateOptionsMenu(menu)
     }
 

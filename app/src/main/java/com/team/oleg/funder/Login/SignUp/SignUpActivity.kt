@@ -85,8 +85,6 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
             user.accountName = accountName.text.toString()
             user.bankName = accountBankName.text.toString()
             user.accountRek = accountNumber.text.toString()
-
-
             uploadImage()
         }
     }

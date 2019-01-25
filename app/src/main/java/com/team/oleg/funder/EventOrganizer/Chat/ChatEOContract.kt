@@ -11,7 +11,7 @@ interface ChatEOContract {
 
         fun showChatList(chat: List<Chat>)
 
-        fun showChatDetailUi(chatId: String)
+        fun showChatDetailUi(chat: Chat)
 
         fun showNoChat(active: Boolean)
     }

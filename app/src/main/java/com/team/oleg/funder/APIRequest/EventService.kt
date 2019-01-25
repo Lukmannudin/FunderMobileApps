@@ -4,6 +4,7 @@ import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Response.Response
 import io.reactivex.Observable
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -12,7 +13,7 @@ interface EventService {
     fun setEvent(@Body event: Event):
             Observable<Response<String>>
 
-    @POST("event/{eventId}")
+    @GET("event/{eventId}")
     fun getEvent(@Path("eventId") eventId: String?):
             Observable<Response<Event>>
 

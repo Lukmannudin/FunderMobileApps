@@ -14,6 +14,7 @@ import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -24,6 +25,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class ChatFragment : Fragment(), ChatCompanyContract.View {
+
 
     override lateinit var presenter: ChatCompanyContract.Presenter
 
@@ -116,11 +118,19 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
         listAdapter.notifyDataSetChanged()
     }
 
-    override fun showChatDetailUi(chatId: String, companyName:String) {
+//    override fun showChatDetailUi(chatId: String, companyName:String) {
+//        startActivity(
+//            intentFor<ChatMessageCompanyActivity>(
+//                ChatUtils.CHAT_ID to chatId,
+//                ChatUtils.USER_NAME to companyName
+//            )
+//        )
+//    }
+
+    override fun showChatDetailUi(chat: Chat) {
         startActivity(
             intentFor<ChatMessageCompanyActivity>(
-                ChatUtils.CHAT_ID to chatId,
-                ChatUtils.USER_NAME to companyName
+                Utils.INTENT_PARCELABLE to chat
             )
         )
     }

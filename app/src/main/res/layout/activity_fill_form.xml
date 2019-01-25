@@ -76,10 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:editable="false"
-                        android:clickable="true"
-                        android:hint="Date"
-                        android:focusable="true"/>
+                        android:hint="Date"/>
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -103,6 +100,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:hint="Description"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+            >
+                <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edtDemandFunding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:inputType="number"
+                        android:hint="Demand Fund"/>
             </android.support.design.widget.TextInputLayout>
             <RelativeLayout
                     android:layout_width="match_parent"

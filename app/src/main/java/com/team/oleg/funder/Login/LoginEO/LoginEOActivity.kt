@@ -8,10 +8,12 @@ import com.team.oleg.funder.Login.LoginCompany.LoginCompanyActivity
 import com.team.oleg.funder.Login.SignUp.SignUpActivity
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.Login.ForgotPasswordActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_eo.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 
 class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
 
@@ -29,6 +31,10 @@ class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
 
         LoginSignupLink.setOnClickListener {
             startActivity(intentFor<SignUpActivity>())
+        }
+
+        forgotPasswordBtn.setOnClickListener {
+            startActivity(intentFor<ForgotPasswordActivity>())
         }
 
 

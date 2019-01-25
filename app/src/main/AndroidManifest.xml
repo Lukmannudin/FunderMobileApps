@@ -3,6 +3,8 @@
           package="com.team.oleg.funder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
             android:name=".MyCustomApplication"
@@ -12,13 +14,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Company.EOProfile.EoProfileActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-        >
+        <activity android:name=".Login.ForgotPasswordActivity">
         </activity>
-        <activity android:name=".Company.DealForm.DealFormActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        >
+        <activity
+                android:name=".Company.EOProfile.EoProfileActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".Company.DealForm.DealFormActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity android:name=".Company.RequestDetail.RequestDetailActivity">
         </activity>
@@ -48,7 +52,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".EventOrganizer.EventOrganizerProfile"
+                android:name=".EventOrganizer.profile.EventOrganizerProfile"
                 android:theme="@style/Theme.MyEOProfile">
         </activity>
         <activity
@@ -63,7 +67,8 @@
         </activity>
         <activity
                 android:name=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity"
-                android:parentActivityName=".Main.MainActivity">
+                android:parentActivityName=".Main.MainActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
                 android:name=".Company.ChatMessageCompany.ChatMessageCompanyActivity"

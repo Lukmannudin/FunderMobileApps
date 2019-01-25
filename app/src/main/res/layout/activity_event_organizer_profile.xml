@@ -11,7 +11,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context="com.team.oleg.funder.EventOrganizer.EventOrganizerProfile">
+            tools:context="com.team.oleg.funder.EventOrganizer.profile.EventOrganizerProfile">
 
         <include
                 android:id="@+id/toolbarEO"
@@ -68,7 +68,7 @@
                 android:layout_marginStart="12dp"/>
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageEOUplad"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="128dp"
                 android:layout_marginStart="60dp"
                 android:src="@drawable/photo_camera"
                 android:layout_width="35dp"
@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvEOTrackRecordLink"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.764"/>
         <TextView
                 android:id="@+id/tvEOEmail"
                 android:text="hipmaunikom@gmail.com"
@@ -114,6 +114,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="15dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp">
             <EditText
+                    android:id="@+id/accountNameEO"
                     android:hint="Account Name"
                     android:text="HIPMA UNIKOM"
                     android:layout_width="match_parent"
@@ -127,6 +128,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="15dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp">
             <EditText
+                    android:id="@+id/bankNameEO"
                     android:hint="Bank Name"
                     android:text="BCA"
                     android:layout_width="match_parent"
@@ -140,6 +142,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="15dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp">
             <EditText
+                    android:id="@+id/accountNumberEO"
                     android:hint="Account Number"
                     android:text="022 0323 9213"
                     android:layout_width="match_parent"
@@ -165,6 +168,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="15dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp">
             <EditText
+                    android:id="@+id/visiEO"
                     android:hint="Visi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -185,11 +189,13 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="15dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp">
             <EditText
+                    android:id="@+id/misiEO"
                     android:hint="Mission"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
         </android.support.design.widget.TextInputLayout>
         <Button
+                android:id="@+id/saveChangesEO"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"

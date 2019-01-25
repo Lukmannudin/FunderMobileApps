@@ -11,7 +11,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.team.oleg.funder.BuildConfig
+import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.R
@@ -35,8 +40,20 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_message_eo)
-        chatId = intent.getStringExtra(ChatUtils.CHAT_ID)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val storage = FirebaseStorage.getInstance()
+        val storageRef: StorageReference? = storage.reference
+        val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
+        chatId = data.chatId
+
+        chat_eo_name.text = data.eoName
+
+        storageRef?.child("userProfileImage/"+data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
+            Glide.with(this).load(
+                BuildConfig.BASE_URL
+                        + "uploads/photo/company_photo/" +data.companyPhoto)
+                .into(eo_image_profile)
+        }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
+
 
         listAdapter = ChatMessageEOAdapter(this, messageList)
         presenter = ChatMessageEOPresenter(this, chatId, this)
@@ -50,7 +67,9 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
             edtAddMessage.text.clear()
         }
 
-
+        setSupportActionBar(chat_message_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
     }
 
     override fun setLoadingIndicator(active: Boolean) {

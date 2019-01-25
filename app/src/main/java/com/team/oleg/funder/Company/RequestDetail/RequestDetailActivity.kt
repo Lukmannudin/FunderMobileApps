@@ -1,9 +1,13 @@
 package com.team.oleg.funder.Company.RequestDetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Company.CompanyActivity
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.R
@@ -11,12 +15,15 @@ import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_request_detail.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
+import java.text.NumberFormat
+import java.util.*
 
 class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
 
 
     override lateinit var presenter: RequestDetailContract.Presenter
     var bidderId: String? = null
+    private val event = Event()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +39,7 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         bAccept.setOnClickListener {
             presenter.eventApproval(true, bidderId)
         }
+
     }
 
     override fun setLoadingIndicator(active: Boolean) {
@@ -42,6 +50,21 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         nameSpeakerEO.text = event.eventSpeaker
         nameMediaPartEO.text = event.eventMp
         descriptionFullEO.text = event.eventDesc
+//        totalFundEO.text = event.eventDana
+
+        val localeID =  Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+
+        totalFundEO.text = numberFormat.format(event.eventDana?.toDouble())
+        Log.i("cek",event.eventMp)
+        dlIconProposal.setOnClickListener {
+            val storage = FirebaseStorage.getInstance()
+            val storageRef: StorageReference? = storage.reference
+            storageRef?.child("proposal/{Form Request Beasiswa Dicoding - MADE.pdf}")?.downloadUrl?.addOnSuccessListener {
+                val browserIntent = Intent(Intent.ACTION_VIEW, it)
+                startActivity(browserIntent)
+            }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
+        }
     }
 
     override fun onResume() {

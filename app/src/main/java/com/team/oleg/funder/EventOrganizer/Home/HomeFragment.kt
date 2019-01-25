@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.team.oleg.funder.Auction.AuctionActivity
 import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.EventOrganizer.EventOrganizerProfile
+import com.team.oleg.funder.EventOrganizer.profile.EventOrganizerProfile
 import com.team.oleg.funder.EventOrganizer.SearchHome.SearchHomeActivity
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R

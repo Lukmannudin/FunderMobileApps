@@ -18,6 +18,7 @@ import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_chat.*
 import kotlinx.android.synthetic.main.fragment_main_chat.view.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -158,9 +159,9 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
         listEOAdapter.notifyDataSetChanged()
     }
 
-    override fun showChatDetailUi(chatId: String) {
+    override fun showChatDetailUi(chat: Chat) {
         startActivity(intentFor<ChatMessageEOActivity>(
-            ChatUtils.CHAT_ID to chatId
+            Utils.INTENT_PARCELABLE to chat
         ))
     }
 

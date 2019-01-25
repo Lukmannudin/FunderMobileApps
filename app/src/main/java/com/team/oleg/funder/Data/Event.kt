@@ -9,33 +9,36 @@ import kotlinx.android.parcel.Parcelize
 data class Event(
     @SerializedName("event_id")
     @Expose
-    val eventId: String? = null,
+    var eventId: String? = null,
     @SerializedName("eo_id")
     @Expose
-    val eoId: String? = null,
+    var eoId: String? = null,
     @SerializedName("sponsor_id")
     @Expose
-    val sponsorId: String? = null,
+    var sponsorId: String? = null,
     @SerializedName("event_name")
     @Expose
-    val eventName: String? = null,
+    var eventName: String? = null,
     @SerializedName("event_date")
     @Expose
-    val eventDate: String? = null,
+    var eventDate: String? = null,
     @SerializedName("event_speaker")
     @Expose
-    val eventSpeaker: String? = null,
+    var eventSpeaker: String? = null,
     @SerializedName("event_mp")
     @Expose
-    val eventMp: String? = null,
+    var eventMp: String? = null,
     @SerializedName("event_desc")
     @Expose
-    val eventDesc: String? = null,
+    var eventDesc: String? = null,
     @SerializedName("event_proposal")
     @Expose
-    val eventProposal: String? = null,
+    var eventProposal: String? = null,
     @SerializedName("event_status")
     @Expose
-    val eventStatus: String? = null
+    var eventStatus: String? = null,
+    @SerializedName("event_dana")
+    @Expose
+    var eventDana: String? = null
 ) : Parcelable
 
