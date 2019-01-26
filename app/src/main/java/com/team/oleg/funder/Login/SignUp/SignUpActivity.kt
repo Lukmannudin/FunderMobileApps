@@ -22,6 +22,7 @@ import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,16 +49,16 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         supportActionBar?.title = "Sign Up"
         presenter = SignUpPresenter(this)
         passwordStatus.visibility = View.GONE
-        signUpButton.visibility = View.INVISIBLE
+        signUpButton.isEnabled = false
         passwordRetype.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 passwordStatus.visibility = View.VISIBLE
                 if (password.text.toString() == s.toString()) {
                     passwordStatus.text = "Password match"
-                    signUpButton.visibility = View.VISIBLE
+                    signUpButton.isEnabled = true
                 } else {
                     passwordStatus.text = "Password incorrect"
-                    signUpButton.visibility = View.INVISIBLE
+                    signUpButton.isEnabled = false
                 }
             }
 
@@ -147,7 +148,7 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
 
     private fun chooseFile() {
         val intent = Intent()
-        intent.type = "*/*"
+        intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }

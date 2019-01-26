@@ -251,7 +251,9 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         Log.i("cek", data.bidderId)
         when (item?.itemId) {
             R.id.view_eo_profile -> {
-                startActivity(intentFor<EoProfileActivity>())
+                startActivity(intentFor<EoProfileActivity>(
+                    Utils.ID to data.eoId
+                ))
             }
             R.id.view_search -> {
                 Toast.makeText(this, "EO SEARCH", Toast.LENGTH_SHORT).show()

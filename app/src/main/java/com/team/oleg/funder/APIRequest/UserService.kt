@@ -24,12 +24,28 @@ interface UserService {
             Observable<Response<String>>
 
     @GET("userEO/{userId}")
-    fun getUser(@Path("userId")userId:String):
+    fun getUser(@Path("userId") userId: String):
             Observable<Response<User>>
 
     @POST("userEO/edit/{userId}")
     fun changeUser(
         @Path("userId") userId: String?,
-        @Body user: User):
+        @Body user: User
+    ):
             Observable<Response<String>>
+
+    @POST("userEO/changePass/{userId}")
+    fun changePassword(
+        @Path( "userId") userId:String,
+        @Body password: HashMap<String,String>
+        )
+            :Observable<Response<String>>
+
+
+    @POST("userEO/photo/{userId}")
+    fun changeImageProfile(
+        @Path( "userId") userId:String?,
+        @Body nameImage:HashMap<String,String?>
+    )
+            :Observable<Response<String>>
 }

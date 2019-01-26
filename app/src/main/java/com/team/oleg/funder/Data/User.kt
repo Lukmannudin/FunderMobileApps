@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class User(
+data class User (
     @SerializedName("eo_id")
     var eoId: String? = null,
 
@@ -32,11 +32,11 @@ data class User(
     var eoPhoto: String? = null,
 
     @SerializedName("account_rek")
-    var accountRek:String? = null,
+    var accountRek: String? = null,
 
     @SerializedName("account_name")
-    var accountName:String? = null,
+    var accountName: String? = null,
 
     @SerializedName("bank_name")
-    var bankName:String? = null
+    var bankName: String? = null
 ) : Parcelable

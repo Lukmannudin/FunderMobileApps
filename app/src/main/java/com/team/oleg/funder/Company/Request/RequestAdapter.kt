@@ -2,6 +2,7 @@ package com.team.oleg.funder.Company.Request
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,11 +52,14 @@ class RequestAdapter(
                     BuildConfig.BASE_URL + "uploads/photo/eo_photo/" + bidder.eoPhoto
                 ).into(companyImage)
             }
+
+            Log.i("cekcok",bidder.eoPhoto)
             titleChat.text = bidder.eoName
             eventName.text = bidder.eventName
             messageChat.text = ""
             unreadMessage.text = ""
             messageChat.text = ""
+            dateChat.text = bidder.bidderDate
             itemView.setOnClickListener {
                 listener.onBidderClick(bidder)
             }

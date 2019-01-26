@@ -14,9 +14,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Login.ForgotPasswordActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        >
+        <activity android:name=".EventOrganizer.ChangePassword.ChangePasswordActivity">
+        </activity>
+        <activity
+                android:name=".Login.ForgotPasswordActivity"
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
                 android:name=".Company.EOProfile.EoProfileActivity"
@@ -54,7 +56,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".EventOrganizer.profile.EventOrganizerProfile"
+                android:name=".EventOrganizer.Profile.EventOrganizerProfileActivity"
                 android:theme="@style/Theme.MyEOProfile">
         </activity>
         <activity

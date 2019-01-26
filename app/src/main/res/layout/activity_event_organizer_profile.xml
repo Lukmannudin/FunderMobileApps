@@ -11,7 +11,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context="com.team.oleg.funder.EventOrganizer.profile.EventOrganizerProfile">
+            tools:context="com.team.oleg.funder.EventOrganizer.Profile.EventOrganizerProfileActivity">
 
         <include
                 android:id="@+id/toolbarEO"

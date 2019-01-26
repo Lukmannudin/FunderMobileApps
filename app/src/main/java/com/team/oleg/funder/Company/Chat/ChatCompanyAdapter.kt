@@ -29,20 +29,12 @@ class ChatCompanyAdapter(
     }
 
     override fun getItemCount(): Int {
-        var a = 0
-        for (i in 0 until items.size)
-        {
-            if (items[i].bidderStatus != "finished" ){
-                a++
-            }
-        }
-        return a
+        return items.size
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        if (items[position].bidderStatus != "finished") {
             holder.bindItem(context, items[position], listener)
-        }
+
     }
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {

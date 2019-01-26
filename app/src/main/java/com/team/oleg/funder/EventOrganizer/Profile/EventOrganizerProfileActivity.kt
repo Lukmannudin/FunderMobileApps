@@ -1,28 +1,37 @@
-package com.team.oleg.funder.EventOrganizer.profile
+package com.team.oleg.funder.EventOrganizer.Profile
 
+import android.app.Activity
+import android.app.ProgressDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.EventOrganizer.ChangePassword.ChangePasswordActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_event_organizer_profile.*
 import kotlinx.android.synthetic.main.toolbar_profile.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
 
-class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
-
+class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContract.View {
+    private var filePath: Uri? = null
+    private var fileNameImage: String? = null
+    private val PICK_IMAGE_REQUEST = 72
     private val userData = User()
     override fun setLoadingIndicator(active: Boolean) {
     }
@@ -32,7 +41,7 @@ class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_organizer_profile)
+        setContentView(com.team.oleg.funder.R.layout.activity_event_organizer_profile)
 
         presenter = EventOrganizerPresenter(this)
         initView()
@@ -62,7 +71,6 @@ class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 tvStringtilEoVisionCount.text = visiEO.text.length.toString() + " / 120"
             }
-
         })
 
         saveChangesEO.setOnClickListener {
@@ -73,14 +81,16 @@ class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
             userData.eoMission = misiEO.text.toString()
             presenter.editUser(userData)
         }
+
+        imageEOUplad.setOnClickListener {
+            chooseFile()
+        }
         logout.setOnClickListener {
             logout()
         }
     }
 
     private fun initView() {
-
-
         val sharedPref = this.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0) ?: return
         val userId = sharedPref.getString(SharedPreferenceUtils.USER_ID, SharedPreferenceUtils.EMPTY)
         val username = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
@@ -116,11 +126,19 @@ class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
         }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
 
 
+        tvChangePassword.setOnClickListener {
+            startActivity(
+                intentFor<ChangePasswordActivity>(
+                    Utils.INTENT_PARCELABLE to user
+                )
+            )
+        }
+
     }
 
     override fun showMessage(message: String) {
         toast(message)
-        startActivity(intentFor<EventOrganizerProfile>())
+        startActivity(intentFor<EventOrganizerProfileActivity>())
     }
 
 
@@ -136,4 +154,61 @@ class EventOrganizerProfile : AppCompatActivity(), EventOrganizerContract.View {
         }
     }
 
+    private fun uploadImage() {
+        val storage = FirebaseStorage.getInstance()
+        val storageReference: StorageReference? = storage.reference
+        Log.i("filenameImage", fileNameImage)
+
+        Log.i("cacing",userData.eoPhoto)
+        val desertRef = storageReference?.child("userProfileImage/${userData.eoPhoto}")
+
+        desertRef?.delete()?.addOnSuccessListener {
+            if (filePath != null) {
+                Log.i("cek", filePath.toString())
+                val progressDialog = ProgressDialog(this)
+                progressDialog.setTitle("Updating...")
+                progressDialog.show()
+                val ref = storageReference.child("userProfileImage/$fileNameImage")
+                ref.putFile(filePath!!).addOnSuccessListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(applicationContext, "Uploaded", Toast.LENGTH_SHORT).show()
+                    presenter.changeProfleImage(userData.eoId, fileNameImage)
+                }.addOnFailureListener { e ->
+                    progressDialog.dismiss()
+                    Toast.makeText(applicationContext, "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                }.addOnProgressListener { taskSnapshot ->
+                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot
+                        .totalByteCount
+                    progressDialog.setMessage("Updated " + progress.toInt() + "%")
+                }
+            }
+        }?.addOnFailureListener {
+            Log.i("error",it.toString())
+            toast("sorry there was an error on our server")
+        }
+    }
+
+    private fun chooseFile() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+            && data != null && data.data != null
+        ) {
+            filePath = data.data
+            data.data?.let { returnUri ->
+                contentResolver.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                cursor.moveToFirst()
+                fileNameImage = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                uploadImage()
+            }
+        }
+    }
 }
+

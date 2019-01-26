@@ -30,6 +30,7 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         setContentView(R.layout.activity_request_detail)
         val eventId = intent.getStringExtra(Utils.ID)
         bidderId = intent.getStringExtra(Utils.BIDDER_ID)
+
         presenter = RequestDetailPresenter(eventId, this)
 
         bReject.setOnClickListener {
@@ -46,6 +47,7 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
     }
 
     override fun showEvent(event: Event) {
+        nameEventEO.text = event.eventName
         dateEventEO.text = event.eventDate
         nameSpeakerEO.text = event.eventSpeaker
         nameMediaPartEO.text = event.eventMp
@@ -60,7 +62,7 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         dlIconProposal.setOnClickListener {
             val storage = FirebaseStorage.getInstance()
             val storageRef: StorageReference? = storage.reference
-            storageRef?.child("proposal/{Form Request Beasiswa Dicoding - MADE.pdf}")?.downloadUrl?.addOnSuccessListener {
+            storageRef?.child("proposal/${event.eventProposal}")?.downloadUrl?.addOnSuccessListener {
                 val browserIntent = Intent(Intent.ACTION_VIEW, it)
                 startActivity(browserIntent)
             }?.addOnFailureListener { Log.i("file", it.localizedMessage) }

@@ -1,4 +1,4 @@
-package com.team.oleg.funder.EventOrganizer.profile
+package com.team.oleg.funder.EventOrganizer.Profile
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.UserService
@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers
 class EventOrganizerPresenter(
     private val UserView: EventOrganizerContract.View
 ) : EventOrganizerContract.Presenter {
+
 
 
     private var disposable: Disposable? = null
@@ -44,10 +45,6 @@ class EventOrganizerPresenter(
     }
 
     override fun editUser(user: User) {
-        Log.i("user accountName",user.accountName)
-        Log.i("user bankName",user.bankName)
-        Log.i("user accountRek",user.accountRek)
-
         val service: UserService = ApiService.userService
         disposable = service.changeUser(user.eoId,user)
             .observeOn(AndroidSchedulers.mainThread())
@@ -64,6 +61,25 @@ class EventOrganizerPresenter(
     }
 
     override fun start() {
+    }
+
+    override fun changeProfleImage(userId: String?, newImage: String?) {
+        val service: UserService = ApiService.userService
+        val image: HashMap<String,String?> = hashMapOf()
+        image["eo_photo"] = newImage
+        disposable = service.changeImageProfile(userId,image)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                { result ->
+                    UserView.showMessage("Edited Account Success")
+                },
+                { error ->
+                    //                    FillFormView.showMessageError(error.localizedMessage)
+                    Log.i("cek error", error.localizedMessage)
+                    UserView.showMessage(error.localizedMessage)
+                }
+            )
     }
 
     override fun destroy() {

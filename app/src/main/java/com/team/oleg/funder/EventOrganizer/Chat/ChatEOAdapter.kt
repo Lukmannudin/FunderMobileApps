@@ -25,20 +25,11 @@ class ChatEOAdapter(
     }
 
     override fun getItemCount(): Int {
-        var a = 0
-        for (i in 0 until items.size)
-        {
-            if (items[i].bidderStatus != "finished" ){
-                a++
-            }
-        }
-        return a
+        return items.size
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        if (items[position].bidderStatus != "finished"){
             holder.bindItem(context, items[position], listener)
-        }
     }
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -64,7 +55,7 @@ class ChatEOAdapter(
             }
             Log.i("coconot",BuildConfig.BASE_URL + "uploads/photo/company_photo/"+chat.companyPhoto)
             titleChat.text = chat.companyName
-            eventName.text = chat.companyVision
+            eventName.text = chat.eventName
             unreadMessage.text = chat.unread
             dateChat.text = chat.messageTime
             if (chat.unread.equals("0")){

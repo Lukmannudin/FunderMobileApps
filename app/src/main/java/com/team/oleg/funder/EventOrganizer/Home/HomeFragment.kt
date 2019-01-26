@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.team.oleg.funder.Auction.AuctionActivity
 import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.EventOrganizer.profile.EventOrganizerProfile
+import com.team.oleg.funder.EventOrganizer.Profile.EventOrganizerProfileActivity
 import com.team.oleg.funder.EventOrganizer.SearchHome.SearchHomeActivity
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
@@ -77,7 +77,7 @@ class HomeFragment : Fragment(), HomeContract.View {
             startActivity(intentFor<SearchHomeActivity>())
         }
         ab_user_profile.setOnClickListener {
-            startActivity(intentFor<EventOrganizerProfile>())
+            startActivity(intentFor<EventOrganizerProfileActivity>())
         }
     }
 

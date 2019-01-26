@@ -129,29 +129,14 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
             && data != null && data.data != null
         ) {
             filePath = data.data
-
-
             data.data?.let { returnUri ->
                 contentResolver.query(returnUri, null, null, null, null)
             }?.use { cursor ->
-                /*
-                 * Get the column indexes of the data in the Cursor,
-                 * move to the first row in the Cursor, get the data,
-                 * and display it.
-                 */
-//                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
                 cursor.moveToFirst()
                 fileNameImage = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
                 fileChooserFillForm.text = fileNameImage
                 event.eventProposal = fileNameImage
             }
-//            try {
-//                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-//
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
         }
     }
 
@@ -199,5 +184,10 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         intent.type = "application/pdf"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_IMAGE_REQUEST)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.destroy()
     }
 }

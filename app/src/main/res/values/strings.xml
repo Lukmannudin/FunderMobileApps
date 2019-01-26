@@ -22,5 +22,6 @@
     <string name="channel_description">Funder Channel Description</string>
     <string name="event_accepted">Congratulations now you has relationship</string>
     <string name="event_rejected">You rejected that event</string>
+    <string name="email_event_organizer"><i> Email Event Organizer </i></string>
 
 </resources>
