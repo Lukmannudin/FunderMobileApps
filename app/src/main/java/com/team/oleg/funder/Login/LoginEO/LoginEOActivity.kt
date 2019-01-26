@@ -37,7 +37,6 @@ class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
             startActivity(intentFor<ForgotPasswordActivity>())
         }
 
-
         val user = User()
         presenter = LoginEOPresenter(this)
         signUpButton.setOnClickListener {

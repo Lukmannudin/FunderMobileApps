@@ -36,7 +36,9 @@ class ChatEOAdapter(
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.bindItem(context, items[position], listener)
+        if (items[position].bidderStatus != "finished"){
+            holder.bindItem(context, items[position], listener)
+        }
     }
 
     class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {

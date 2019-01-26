@@ -62,7 +62,6 @@
                         android:id="@+id/numberReq"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
                         android:hint="Account Number"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -74,7 +73,6 @@
                         android:id="@+id/nameEventOrganizer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="false"
                         android:hint="Account Name"/>
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -122,7 +120,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:editable="false"
                         android:hint="Goods Spesification"/>
             </android.support.design.widget.TextInputLayout>
             <RelativeLayout

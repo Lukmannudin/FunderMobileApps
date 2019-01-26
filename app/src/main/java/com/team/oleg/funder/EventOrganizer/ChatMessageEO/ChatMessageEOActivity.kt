@@ -45,7 +45,7 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
         chatId = data.chatId
 
-        chat_eo_name.text = data.eoName
+        chat_eo_name.text = data.companyName
         eo_chat_status.text = "status : ${data.bidderStatus}"
         storageRef?.child("userProfileImage/"+data.eoPhoto)?.downloadUrl?.addOnSuccessListener {
             Glide.with(this).load(

@@ -27,11 +27,9 @@ interface UserService {
     fun getUser(@Path("userId")userId:String):
             Observable<Response<User>>
 
-    @POST("userEO/{userId}")
+    @POST("userEO/edit/{userId}")
     fun changeUser(
         @Path("userId") userId: String?,
         @Body user: User):
             Observable<Response<String>>
-
-
 }

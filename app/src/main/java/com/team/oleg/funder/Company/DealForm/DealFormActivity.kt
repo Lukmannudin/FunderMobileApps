@@ -7,13 +7,13 @@ import android.text.TextWatcher
 import android.view.View
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.R
+import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_deal_form.*
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 
-class DealFormActivity : AppCompatActivity(),DealFormContract.View{
+class DealFormActivity : AppCompatActivity(), DealFormContract.View {
 
     override lateinit var presenter: DealFormContract.Presenter
 
@@ -22,6 +22,9 @@ class DealFormActivity : AppCompatActivity(),DealFormContract.View{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deal_form)
+
+        val bidderId = intent.getStringExtra(Utils.BIDDER_ID)
+        presenter = DealFormPresenter(this)
         backDealForm.setOnClickListener {
             onBackPressed()
         }
@@ -56,7 +59,6 @@ class DealFormActivity : AppCompatActivity(),DealFormContract.View{
 
         edtFunding.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
 //                var moneyTO = formatRupiah.format(s.toString().toString())
 //                var editable = SpannableStringBuilder(formatRupiah.format(moneyTO).toString())
 //                edtFunding.text = editable
@@ -71,12 +73,12 @@ class DealFormActivity : AppCompatActivity(),DealFormContract.View{
         })
 
         btnSubmitDealForm.setOnClickListener {
-            val transfer :HashMap<String,String> = hashMapOf()
+            val transfer: HashMap<String, String> = hashMapOf()
             transfer["total_transfer"] = edtFunding.text.toString()
             transfer["transfer"] = tMoney.toString()
             transfer["goods"] = tGoods.toString()
             transfer["desc"] = descGoods.text.toString()
-//            presenter.sendTransfer(transfer)
+            presenter.sendTransfer(bidderId, transfer)
         }
     }
 
@@ -89,14 +91,16 @@ class DealFormActivity : AppCompatActivity(),DealFormContract.View{
     }
 
     override fun setLoadingIndicator(active: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showEvent(event: Event) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDialogMessage(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.destroy()
     }
 }

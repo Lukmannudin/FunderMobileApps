@@ -54,8 +54,6 @@ class RequestPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                    Log.i("cekoco",result.data.toString())
-                    Log.i("cekoco",result.data.isEmpty().toString())
                     processChat(result.data)
                     requestDetailView.setLoadingIndicator(false)
                 },

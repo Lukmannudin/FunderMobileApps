@@ -258,7 +258,9 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
             R.id.view_deal_form -> {
-                startActivity(intentFor<DealFormActivity>())
+                startActivity(intentFor<DealFormActivity>(
+                    Utils.BIDDER_ID to data.bidderId
+                ))
             }
 
             R.id.view_end_deal -> {

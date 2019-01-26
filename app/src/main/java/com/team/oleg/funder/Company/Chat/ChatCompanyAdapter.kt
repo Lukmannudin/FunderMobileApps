@@ -2,13 +2,18 @@ package com.team.oleg.funder.Company.Chat
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.Dummy.DummyAuction.data
 import com.team.oleg.funder.R
+import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class ChatCompanyAdapter(
@@ -55,11 +60,24 @@ class ChatCompanyAdapter(
         ) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
-            context?.let {
-                Glide.with(it).load(
-                    BuildConfig.BASE_URL + "uploads/photo/eo_photo/" + chat.eoPhoto
-                ).into(companyImage)
-            }
+//            context?.let {
+//                Glide.with(it).load(
+//                    BuildConfig.BASE_URL + "uploads/photo/eo_photo/" + chat.eoPhoto
+//                ).into(companyImage)
+//            }
+
+            val storage = FirebaseStorage.getInstance()
+            val storageRef: StorageReference? = storage.reference
+
+
+            storageRef?.child("userProfileImage/" + chat.eoPhoto)?.downloadUrl?.addOnSuccessListener {
+                context?.let { it1 -> Glide.with(it1).load(it).into(companyImage) }
+            }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
+
+            Log.i("cek",chat.eoPhoto)
+            Log.i("cek",chat.eoName)
+            Log.i("cek",chat.chatId )
+
             titleChat.text = chat.eoName
             eventName.text = chat.eventName
             messageChat.text = chat.message
