@@ -13,7 +13,7 @@ interface EoProfileContract {
 
         fun showMessage(message:String)
 
-        fun showSponsor(sponsor: List<Sponsor>)
+        fun showData(user: User)
 
     }
 
@@ -21,7 +21,7 @@ interface EoProfileContract {
 
         fun result(requestCode: Int,resultCode: Int)
 
-        fun loadSponsor(forceUpdate: Boolean)
+        fun loadUser(userId:String)
 
         fun openSponsorDetail(requestedAuction: Sponsor)
     }

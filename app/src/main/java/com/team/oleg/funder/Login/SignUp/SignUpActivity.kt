@@ -52,31 +52,6 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         signUpButton.isEnabled = false
 
 
-        accountName.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                accountName.hint = "Account Name"
-            } else {
-                accountName.hint = "Archy Reynaldi Nugraha"
-            }
-        }
-
-
-        accountBankName.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                accountName.hint = "Bank Name"
-            } else {
-                accountName.hint = "BNI/BCA/BRI"
-            }
-        }
-
-        accountNumber.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                accountName.hint = "0395784557"
-            } else {
-                accountName.hint = "Account Number"
-            }
-        }
-
         passwordRetype.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 passwordStatus.visibility = View.VISIBLE
@@ -101,12 +76,24 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         }
 
 
-        misi.setOnFocusChangeListener { v, hasFocus ->
-            tvStringtilEoVisionCount.text = misi.text.length.toString() + " / 120"
-            if (misi.text.length > 120){
-                tvStringtilEoVisionCount.setTextColor(Color.parseColor("#e74c3c"))
+        visi.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                tvStringtilEoVisionCount.text = s?.length.toString() + " / 120"
+                if (s?.length!! > 120) {
+                    tvStringtilEoVisionCount.setTextColor(Color.parseColor("#e74c3c"))
+                } else {
+                    tvStringtilEoVisionCount.setTextColor(Color.parseColor("#000000"))
+                }
             }
-        }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+
         val myFormat = "yyyy-MM-dd HH:mm:ss"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         val now = sdf.format(Date())

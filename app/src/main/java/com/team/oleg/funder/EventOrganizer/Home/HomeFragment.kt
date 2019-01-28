@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.fragment_main_home.view.*
 import kotlinx.android.synthetic.main.main_toolbar.*
 import kotlinx.android.synthetic.main.main_toolbar.view.*
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 
 
 class HomeFragment : Fragment(), HomeContract.View {
@@ -75,6 +76,7 @@ class HomeFragment : Fragment(), HomeContract.View {
         rvAuction.adapter = listAdapter
         ab_search.setOnClickListener {
             startActivity(intentFor<SearchHomeActivity>())
+            toast("Sorry for now this feature can't be use")
         }
         ab_user_profile.setOnClickListener {
             startActivity(intentFor<EventOrganizerProfileActivity>())
@@ -96,6 +98,10 @@ class HomeFragment : Fragment(), HomeContract.View {
                     Utils.NAME to Utils.TOCHAT
                 )
             )
+        }
+
+        view.ab_notification.setOnClickListener {
+            toast("Sorry for now this feature can't be use")
         }
         view.homeSwipeRefresh.setOnRefreshListener {
             presenter.loadSponsor(false)

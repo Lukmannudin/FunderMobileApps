@@ -17,9 +17,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Company.DealForm.DealFormActivity
-import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.ChatUtils.CHAT_ID
@@ -251,18 +251,22 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         Log.i("cek", data.bidderId)
         when (item?.itemId) {
             R.id.view_eo_profile -> {
-                startActivity(intentFor<EoProfileActivity>(
-                    Utils.ID to data.eoId
-                ))
+                startActivity(
+                    intentFor<EoProfileActivity>(
+                        Utils.ID to data.eoId
+                    )
+                )
             }
             R.id.view_search -> {
                 Toast.makeText(this, "EO SEARCH", Toast.LENGTH_SHORT).show()
             }
 
             R.id.view_deal_form -> {
-                startActivity(intentFor<DealFormActivity>(
-                    Utils.BIDDER_ID to data.bidderId
-                ))
+                startActivity(
+                    intentFor<DealFormActivity>(
+                        Utils.BIDDER_ID to data.bidderId
+                    )
+                )
             }
 
             R.id.view_end_deal -> {

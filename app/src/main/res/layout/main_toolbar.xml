@@ -22,6 +22,22 @@
                     android:layout_height="match_parent"
                     android:drawableStart="@drawable/icon_user_profile"
             />
+
+            <TextView
+                    android:id="@+id/ab_title_dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/ab_user_profile"
+                    android:text="Home"
+                    android:paddingStart="50dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:layout_marginTop="0dp" android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" android:layout_marginBottom="0dp"
+                    android:layout_toEndOf="@+id/ab_user_profile" android:layout_marginStart="-8dp"
+                    android:layout_toStartOf="@+id/tbUnreadChat" android:layout_marginLeft="-8dp"
+                    android:layout_marginEnd="8dp"/>
             <TextView
                     android:paddingEnd="5dp"
                     android:layout_toLeftOf="@id/ab_search"

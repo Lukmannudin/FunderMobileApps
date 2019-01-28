@@ -23,5 +23,8 @@
     <string name="event_accepted">Congratulations now you has relationship</string>
     <string name="event_rejected">You rejected that event</string>
     <string name="email_event_organizer"><i> Email Event Organizer </i></string>
+    <string name="username"><i>username</i></string>
+    <string name="password"><i>password</i></string>
+    <string name="retype_password"><i>retype password</i></string>
 
 </resources>

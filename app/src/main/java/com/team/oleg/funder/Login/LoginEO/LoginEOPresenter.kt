@@ -30,7 +30,7 @@ class LoginEOPresenter(
     }
 
     override fun loadUser(user: User) {
-        loadUser(user,true)
+        loadUser(user, true)
     }
 
     private fun loadUser(user: User, showLoadingUI: Boolean) {
@@ -44,11 +44,11 @@ class LoginEOPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
-                   processUser(result.data[0])
+                    processUser(result.data[0])
 
                 },
                 { error ->
-                    loginEOView.showIsFailed(error.localizedMessage)
+                    loginEOView.showIsFailed("Username or password wrong")
                 }
             )
         if (showLoadingUI) {
@@ -56,8 +56,8 @@ class LoginEOPresenter(
         }
     }
 
-    private fun processUser(user: User){
-        if (user.eoEmail == null){
+    private fun processUser(user: User) {
+        if (user.eoEmail == null) {
             loginEOView.showIsFailed("Username or password wrong")
         } else {
             loginEOView.showIsSuccessfull(user)
