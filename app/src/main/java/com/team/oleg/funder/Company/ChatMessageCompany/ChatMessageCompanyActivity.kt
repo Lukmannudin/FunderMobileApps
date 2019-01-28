@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Company.DealForm.DealFormActivity
-import com.team.oleg.funder.Company.EOProfile.EoProfileActivity
+import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.R

@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.EOProfile
+package com.team.oleg.funder.EOProfile
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.ChatService

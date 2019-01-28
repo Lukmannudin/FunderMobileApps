@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.EOProfile
+package com.team.oleg.funder.EOProfile
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView

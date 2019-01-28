@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.EventOrganizer.ChangePassword.ChangePasswordActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
@@ -25,6 +26,7 @@ import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_event_organizer_profile.*
 import kotlinx.android.synthetic.main.toolbar_profile.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 
@@ -88,6 +90,8 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         logout.setOnClickListener {
             logout()
         }
+
+
     }
 
     private fun initView() {
@@ -120,6 +124,7 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         userData.eoName = user.eoName
         userData.eoPoint = user.eoPoint
         userData.eoPhoto = user.eoPhoto
+        userData.deal = user.deal
 
         storageRef?.child("userProfileImage/${user.eoPhoto}")?.downloadUrl?.addOnSuccessListener {
             Glide.with(this).load(it).into(EOImage)
@@ -129,6 +134,14 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         tvChangePassword.setOnClickListener {
             startActivity(
                 intentFor<ChangePasswordActivity>(
+                    Utils.INTENT_PARCELABLE to user
+                )
+            )
+        }
+
+        tvEOTrackRecordLink.setOnClickListener {
+            startActivity(
+                intentFor<EoProfileActivity>(
                     Utils.INTENT_PARCELABLE to user
                 )
             )

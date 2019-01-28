@@ -73,12 +73,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCompanyName"
                 app:layout_constraintHorizontal_bias="1.0"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"/>
+                app:layout_constraintBottom_toTopOf="@+id/eoVission"/>
         <TextView
                 android:text="TERWUJUDNYA KOTA BANDUNG  YANG UNGGUL, NYAMAN, DAN SEJAHTERA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4"
+                android:id="@+id/eoVission"
                 app:layout_constraintTop_toBottomOf="@+id/tvCompanyVision"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:id="@+id/tvCompanyMission"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/eoVission"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="15dp"
