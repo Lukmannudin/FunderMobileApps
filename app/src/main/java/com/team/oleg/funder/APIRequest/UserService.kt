@@ -15,6 +15,7 @@ interface UserService {
     fun login(@Body user: User):
             Observable<RootResponse<User>>
 
+
     @POST("login/company")
     fun loginCompany(@Body company: Company):
             Observable<RootResponse<Company>>
@@ -31,21 +32,18 @@ interface UserService {
     fun changeUser(
         @Path("userId") userId: String?,
         @Body user: User
-    ):
-            Observable<Response<String>>
+    ): Observable<Response<String>>
 
     @POST("userEO/changePass/{userId}")
     fun changePassword(
-        @Path( "userId") userId:String,
-        @Body password: HashMap<String,String>
-        )
-            :Observable<Response<String>>
+        @Path("userId") userId: String,
+        @Body password: HashMap<String, String>
+    ) : Observable<Response<String>>
 
 
     @POST("userEO/photo/{userId}")
     fun changeImageProfile(
-        @Path( "userId") userId:String?,
-        @Body nameImage:HashMap<String,String?>
-    )
-            :Observable<Response<String>>
+        @Path("userId") userId: String?,
+        @Body nameImage: HashMap<String, String?>
+    ): Observable<Response<String>>
 }

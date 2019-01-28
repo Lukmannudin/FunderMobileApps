@@ -25,7 +25,7 @@ class LoginEOPresenter(
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
-        Log.i("result: ", "requestCode: " + requestCode.toString() + "| resultCode:" + resultCode)
+        Log.i("result: ", "requestCode: $requestCode| resultCode:$resultCode")
 
     }
 
@@ -37,6 +37,7 @@ class LoginEOPresenter(
         if (showLoadingUI) {
             loginEOView.setLoadingIndicator(true)
         }
+
         val service: UserService = ApiService.userService
         disposable = service.login(user)
             .subscribeOn(Schedulers.io())
@@ -47,7 +48,7 @@ class LoginEOPresenter(
 
                 },
                 { error ->
-                    loginEOView.showIsFailed("username or password is wrong")
+                    loginEOView.showIsFailed(error.localizedMessage)
                 }
             )
         if (showLoadingUI) {

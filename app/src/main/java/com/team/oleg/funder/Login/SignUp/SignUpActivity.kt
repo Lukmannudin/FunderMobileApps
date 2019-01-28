@@ -3,6 +3,7 @@ package com.team.oleg.funder.Login.SignUp
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -17,7 +18,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.Login.LoginPresenter
-import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
@@ -50,6 +50,33 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         presenter = SignUpPresenter(this)
         passwordStatus.visibility = View.GONE
         signUpButton.isEnabled = false
+
+
+        accountName.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                accountName.hint = "Account Name"
+            } else {
+                accountName.hint = "Archy Reynaldi Nugraha"
+            }
+        }
+
+
+        accountBankName.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                accountName.hint = "Bank Name"
+            } else {
+                accountName.hint = "BNI/BCA/BRI"
+            }
+        }
+
+        accountNumber.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                accountName.hint = "0395784557"
+            } else {
+                accountName.hint = "Account Number"
+            }
+        }
+
         passwordRetype.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 passwordStatus.visibility = View.VISIBLE
@@ -72,22 +99,45 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         btnUploadImageSignUp.setOnClickListener {
             chooseFile()
         }
+
+
+        misi.setOnFocusChangeListener { v, hasFocus ->
+            tvStringtilEoVisionCount.text = misi.text.length.toString() + " / 120"
+            if (misi.text.length > 120){
+                tvStringtilEoVisionCount.setTextColor(Color.parseColor("#e74c3c"))
+            }
+        }
         val myFormat = "yyyy-MM-dd HH:mm:ss"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         val now = sdf.format(Date())
 
         signUpButton.setOnClickListener {
-            user.eoEmail = email.text.toString()
-            user.eoName = username.text.toString()
-            user.eoPassword = passwordRetype.text.toString()
-            user.eoPoint = "0"
-            user.eoVision = misi.text.toString()
-            user.eoMission = visi.text.toString()
-            user.accountName = accountName.text.toString()
-            user.bankName = accountBankName.text.toString()
-            user.accountRek = accountNumber.text.toString()
-            uploadImage()
+            if (
+                email.text.toString() == "" ||
+                username.text.toString() == "" ||
+                passwordRetype.text.toString() == password.text.toString() ||
+                misi.text.toString() == "" ||
+                accountName.text.toString() == "" ||
+                accountBankName.text.toString() == "" ||
+                accountNumber.text.toString() == "" ||
+                passwordRetype.text.toString().length < 5
+            ) {
+                toast("Please complete this form")
+            } else {
+                user.eoEmail = email.text.toString()
+                user.eoName = username.text.toString()
+                user.eoPassword = passwordRetype.text.toString()
+                user.eoPoint = "0"
+                user.eoVision = misi.text.toString()
+                user.eoMission = visi.text.toString()
+                user.accountName = accountName.text.toString()
+                user.bankName = accountBankName.text.toString()
+                user.accountRek = accountNumber.text.toString()
+                uploadImage()
+            }
         }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -120,14 +170,14 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
     private fun uploadImage() {
         presenter.addUser(user)
         val storage = FirebaseStorage.getInstance()
-        var storageReference: StorageReference? = storage.reference
+        val storageReference: StorageReference? = storage.reference
         if (filePath != null) {
             Log.i("cek", filePath.toString())
             val progressDialog = ProgressDialog(this)
             progressDialog.setTitle("Uploading...")
             progressDialog.show()
 
-            val ref = storageReference?.child("userProfileImage/"+user.eoPhoto)
+            val ref = storageReference?.child("userProfileImage/" + user.eoPhoto)
             ref?.putFile(filePath!!)
                 ?.addOnSuccessListener {
                     progressDialog.dismiss()
