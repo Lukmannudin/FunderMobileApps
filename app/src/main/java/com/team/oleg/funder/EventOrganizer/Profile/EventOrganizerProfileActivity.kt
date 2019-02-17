@@ -26,7 +26,6 @@ import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_event_organizer_profile.*
 import kotlinx.android.synthetic.main.toolbar_profile.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 

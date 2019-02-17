@@ -1,9 +1,6 @@
 package com.team.oleg.funder.Login.SignUp
 
-import android.util.Log
-import com.team.oleg.funder.APIRequest.EventService
 import com.team.oleg.funder.APIRequest.UserService
-import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -6,7 +6,6 @@ import com.team.oleg.funder.Company.CompanyActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.SharedPreferenceUtils.USER_ID
 import org.jetbrains.anko.intentFor
 
 class LoginPresenter : AppCompatActivity() {

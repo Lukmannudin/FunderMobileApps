@@ -16,7 +16,6 @@ import android.widget.ImageView
 import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.ChatUtils
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_chat.*

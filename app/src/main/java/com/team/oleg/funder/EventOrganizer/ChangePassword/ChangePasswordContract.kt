@@ -2,7 +2,6 @@ package com.team.oleg.funder.EventOrganizer.ChangePassword
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.User
 
 interface ChangePasswordContract {
 

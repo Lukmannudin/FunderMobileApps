@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.team.oleg.funder.Company.RequestDetail.RequestDetailActivity
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailContract
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailPresenter
 import com.team.oleg.funder.Data.Bidder
 
 import com.team.oleg.funder.R

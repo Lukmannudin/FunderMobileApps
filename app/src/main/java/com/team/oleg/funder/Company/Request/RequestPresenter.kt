@@ -1,8 +1,6 @@
 package com.team.oleg.funder.Company.Request
 
-import android.util.Log
 import com.team.oleg.funder.APIRequest.DealHistoryService
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailContract
 import com.team.oleg.funder.Data.Bidder
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Data.Chat
-import com.team.oleg.funder.Dummy.DummyAuction.data
 import com.team.oleg.funder.R
-import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class ChatCompanyAdapter(
