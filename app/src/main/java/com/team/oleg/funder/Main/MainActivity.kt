@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.team.oleg.funder.BaseActivity
 import com.team.oleg.funder.EventOrganizer.Chat.MainChatFragment
 import com.team.oleg.funder.EventOrganizer.DealHistory.MainDealHistoryFragment
 import com.team.oleg.funder.EventOrganizer.Home.HomePresenter

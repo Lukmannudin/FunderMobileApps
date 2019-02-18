@@ -2,7 +2,6 @@ package com.team.oleg.funder.Auction
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.SponsorService
-import com.team.oleg.funder.Auction.AuctionContract
 import com.team.oleg.funder.Response.SponsorResponse
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers

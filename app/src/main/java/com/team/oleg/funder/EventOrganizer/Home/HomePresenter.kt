@@ -5,7 +5,6 @@ import com.team.oleg.funder.APIRequest.ChatService
 import com.team.oleg.funder.APIRequest.SponsorService
 import com.team.oleg.funder.Data.Sponsor
 import com.team.oleg.funder.Service.ApiService
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

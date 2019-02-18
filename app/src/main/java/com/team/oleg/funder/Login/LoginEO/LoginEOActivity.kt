@@ -13,7 +13,6 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_eo.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
 class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
 

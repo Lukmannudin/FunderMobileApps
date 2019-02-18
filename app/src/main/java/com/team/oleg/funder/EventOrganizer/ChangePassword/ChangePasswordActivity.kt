@@ -9,7 +9,6 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class ChangePasswordActivity : AppCompatActivity(), ChangePasswordContract.View {
