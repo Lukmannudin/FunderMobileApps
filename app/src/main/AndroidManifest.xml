@@ -80,6 +80,7 @@
                 android:name=".company.chatMessageCompany.ChatMessageCompanyActivity"
                 android:parentActivityName=".company.CompanyActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".Session"/>
     </application>
 
 </manifest>

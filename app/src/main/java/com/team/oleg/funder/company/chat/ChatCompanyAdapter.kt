@@ -63,10 +63,6 @@ class ChatCompanyAdapter(
                 context?.let { it1 -> Glide.with(it1).load(it).into(companyImage) }
             }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
 
-            Log.i("cek",chat.eoPhoto)
-            Log.i("cek",chat.eoName)
-            Log.i("cek",chat.chatId )
-
             titleChat.text = chat.eoName
             eventName.text = chat.eventName
             messageChat.text = chat.message

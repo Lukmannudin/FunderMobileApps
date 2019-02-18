@@ -17,8 +17,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.company.CompanyActivity
-import com.team.oleg.funder.company.DealForm.DealFormActivity
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.EOProfile.EoProfileActivity
@@ -28,10 +26,12 @@ import com.team.oleg.funder.Utils.ChatUtils.CHAT_ID
 import com.team.oleg.funder.Utils.ChatUtils.COLLECTION_KEY
 import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
 import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.company.CompanyActivity
+import com.team.oleg.funder.company.DealForm.DealFormActivity
+import com.team.oleg.funder.company.ReviewEO.ReviewEO
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
 class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContract.View {
 
@@ -263,6 +263,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
             R.id.view_end_deal -> {
 //                presenter.endDeal(data.bidderId)
+                startActivity(intentFor<ReviewEO>())
             }
         }
         return super.onOptionsItemSelected(item)

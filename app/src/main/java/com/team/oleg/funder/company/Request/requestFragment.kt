@@ -5,15 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.team.oleg.funder.company.RequestDetail.RequestDetailActivity
+import android.support.v7.widget.SearchView
+import android.view.*
 import com.team.oleg.funder.Data.Bidder
-
+import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.company.RequestDetail.RequestDetailActivity
 import kotlinx.android.synthetic.main.fragment_request.*
 import kotlinx.android.synthetic.main.fragment_request.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -42,6 +41,8 @@ class RequestFragment : Fragment(), RequestContract.View {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
+    val temp: MutableList<Bidder> = mutableListOf()
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +89,7 @@ class RequestFragment : Fragment(), RequestContract.View {
         view.bidderSwipeRefresh.setOnRefreshListener {
             presenter.loadBidder(false)
         }
+        setHasOptionsMenu(true)
         return view
     }
 
@@ -104,6 +106,61 @@ class RequestFragment : Fragment(), RequestContract.View {
     override fun onDetach() {
         super.onDetach()
         listener = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.toolbar_company, menu)
+        searchView = menu?.findItem(R.id.searchCompany)?.actionView as SearchView
+        temp.addAll(bidderList)
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(searchString: String?): Boolean {
+                if (bidderList.isEmpty() || bidderList.size == 0) {
+                    bidderList.addAll(temp)
+                }
+                if (!bidderList.isEmpty() && bidderList.size > 0) {
+                    val dump: MutableList<Bidder> = mutableListOf()
+                    for (i in bidderList.indices) {
+                        searchString?.let {
+                            if (bidderList[i].eoName?.contains(searchString.toRegex())!!) {
+                                dump.add(bidderList[i])
+                            }
+                        }
+                    }
+                    bidderList.clear()
+                    bidderList.addAll(dump)
+                    listDetailAdapter.notifyDataSetChanged()
+                }
+                return true
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            R.id.logout -> {
+                logout()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    fun logout() {
+        val sharedPref = activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0)
+        if (sharedPref?.getString(
+                SharedPreferenceUtils.USER_ID,
+                SharedPreferenceUtils.EMPTY
+            ) != SharedPreferenceUtils.EMPTY
+        ) {
+            sharedPref?.edit()?.clear()?.apply()
+            activity?.startActivity(intentFor<LoginEOActivity>())
+        }
     }
 
     interface OnFragmentInteractionListener {

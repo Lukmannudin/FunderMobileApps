@@ -4,14 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.team.oleg.funder.company.chatMessageCompany.ChatMessageCompanyActivity
+import android.support.v7.widget.SearchView
+import android.view.*
 import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.company.chatMessageCompany.ChatMessageCompanyActivity
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -22,7 +22,8 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     override lateinit var presenter: ChatCompanyContract.Presenter
 
     private val chatList: MutableList<Chat> = mutableListOf()
-
+    val temp: MutableList<Chat> = mutableListOf()
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +68,7 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
         view.chatCompanySwipeRefresh.setOnRefreshListener {
             presenter.loadChat(false)
         }
+        setHasOptionsMenu(true)
         return view
     }
 
@@ -82,6 +84,7 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     override fun showChatList(chat: List<Chat>) {
         chatList.clear()
         chatList.addAll(chat)
+        temp.addAll(chat)
         listAdapter.notifyDataSetChanged()
     }
 
@@ -95,6 +98,78 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     }
 
     override fun showNoChat(active: Boolean) {
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.toolbar_company, menu)
+        searchView = menu?.findItem(R.id.searchCompany)?.actionView as SearchView
+        temp.addAll(chatList)
+
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(searchString: String?): Boolean {
+                if (chatList.isEmpty() || chatList.size == 0) {
+                    chatList.addAll(temp)
+                }
+                if (!chatList.isEmpty() && chatList.size > 0) {
+                    val dump: MutableList<Chat> = mutableListOf()
+                    for (i in chatList.indices) {
+                        searchString?.let {
+                            if (chatList[i].eoName?.contains(searchString.toRegex())!!) {
+                                dump.add(chatList[i])
+                            }
+                        }
+                    }
+                    chatList.clear()
+                    chatList.addAll(dump)
+                    listAdapter.notifyDataSetChanged()
+                }
+                return true
+            }
+        })
+
+        searchView.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                chatList.clear()
+                chatList.addAll(temp)
+                listAdapter.notifyDataSetChanged()
+                return false
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            R.id.logout -> {
+                logout()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.destroy()
+        searchView.isIconified = true
+    }
+
+    fun logout() {
+        val sharedPref = activity?.getSharedPreferences(SharedPreferenceUtils.USER_LOGIN, 0)
+        if (sharedPref?.getString(
+                SharedPreferenceUtils.USER_ID,
+                SharedPreferenceUtils.EMPTY
+            ) != SharedPreferenceUtils.EMPTY
+        ) {
+            sharedPref?.edit()?.clear()?.apply()
+            activity?.startActivity(intentFor<LoginEOActivity>())
+        }
     }
 
     interface ChatItemListener {
