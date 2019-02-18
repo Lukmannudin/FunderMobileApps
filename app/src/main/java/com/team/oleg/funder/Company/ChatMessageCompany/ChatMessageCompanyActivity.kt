@@ -270,7 +270,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
             R.id.view_end_deal -> {
-                presenter.endDeal(data.bidderId)
+//                presenter.endDeal(data.bidderId)
             }
         }
         return super.onOptionsItemSelected(item)
