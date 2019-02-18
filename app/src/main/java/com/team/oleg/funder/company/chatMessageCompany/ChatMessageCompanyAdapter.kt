@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.ChatMessageCompany
+package com.team.oleg.funder.company.chatMessageCompany
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

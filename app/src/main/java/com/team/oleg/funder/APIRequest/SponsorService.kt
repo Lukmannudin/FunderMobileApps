@@ -7,6 +7,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SponsorService {
     @GET("sponsor/")
@@ -19,4 +20,8 @@ interface SponsorService {
     @GET("sponsor/{id}")
     fun getSponsorById(@Path("id") id: String):
             Observable<SponsorResponse>
+
+    @GET("sponsor/search/")
+    fun getSearchSponsor(@Query("keyword")keyword:String):
+            Observable<RootResponse<Sponsor>>
 }

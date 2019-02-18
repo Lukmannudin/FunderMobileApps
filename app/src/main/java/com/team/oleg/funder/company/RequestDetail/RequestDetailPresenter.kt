@@ -1,16 +1,12 @@
-package com.team.oleg.funder.Company.RequestDetail
+package com.team.oleg.funder.company.RequestDetail
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.EventService
-import com.team.oleg.funder.Data.Bidder
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import android.R
-import android.content.Context
-import android.widget.Toast
 import com.team.oleg.funder.Utils.Utils
 
 

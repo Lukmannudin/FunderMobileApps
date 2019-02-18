@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.ChatMessageCompany
+package com.team.oleg.funder.company.chatMessageCompany
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -16,7 +17,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Company.DealForm.DealFormActivity
+import com.team.oleg.funder.company.CompanyActivity
+import com.team.oleg.funder.company.DealForm.DealFormActivity
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Data.Message
 import com.team.oleg.funder.EOProfile.EoProfileActivity
@@ -27,9 +29,12 @@ import com.team.oleg.funder.Utils.ChatUtils.COLLECTION_KEY
 import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 
 class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContract.View {
+
 
     private val messageList: MutableList<Message> = mutableListOf()
 
@@ -62,9 +67,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         presenter = ChatMessageCompanyPresenter(chatId, this)
         rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         presenter.loadChat(false)
-//        chatMessageSwipeRefresh.setOnRefreshListener {
-//            presenter.loadChat(false)
-//        }
 
         rvMessage.adapter = listAdapter
         realtimeUpdateListener()
@@ -188,16 +190,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                                 )
                             )
 
-//                            var mBuilder =
-//                                chatId?.let {
-//                                    NotificationCompat.Builder(this@ChatMessageCompanyActivity, it)
-//                                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-//                                        .setContentTitle(data?.get(ChatUtils.USER_NAME).toString())
-//                                        .setContentText(data?.get(ChatUtils.MESSAGE).toString())
-//                                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                                }
-//
-
 
                         } else if (data?.get(ChatUtils.MESSAGE_STATUS_SENDING) != null) {
                             if (data?.get(ChatUtils.CHAT_ID) == chatId
@@ -248,7 +240,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
-        Log.i("cek", data.bidderId)
         when (item?.itemId) {
             R.id.view_eo_profile -> {
                 startActivity(
@@ -264,15 +255,32 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             R.id.view_deal_form -> {
                 startActivity(
                     intentFor<DealFormActivity>(
-                        Utils.BIDDER_ID to data.bidderId
+                        Utils.BIDDER_ID to data.bidderId,
+                        Utils.ID to data.eoId
                     )
                 )
             }
 
             R.id.view_end_deal -> {
-                presenter.endDeal(data.bidderId)
+//                presenter.endDeal(data.bidderId)
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showDialog(message: String) {
+        alertDialog(message)
+    }
+
+    private fun alertDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setCancelable(false)
+        val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+        view.titleFillFormSubmitted.text = message
+        view.btnSubmitFillForm.setOnClickListener {
+            startActivity(intentFor<CompanyActivity>())
+        }
+        builder.setView(view)
+        builder.show()
     }
 }

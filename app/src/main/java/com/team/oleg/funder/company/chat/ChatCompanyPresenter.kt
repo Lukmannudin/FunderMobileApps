@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.Chat
+package com.team.oleg.funder.company.chat
 
 import com.team.oleg.funder.APIRequest.ChatService
 import com.team.oleg.funder.Data.Chat

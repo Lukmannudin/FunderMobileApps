@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.ChatMessageCompany
+package com.team.oleg.funder.company.chatMessageCompany
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
@@ -17,6 +17,8 @@ interface ChatMessageCompanyContract {
 
         fun setMessage(textMessage:String,status:Boolean)
 
+        fun showDialog(message:String)
+
     }
 
     interface Presenter : BasePresenter {
@@ -34,6 +36,7 @@ interface ChatMessageCompanyContract {
         fun setOnline(chatId: String?,status:Boolean )
 
         fun endDeal(bidderId:String?)
+
 
     }
 }

@@ -1,19 +1,25 @@
-package com.team.oleg.funder.Company.DealForm
+package com.team.oleg.funder.company.DealForm
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import com.team.oleg.funder.company.CompanyActivity
+import com.team.oleg.funder.Data.Bank
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_deal_form.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
+import org.jetbrains.anko.intentFor
 import java.text.NumberFormat
 import java.util.*
 
 
 class DealFormActivity : AppCompatActivity(), DealFormContract.View {
+
 
     override lateinit var presenter: DealFormContract.Presenter
 
@@ -24,12 +30,16 @@ class DealFormActivity : AppCompatActivity(), DealFormContract.View {
         setContentView(R.layout.activity_deal_form)
 
         val bidderId = intent.getStringExtra(Utils.BIDDER_ID)
+        val eoId = intent.getStringExtra(Utils.ID)
         presenter = DealFormPresenter(this)
+        presenter.getDataBank(eoId)
+
         backDealForm.setOnClickListener {
             onBackPressed()
         }
+
         initView()
-        tUang.setOnCheckedChangeListener { buttonView, isChecked ->
+        tUang.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 numberReq.visibility = View.VISIBLE
                 nameEventOrganizer.visibility = View.VISIBLE
@@ -43,6 +53,7 @@ class DealFormActivity : AppCompatActivity(), DealFormContract.View {
                 edtFunding.visibility = View.GONE
             }
         }
+
 
         kBarang.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -97,10 +108,30 @@ class DealFormActivity : AppCompatActivity(), DealFormContract.View {
     }
 
     override fun showDialogMessage(message: String) {
+        alertDialog(message)
     }
 
     override fun onPause() {
         super.onPause()
         presenter.destroy()
     }
+
+    private fun alertDialog(message:String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setCancelable(false)
+        val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+        view.titleFillFormSubmitted.text = message
+        view.btnSubmitFillForm.setOnClickListener {
+            startActivity(intentFor<CompanyActivity>())
+        }
+        builder.setView(view)
+        builder.show()
+    }
+
+    override fun setView(data: Bank) {
+        numberReq.setText(data.accountRek)
+        nameEventOrganizer.setText(data.accountName)
+        bankName.setText(data.bankName)
+    }
+
 }

@@ -1,26 +1,28 @@
-package com.team.oleg.funder.Company.RequestDetail
+package com.team.oleg.funder.company.Request
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
 import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.Data.Event
 
-interface RequestDetailContract {
+interface RequestContract {
     interface View: BaseView<Presenter>{
 
         fun setLoadingIndicator(active: Boolean)
 
-        fun showEvent(event: Event)
+        fun showBidder(bidder: List<Bidder>)
 
-        fun showDialogMessage(message:String)
+        fun showBidderDetail(eventId: String,bidderId:String)
+
+        fun showNoBidder(active: Boolean)
     }
 
     interface Presenter: BasePresenter {
 
         fun result(requestCode:Int,resultCode:Int)
 
-        fun loadEvent(forceUpdate: Boolean)
+        fun loadBidder(forceUpdate: Boolean)
 
-        fun eventApproval(status:Boolean,bidderId:String?)
+        fun openBidderDetail(requestedBidder: Bidder)
+
     }
 }

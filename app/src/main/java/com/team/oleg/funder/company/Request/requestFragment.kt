@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.Request
+package com.team.oleg.funder.company.Request
 
 import android.content.Intent
 import android.net.Uri
@@ -8,9 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailActivity
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailContract
-import com.team.oleg.funder.Company.RequestDetail.RequestDetailPresenter
+import com.team.oleg.funder.company.RequestDetail.RequestDetailActivity
 import com.team.oleg.funder.Data.Bidder
 
 import com.team.oleg.funder.R

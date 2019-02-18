@@ -1,10 +1,10 @@
-package com.team.oleg.funder.Company
+package com.team.oleg.funder.company
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.team.oleg.funder.Company.Chat.ChatFragment
-import com.team.oleg.funder.Company.Request.RequestFragment
+import com.team.oleg.funder.company.chat.ChatFragment
+import com.team.oleg.funder.company.Request.RequestFragment
 
 class CompanyAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

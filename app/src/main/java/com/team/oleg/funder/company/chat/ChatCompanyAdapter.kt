@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.Chat
+package com.team.oleg.funder.company.chat
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,17 +9,14 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.Data.Chat
-import com.team.oleg.funder.Dummy.DummyAuction.data
 import com.team.oleg.funder.R
-import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import kotlinx.android.synthetic.main.chat_list.view.*
 
 class ChatCompanyAdapter(
     private val context: Context?,
     private val items: List<Chat>,
-    private val listener: ChatFragment.chatItemListener
+    private val listener: ChatFragment.ChatItemListener
 ) : RecyclerView.Adapter<ChatCompanyAdapter.ChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
@@ -48,7 +45,7 @@ class ChatCompanyAdapter(
         fun bindItem(
             context: Context?,
             chat: Chat,
-            listener: ChatFragment.chatItemListener
+            listener: ChatFragment.ChatItemListener
         ) {
             val dummyImage =
                 "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"

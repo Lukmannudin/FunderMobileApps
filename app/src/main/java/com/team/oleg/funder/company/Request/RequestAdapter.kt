@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.Request
+package com.team.oleg.funder.company.Request
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

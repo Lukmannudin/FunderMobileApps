@@ -14,6 +14,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".company.ReviewEO.ReviewEO">
+        </activity>
         <activity android:name=".EventOrganizer.ChangePassword.ChangePasswordActivity">
         </activity>
         <activity
@@ -25,10 +27,10 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".Company.DealForm.DealFormActivity"
+                android:name=".company.DealForm.DealFormActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".Company.RequestDetail.RequestDetailActivity">
+        <activity android:name=".company.RequestDetail.RequestDetailActivity">
         </activity>
         <activity
                 android:name=".Login.LoginPresenter"
@@ -67,7 +69,7 @@
                 android:name=".Login.SignUp.SignUpActivity"
                 android:parentActivityName=".Login.LoginEO.LoginEOActivity">
         </activity>
-        <activity android:name=".Company.CompanyActivity">
+        <activity android:name=".company.CompanyActivity">
         </activity>
         <activity
                 android:name=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity"
@@ -75,8 +77,8 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-                android:name=".Company.ChatMessageCompany.ChatMessageCompanyActivity"
-                android:parentActivityName=".Company.CompanyActivity"
+                android:name=".company.chatMessageCompany.ChatMessageCompanyActivity"
+                android:parentActivityName=".company.CompanyActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 

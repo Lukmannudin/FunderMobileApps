@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.ChatMessageCompany
+package com.team.oleg.funder.company.chatMessageCompany
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.ChatService
@@ -24,9 +24,6 @@ class ChatMessageCompanyPresenter(
 
     override fun start() {
         loadChat(false)
-        Log.i("cek FirstLoad", firstLoad.toString())
-
-//        chatCompanyView.showNoChat(false)
     }
 
     override fun result(requestCode: Int, resultCode: Int) {
@@ -45,11 +42,6 @@ class ChatMessageCompanyPresenter(
         if (showLoadingUI) {
             chatCompanyView.setLoadingIndicator(true)
         }
-
-
-//        if (forceUpdate) {
-//        }
-        Log.i("firsload", firstLoad.toString())
 
         val service: ChatService = ApiService.chatService
         disposable = service.getMessageEO(chatId)
@@ -156,10 +148,12 @@ class ChatMessageCompanyPresenter(
             .subscribe(
                 { result ->
                     Log.i("berhasil", "berhasilread")
+                    chatCompanyView.showDialog(message = "Thank you, your relation with this Event organizer ")
                 },
                 { error ->
                     println(error.localizedMessage)
                     Log.i("berhasil", error.localizedMessage)
+                    chatCompanyView.showDialog(message = "Thank you, your relation with this Event organizer ")
                 }
             )
     }

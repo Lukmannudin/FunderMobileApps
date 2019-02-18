@@ -12,6 +12,7 @@
     <color name="bidCanceled">#b67a36</color>
     <color name="colorWhiteBackground">#f5f5f5</color>
     <color name="colorWhiteLight">#8a000000</color>
-
+    <color name="golden">#fac917</color>
+    <color name="darkWhite">#82707070</color>
 
 </resources>

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import com.team.oleg.funder.Company.CompanyActivity
+import com.team.oleg.funder.company.CompanyActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Data.Company
 import com.team.oleg.funder.R

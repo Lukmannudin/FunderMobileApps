@@ -1,4 +1,4 @@
-package com.team.oleg.funder.Company.RequestDetail
+package com.team.oleg.funder.company.RequestDetail
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Company.CompanyActivity
+import com.team.oleg.funder.company.CompanyActivity
 import com.team.oleg.funder.Data.Event
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
