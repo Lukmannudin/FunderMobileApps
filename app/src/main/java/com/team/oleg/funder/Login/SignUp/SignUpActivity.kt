@@ -102,7 +102,7 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
             if (
                 email.text.toString() == "" ||
                 username.text.toString() == "" ||
-                passwordRetype.text.toString() == password.text.toString() ||
+                passwordRetype.text.toString() != password.text.toString() ||
                 misi.text.toString() == "" ||
                 accountName.text.toString() == "" ||
                 accountBankName.text.toString() == "" ||

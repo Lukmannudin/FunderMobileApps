@@ -42,9 +42,6 @@ class ChatEOPresenter(
             chatEOView.setLoadingIndicator(true)
         }
 
-//        if (forceUpdate) {
-//        }
-
         val service: ChatService = ApiService.chatService
         disposable = service.getChatEO(userId)
             .subscribeOn(Schedulers.io())

@@ -19,4 +19,8 @@
     <style name="Theme.MyEOProfile" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_blue_24dp</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/golden</item>
+        <item name="colorControlActivated">@color/darkWhite</item>
+    </style>
 </resources>
