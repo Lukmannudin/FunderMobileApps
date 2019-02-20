@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -150,7 +151,12 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     override fun showUnreadChat(count: String) {
-        tbUnreadChat.text = count
+        Log.i("count",count)
+        if (count == "0"){
+            tbUnreadChat.visibility = View.GONE
+        } else {
+            tbUnreadChat.text = count
+        }
     }
 
     override fun onResume() {

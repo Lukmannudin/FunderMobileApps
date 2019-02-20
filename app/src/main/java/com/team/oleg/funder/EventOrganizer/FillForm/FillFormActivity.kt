@@ -22,6 +22,7 @@ import com.team.oleg.funder.Utils.SharedPreferenceUtils
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_fill_form.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
+import org.jetbrains.anko.datePicker
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -53,6 +54,13 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
 
         presenter = FillFormPresenter(this)
 
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInView()
+        }
+
         val myFormat = "yyyy-MM-dd HH:mm:ss"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         val now = sdf.format(Date())
@@ -73,25 +81,22 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         dlIconProposal.setOnClickListener { downloadFile() }
         btnUploadProposal.setOnClickListener { chooseFile() }
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, monthOfYear)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateDateInView()
-        }
         edtEventDate.setOnTouchListener { _, action ->
             if (action.action == MotionEvent.ACTION_UP) {
-                DatePickerDialog(
+                val datePickerDialog = DatePickerDialog(
                     this@FillFormActivity,
                     dateSetListener,
                     cal.get(Calendar.YEAR),
                     cal.get(Calendar.MONTH),
                     cal.get(Calendar.DAY_OF_MONTH)
-                ).show()
+                )
+                datePickerDialog.datePicker.minDate = System.currentTimeMillis() + 604800000 // penambahan 1 minggu dari sekarang
+                datePickerDialog.show()
             }
             true
         }
     }
+
 
     private fun downloadFile() {
         val storage = FirebaseStorage.getInstance()

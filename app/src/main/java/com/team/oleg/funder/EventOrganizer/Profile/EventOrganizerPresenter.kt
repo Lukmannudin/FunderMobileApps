@@ -21,6 +21,7 @@ class EventOrganizerPresenter(
     }
 
     override fun getEO(userId: String) {
+        Log.i("userId",userId)
         val service: UserService = ApiService.userService
         disposable = service.getUser(userId)
             .observeOn(AndroidSchedulers.mainThread())

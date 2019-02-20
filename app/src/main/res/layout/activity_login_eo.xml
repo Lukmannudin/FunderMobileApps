@@ -24,7 +24,7 @@
             android:src="@drawable/logo"
             android:layout_width="269dp"
             android:layout_height="113dp"
-            android:id="@+id/imageView2" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:id="@+id/logoFunderLogin" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginTop="80dp" app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/logo_funder"
@@ -42,7 +42,7 @@
             android:layout_marginStart="30dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/logoFunderLogin"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:layout_marginTop="52dp"
             android:layout_marginHorizontal="20dp"
             android:background="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/logoFunderLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0" android:id="@+id/linearLayout">
@@ -123,7 +123,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
-  
+
     <TextView
             android:text="Login as company"
             android:layout_width="wrap_content"

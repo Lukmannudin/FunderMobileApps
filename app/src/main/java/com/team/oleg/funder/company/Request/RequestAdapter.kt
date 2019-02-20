@@ -1,6 +1,7 @@
 package com.team.oleg.funder.company.Request
 
 import android.content.Context
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 
 class RequestAdapter(
     private val context: Context?,
@@ -21,7 +24,7 @@ class RequestAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BidderViewHolder {
         return BidderViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.chat_list, parent, false)
+            LayoutInflater.from(parent.context).inflate(com.team.oleg.funder.R.layout.chat_list, parent, false)
         )
     }
 
@@ -54,7 +57,7 @@ class RequestAdapter(
                 context?.let { it1 -> Glide.with(it1).load(it).into(companyImage) }
             }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
 
-            Log.i("cekcok",bidder.eoPhoto)
+            Log.i("cekcok", bidder.eoPhoto)
             titleChat.text = bidder.eoName
             eventName.text = bidder.eventName
             messageChat.text = ""
@@ -63,6 +66,12 @@ class RequestAdapter(
             dateChat.text = bidder.bidderDate
             itemView.setOnClickListener {
                 listener.onBidderClick(bidder)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                val todayDate = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatted = todayDate.format(formatter)
             }
 
             unreadMessage.visibility = View.GONE

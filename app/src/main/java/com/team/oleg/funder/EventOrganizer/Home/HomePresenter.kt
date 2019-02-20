@@ -72,7 +72,7 @@ class HomePresenter(
 
     override fun result(requestCode: Int, resultCode: Int) {
         //If a task was successfully added, show
-        Log.i("result: ", "requestCode: " + requestCode.toString() + "| resultCode:" + resultCode)
+        Log.i("result: ", "requestCode: $requestCode| resultCode:$resultCode")
     }
 
 
