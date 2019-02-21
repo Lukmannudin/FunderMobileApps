@@ -53,9 +53,12 @@ class ChatEOAdapter(
                     BuildConfig.BASE_URL + "uploads/photo/company_photo/"+chat.companyPhoto
                 ).into(companyImage)
             }
-            Log.i("coconot",BuildConfig.BASE_URL + "uploads/photo/company_photo/"+chat.companyPhoto)
             titleChat.text = chat.companyName
             eventName.text = chat.eventName
+            if (unreadMessage.equals("0")){
+                unreadMessage.visibility = View.GONE
+            }
+
             unreadMessage.text = chat.unread
             dateChat.text = chat.messageTime
             if (chat.unread.equals("0")){

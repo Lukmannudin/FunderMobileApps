@@ -28,7 +28,6 @@ import com.team.oleg.funder.Utils.ChatUtils.DOCUMENT_KEY
 import com.team.oleg.funder.Utils.Utils
 import com.team.oleg.funder.company.CompanyActivity
 import com.team.oleg.funder.company.DealForm.DealFormActivity
-import com.team.oleg.funder.company.ReviewEO.ReviewEO
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor
@@ -78,6 +77,15 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
         setSupportActionBar(chat_message_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+
+        chat_message_toolbar.setOnClickListener {
+            startActivity(
+                intentFor<EoProfileActivity>(
+                    Utils.USER_TYPE to Utils.SENDER_COMPANY,
+                    Utils.ID to data.eoId
+                )
+            )
+        }
     }
 
 
@@ -140,7 +148,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
 //                presenter.sendChat(message)
             }
             .addOnFailureListener { e ->
-                Log.i("cek", e.localizedMessage)
             }
     }
 
@@ -165,7 +172,6 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
                 presenter.sendChat(message)
             }
             .addOnFailureListener { e ->
-                Log.i("cek Error", e.message)
             }
     }
 
@@ -244,6 +250,7 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             R.id.view_eo_profile -> {
                 startActivity(
                     intentFor<EoProfileActivity>(
+                        Utils.USER_TYPE to Utils.SENDER_COMPANY,
                         Utils.ID to data.eoId
                     )
                 )
@@ -262,8 +269,8 @@ class ChatMessageCompanyActivity : AppCompatActivity(), ChatMessageCompanyContra
             }
 
             R.id.view_end_deal -> {
-//                presenter.endDeal(data.bidderId)
-                startActivity(intentFor<ReviewEO>())
+                presenter.endDeal(data.bidderId)
+//                startActivity(intentFor<ReviewEO>())
             }
         }
         return super.onOptionsItemSelected(item)

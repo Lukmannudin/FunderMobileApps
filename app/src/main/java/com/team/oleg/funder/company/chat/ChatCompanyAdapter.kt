@@ -66,6 +66,10 @@ class ChatCompanyAdapter(
             titleChat.text = chat.eoName
             eventName.text = chat.eventName
             messageChat.text = chat.message
+
+            if (unreadMessage.equals("0")){
+                unreadMessage.visibility = View.GONE
+            }
             unreadMessage.text = chat.unread
             messageChat.text = chat.lastMessage
             itemView.setOnClickListener {

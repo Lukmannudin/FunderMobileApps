@@ -158,7 +158,6 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         val storage = FirebaseStorage.getInstance()
         val storageReference: StorageReference? = storage.reference
         if (filePath != null) {
-            Log.i("cek", filePath.toString())
             val progressDialog = ProgressDialog(this)
             progressDialog.setTitle("Uploading...")
             progressDialog.show()

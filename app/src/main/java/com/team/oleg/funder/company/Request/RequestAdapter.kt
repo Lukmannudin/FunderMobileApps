@@ -57,7 +57,6 @@ class RequestAdapter(
                 context?.let { it1 -> Glide.with(it1).load(it).into(companyImage) }
             }?.addOnFailureListener { Log.i("file", it.localizedMessage) }
 
-            Log.i("cekcok", bidder.eoPhoto)
             titleChat.text = bidder.eoName
             eventName.text = bidder.eventName
             messageChat.text = ""

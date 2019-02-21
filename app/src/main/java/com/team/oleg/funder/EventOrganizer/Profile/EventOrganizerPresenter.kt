@@ -2,6 +2,7 @@ package com.team.oleg.funder.EventOrganizer.Profile
 
 import android.util.Log
 import com.team.oleg.funder.APIRequest.UserService
+import com.team.oleg.funder.Data.Bidder
 import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.Service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,10 +30,11 @@ class EventOrganizerPresenter(
             .subscribe(
                 { result ->
                     processData(result.data)
+                    Log.i("cek",result.data.accountName)
                 },
                 { error ->
+//                    Log.i("cek",error.localizedMessage)
                     //                    FillFormView.showMessageError(error.localizedMessage)
-                    Log.i("cek", error.localizedMessage)
                 }
             )
     }
@@ -56,7 +58,6 @@ class EventOrganizerPresenter(
                 },
                 { error ->
                     //                    FillFormView.showMessageError(error.localizedMessage)
-                    Log.i("cek", error.localizedMessage)
                 }
             )
     }
@@ -77,7 +78,6 @@ class EventOrganizerPresenter(
                 },
                 { error ->
                     //                    FillFormView.showMessageError(error.localizedMessage)
-                    Log.i("cek error", error.localizedMessage)
                     UserView.showMessage(error.localizedMessage)
                 }
             )

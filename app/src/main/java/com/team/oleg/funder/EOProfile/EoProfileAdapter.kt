@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.team.oleg.funder.Data.Bidder
+import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.track_record_list.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -19,10 +20,11 @@ class EoProfileAdapter(
     private val listener: EoProfileActivity.BidderItemListener
 ) :
     RecyclerView.Adapter<EoProfileAdapter.TopFunderViewHolder>() {
-
+    var yearCurrent = ""
+    var yearSame = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderViewHolder {
         return TopFunderViewHolder(
-            LayoutInflater.from(context).inflate(com.team.oleg.funder.R.layout.track_record_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.track_record_list, parent, false)
         )
     }
 
@@ -31,35 +33,41 @@ class EoProfileAdapter(
     }
 
     override fun onBindViewHolder(holder: TopFunderViewHolder, position: Int) {
-        holder.bindItem(context, items!![position], listener)
+
+        Log.i("cek", items!![position].eventDate?.substringBefore("-").toString())
+        if (!yearCurrent.equals(items[position].eventDate?.substringBefore("-").toString())) {
+            yearCurrent = items[position].eventDate?.substringBefore("-").toString()
+            yearSame = false
+        } else {
+            yearSame = true
+        }
+
+        holder.bindItem(context, items[position], yearSame, listener)
     }
 
     class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private var yearCurrent = ""
+        var yearCurrent = ""
         private val year = view.yearTrackRecord
         private val date = view.dateTrackRecord
         private val eventName = view.eventNameTrackRecord
         private val desc = view.descTrackRecord
-        fun bindItem(context: Context?, items: Bidder, listener: EoProfileActivity.BidderItemListener) {
-            val dummyImage =
-                "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/2/18/0/0_046f8c71-d3c9-49c2-babf-c68c42f0dc71_900_813.jpg"
-            if (context != null) {
-//                sponsorImage.setImageURI(BuildConfig.BASE_URL+"uploads/img/img_sponsor/${items.sponsorImage}")
-            }
+        fun bindItem(
+            context: Context?,
+            items: Bidder,
+            yearString: Boolean,
+            listener: EoProfileActivity.BidderItemListener
+        ) {
 
-            if (yearCurrent != items.eventDate?.substringBefore("-").toString()){
-                year.text = items.eventDate?.substringBefore("-")
-                yearCurrent = items.eventDate?.substringBefore("-").toString()
-                Log.i("year",yearCurrent+":"+items.eventDate?.substringBefore("-"))
-            }  else{
+            if (yearString){
                 year.visibility = View.GONE
-                yearCurrent = items.eventDate?.substringBefore("-").toString()
+            } else {
+                year.text = items.eventDate?.substringBefore("-")
             }
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val dateN =  LocalDate.parse(items.eventDate, DateTimeFormatter.ISO_DATE)
-                date.text = ""+ dateN.month.toString()+" " + dateN.dayOfMonth.toString()
+                val dateN = LocalDate.parse(items.eventDate, DateTimeFormatter.ISO_DATE)
+                date.text = "" + dateN.month.toString() + " " + dateN.dayOfMonth.toString()
 
             }
 

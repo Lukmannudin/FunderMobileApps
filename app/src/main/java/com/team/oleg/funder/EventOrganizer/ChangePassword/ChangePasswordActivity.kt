@@ -33,7 +33,6 @@ class ChangePasswordActivity : AppCompatActivity(), ChangePasswordContract.View 
                 newPassword != confirmPassword -> toast("new password and confirm password not match")
                 else -> {
                     user.eoPassword = newPassword
-                    Log.i("cek",user.eoPassword)
                     user.eoId?.let { it1 -> presenter.changePassword(it1,newPassword) }
                 }
             }

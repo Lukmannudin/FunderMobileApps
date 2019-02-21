@@ -34,7 +34,6 @@ class ChangePasswordPresenter(
                 },
                 { error ->
                     //                    FillFormView.showMessageError(error.localizedMessage)
-                    Log.i("cek", error.localizedMessage)
                 }
             )
     }

@@ -39,8 +39,6 @@ data class User(
 
     @SerializedName("bank_name")
     var bankName: String? = null,
-
-    @SerializedName("deal")
     var deal: List<Bidder>? = mutableListOf()
 ) : Parcelable
 

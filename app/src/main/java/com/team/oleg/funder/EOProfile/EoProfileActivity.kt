@@ -1,9 +1,12 @@
 package com.team.oleg.funder.EOProfile
 
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -14,7 +17,7 @@ import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.Utils
 import kotlinx.android.synthetic.main.activity_eo_profile.*
 
-class EoProfileActivity : AppCompatActivity(),EoProfileContract.View {
+class EoProfileActivity : AppCompatActivity(), EoProfileContract.View {
 
 
 
@@ -29,12 +32,25 @@ class EoProfileActivity : AppCompatActivity(),EoProfileContract.View {
         val storage = FirebaseStorage.getInstance()
         val storageRef: StorageReference? = storage.reference
 
+        val userView = intent.getStringExtra(Utils.USER_TYPE)
+
+        if (userView.equals(Utils.SENDER_EO)){
+            backgroundCompanyProfile.visibility = View.GONE
+            notificationCompanyImage.visibility = View.GONE
+            tvCompanyName.visibility = View.GONE
+            eo_points.visibility = View.GONE
+            tvCompanyVision.visibility = View.GONE
+            eoVission.visibility = View.GONE
+            tvCompanyMission.visibility = View.GONE
+            tvCompanyMissionValue.visibility = View.GONE
+            val parameter = (ConstraintLayout.LayoutParams(tvCompanySponsorhsip.layoutParams))
+        }
 
         val data = intent.getParcelableExtra<User>(Utils.INTENT_PARCELABLE)
         trackRecordEO.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
         presenter = EoProfilePresenter(this)
         if (data != null){
-            listAdapter = EoProfileAdapter(this, data.deal,itemListener)
+            listAdapter = EoProfileAdapter(this, data.deal, itemListener)
             trackRecordEO.adapter = listAdapter
             storageRef?.child("userProfileImage/${data.eoPhoto}")
                 ?.downloadUrl?.addOnSuccessListener {
@@ -74,7 +90,7 @@ class EoProfileActivity : AppCompatActivity(),EoProfileContract.View {
     override fun showData(user: User) {
         val storage = FirebaseStorage.getInstance()
         val storageRef: StorageReference? = storage.reference
-        listAdapter = EoProfileAdapter(this, user.deal,itemListener)
+        listAdapter = EoProfileAdapter(this, user.deal, itemListener)
         trackRecordEO.adapter = listAdapter
         storageRef?.child("userProfileImage/${user.eoPhoto}")
             ?.downloadUrl?.addOnSuccessListener {

@@ -58,7 +58,6 @@ class RequestDetailActivity : AppCompatActivity(), RequestDetailContract.View {
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
 
         totalFundEO.text = numberFormat.format(event.eventDana?.toDouble())
-        Log.i("cek",event.eventMp)
         dlIconProposal.setOnClickListener {
             val storage = FirebaseStorage.getInstance()
             val storageRef: StorageReference? = storage.reference

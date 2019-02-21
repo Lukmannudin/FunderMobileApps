@@ -73,7 +73,11 @@ class ChatMessageEOAdapter(
         private val tvMessage = view.tv_item_chat_message_receive
 
         fun bindItem(context: Context?, items: Message) {
-            tvMessage.text = items.message
+            if (!items.message.equals("null")) {
+                tvMessage.text = items.message
+            } else {
+                tvMessage.visibility = View.GONE
+            }
         }
     }
 

@@ -23,7 +23,7 @@
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-                android:name=".EOProfile.EoProfileActivity"
+                android:name="com.team.oleg.funder.EOProfile.EoProfileActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -80,7 +80,6 @@
                 android:name=".company.chatMessageCompany.ChatMessageCompanyActivity"
                 android:parentActivityName=".company.CompanyActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".Session"/>
     </application>
 
 </manifest>

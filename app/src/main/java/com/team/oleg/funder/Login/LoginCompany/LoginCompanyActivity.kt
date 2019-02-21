@@ -119,4 +119,8 @@ class LoginCompanyActivity : AppCompatActivity(), LoginCompanyContract.View {
             BitmapFactory.decodeResource(res, resId, this)
         }
     }
+
+    override fun onBackPressed() {
+        this.finishAffinity()
+    }
 }

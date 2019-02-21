@@ -107,15 +107,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/signUpButton"
             android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"/>
-    <TextView
+    <Button
             android:text="@string/login"
-            android:background="@drawable/rounded_white"
+            android:background="@drawable/button_background_white"
             android:textColor="@color/colorPrimary"
             android:layout_width="180dp"
             android:textSize="20sp"
-            android:layout_height="34dp"
+            android:layout_height="40dp"
             android:textStyle="bold"
             android:gravity="center"
+            android:clickable="true"
             android:id="@+id/loginButtonCompany" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>

@@ -2,4 +2,7 @@
 <resources>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="list_box">150dp</dimen>
+    <dimen name="linear_funder_margin_horizontal">6dp</dimen>
+    <dimen name="linear_funder_padding_horizontal">15dp</dimen>
+
 </resources>

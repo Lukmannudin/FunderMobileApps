@@ -136,7 +136,6 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 //                presenter.sendChat(message)
             }
             .addOnFailureListener { e ->
-                //                Log.i("cek Error", e.message)
             }
     }
 

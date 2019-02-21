@@ -132,4 +132,8 @@ class LoginEOActivity : AppCompatActivity(), LoginEOContract.View {
     override fun showIsFailed(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onBackPressed() {
+        this.finishAffinity()
+    }
 }

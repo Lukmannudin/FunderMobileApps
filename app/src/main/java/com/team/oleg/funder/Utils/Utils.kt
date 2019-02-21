@@ -18,4 +18,5 @@ object Utils {
     const val MESSAGE_EVENT_ACCEPTED = "Congratulations now you has relationship"
     const val MESSAGE_EVENT_REJECTED = "You rejected that event"
 
+    const val USER_TYPE = "user_type"
 }

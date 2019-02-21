@@ -16,8 +16,8 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.EventOrganizer.ChangePassword.ChangePasswordActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity
@@ -112,6 +112,9 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         val storage = FirebaseStorage.getInstance()
         val storageRef: StorageReference? = storage.reference
 
+        if (user.accountName != null){
+                    Log.i("cek",user.accountName)
+        }
         accountNameEO.setText(user.accountName)
         bankNameEO.setText(user.bankName)
         accountNumberEO.setText(user.accountRek)
@@ -123,7 +126,7 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         userData.eoName = user.eoName
         userData.eoPoint = user.eoPoint
         userData.eoPhoto = user.eoPhoto
-        userData.deal = user.deal
+//        userData.deal = user.deal
 
         storageRef?.child("userProfileImage/${user.eoPhoto}")?.downloadUrl?.addOnSuccessListener {
             Glide.with(this).load(it).into(EOImage)
@@ -139,9 +142,12 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
         }
 
         tvEOTrackRecordLink.setOnClickListener {
+            Log.i("fase","setOnClickListener")
+
             startActivity(
                 intentFor<EoProfileActivity>(
-                    Utils.INTENT_PARCELABLE to user
+                    Utils.INTENT_PARCELABLE to user,
+                    Utils.USER_TYPE to Utils.SENDER_EO
                 )
             )
         }
@@ -176,7 +182,6 @@ class EventOrganizerProfileActivity : AppCompatActivity(), EventOrganizerContrac
 
         desertRef?.delete()?.addOnSuccessListener {
             if (filePath != null) {
-                Log.i("cek", filePath.toString())
                 val progressDialog = ProgressDialog(this)
                 progressDialog.setTitle("Updating...")
                 progressDialog.show()
