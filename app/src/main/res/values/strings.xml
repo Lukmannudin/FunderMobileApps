@@ -34,5 +34,6 @@
     <string name="retype_password">
         <i>retype password</i>
     </string>
+    <string name="msg_token_fmt">message token fmt</string>
 
 </resources>

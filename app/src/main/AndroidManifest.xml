@@ -80,6 +80,11 @@
                 android:name=".company.chatMessageCompany.ChatMessageCompanyActivity"
                 android:parentActivityName=".company.CompanyActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <service android:name=".Service.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
