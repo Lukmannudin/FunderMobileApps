@@ -2,7 +2,7 @@ package com.team.oleg.funder.company.Request
 
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,7 @@ class RequestAdapter(
     private val context: Context?,
     private val items: List<Bidder>,
     private val listener: RequestFragment.BidderItemListener
-) : RecyclerView.Adapter<RequestAdapter.BidderViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<RequestAdapter.BidderViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BidderViewHolder {
         return BidderViewHolder(
@@ -36,7 +36,7 @@ class RequestAdapter(
         holder.bindItem(context, items[position], listener)
     }
 
-    class BidderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class BidderViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val companyImage = view.ivChatList
         private val titleChat = view.tvTitleChatList
         private val eventName = view.tvChatEventName

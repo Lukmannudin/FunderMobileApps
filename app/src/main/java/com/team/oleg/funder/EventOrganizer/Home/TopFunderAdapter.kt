@@ -1,7 +1,7 @@
 package com.team.oleg.funder.EventOrganizer.Home
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ class TopFunderAdapter(
     private val items: List<Sponsor>,
     private val listener: HomeFragment.SponsorItemListener
 ) :
-    RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<TopFunderAdapter.TopFunderViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderViewHolder {
         return TopFunderViewHolder(
             LayoutInflater.from(context).inflate(R.layout.top_funder_list, parent, false)
@@ -30,7 +30,7 @@ class TopFunderAdapter(
         holder.bindItem(context,items[position], listener)
     }
 
-    class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TopFunderViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val sponsorImage = view.ivSponsorImage
         private val sponsorTitle = view.tvSponsorTitle
         private val sponsorCompany = view.tvSponsorCompany

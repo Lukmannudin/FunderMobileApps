@@ -2,9 +2,9 @@ package com.team.oleg.funder.Main
 
 import MainHomeAdapter
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.team.oleg.funder.EventOrganizer.Chat.MainChatFragment
 import com.team.oleg.funder.EventOrganizer.DealHistory.MainDealHistoryFragment
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        viewpager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
             }
 
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setupViewPager(viewPager: ViewPager) {
+    private fun setupViewPager(viewPager: androidx.viewpager.widget.ViewPager) {
         val adapter = MainHomeAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment.newInstance())
         adapter.addFragment(MainChatFragment.newInstance())

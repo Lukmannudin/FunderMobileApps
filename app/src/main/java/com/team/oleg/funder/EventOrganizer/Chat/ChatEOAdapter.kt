@@ -1,7 +1,7 @@
 package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +16,7 @@ class ChatEOAdapter(
     private val context: Context?,
     private val items: List<Chat>,
     private val listener: MainChatFragment.chatItemListener
-) : RecyclerView.Adapter<ChatEOAdapter.ChatViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<ChatEOAdapter.ChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(
@@ -32,7 +32,7 @@ class ChatEOAdapter(
             holder.bindItem(context, items[position], listener)
     }
 
-    class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ChatViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val companyImage = view.ivChatList
         private val titleChat = view.tvTitleChatList
         private val eventName = view.tvChatEventName

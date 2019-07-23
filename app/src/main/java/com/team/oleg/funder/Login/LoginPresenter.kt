@@ -1,7 +1,7 @@
 package com.team.oleg.funder.Login
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.team.oleg.funder.company.CompanyActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity

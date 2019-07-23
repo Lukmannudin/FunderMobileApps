@@ -3,9 +3,9 @@ package com.team.oleg.funder.company.Request
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.SearchView
 import android.view.*
 import com.team.oleg.funder.Data.Bidder
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
@@ -31,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class RequestFragment : Fragment(), RequestContract.View {
+class RequestFragment : androidx.fragment.app.Fragment(), RequestContract.View {
 
     override lateinit var presenter: RequestContract.Presenter
     private val bidderList : MutableList<Bidder> = mutableListOf()
@@ -85,7 +85,11 @@ class RequestFragment : Fragment(), RequestContract.View {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_request, container, false)
-        view.rvBidder.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.rvBidder.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         view.bidderSwipeRefresh.setOnRefreshListener {
             presenter.loadBidder(false)
         }

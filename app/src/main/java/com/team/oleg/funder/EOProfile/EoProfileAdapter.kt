@@ -2,7 +2,7 @@ package com.team.oleg.funder.EOProfile
 
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +19,7 @@ class EoProfileAdapter(
     private val items: List<Bidder>?,
     private val listener: EoProfileActivity.BidderItemListener
 ) :
-    RecyclerView.Adapter<EoProfileAdapter.TopFunderViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<EoProfileAdapter.TopFunderViewHolder>() {
     var yearCurrent = ""
     var yearSame = false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFunderViewHolder {
@@ -45,7 +45,7 @@ class EoProfileAdapter(
         holder.bindItem(context, items[position], yearSame, listener)
     }
 
-    class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TopFunderViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         var yearCurrent = ""
         private val year = view.yearTrackRecord
         private val date = view.dateTrackRecord

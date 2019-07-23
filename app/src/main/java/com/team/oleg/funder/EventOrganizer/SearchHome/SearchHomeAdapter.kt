@@ -1,7 +1,7 @@
 package com.team.oleg.funder.EventOrganizer.SearchHome
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +18,7 @@ class SearchHomeAdapter(
     private val sponsor: List<Sponsor>,
     private val listener: SearchHomeActivity.SponsorClickListener
 ) :
-    RecyclerView.Adapter<SearchHomeAdapter.SearchViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<SearchHomeAdapter.SearchViewHolder>() {
 
     override fun getItemCount(): Int {
         return sponsor.size
@@ -36,7 +36,7 @@ class SearchHomeAdapter(
     }
 
 
-    class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class SearchViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val sponsorImage = view.ivAuctionList
         private val sponsorTitle = view.tvTitleAuctionList
         private val sponsorDescription = view.tvContentAuctionList

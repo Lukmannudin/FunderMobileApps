@@ -1,7 +1,7 @@
 package com.team.oleg.funder.company.chat
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ class ChatCompanyAdapter(
     private val context: Context?,
     private val items: List<Chat>,
     private val listener: ChatFragment.ChatItemListener
-) : RecyclerView.Adapter<ChatCompanyAdapter.ChatViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<ChatCompanyAdapter.ChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(
@@ -34,7 +34,7 @@ class ChatCompanyAdapter(
 
     }
 
-    class ChatViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ChatViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val companyImage = view.ivChatList
         private val titleChat = view.tvTitleChatList
         private val eventName = view.tvChatEventName

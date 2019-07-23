@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_item_chat_message_receive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

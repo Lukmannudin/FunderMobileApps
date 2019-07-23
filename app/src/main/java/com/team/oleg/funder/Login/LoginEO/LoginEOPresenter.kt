@@ -45,9 +45,9 @@ class LoginEOPresenter(
             .subscribe(
                 { result ->
                     processUser(result.data[0])
-
                 },
                 { error ->
+                    error.printStackTrace()
                     loginEOView.showIsFailed("Username or password wrong")
                 }
             )

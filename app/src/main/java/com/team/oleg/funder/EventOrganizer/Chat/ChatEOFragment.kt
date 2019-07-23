@@ -4,9 +4,9 @@ import android.app.ActionBar
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +29,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class MainChatFragment : Fragment(), ChatEOContract.View {
+class MainChatFragment : androidx.fragment.app.Fragment(), ChatEOContract.View {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -86,7 +86,11 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true);
         val view =  inflater.inflate(R.layout.fragment_main_chat, container, false)
-        view.rvMainChat.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        view.rvMainChat.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         view.chatSwipeRefresh.setOnRefreshListener {
             presenter.loadChat(false)
         }
@@ -143,11 +147,11 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
     }
 
     private fun setupSearchView() {
-        val searchIconImage = actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_button)
+        val searchIconImage = actionSearch.findViewById<ImageView>(androidx.appcompat.R.id.search_button)
         searchIconImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.icon_search) })
         tbTitle.text = getString(R.string.title_chat)
         val searchIconCloseImage =
-            actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
+            actionSearch.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
         searchIconCloseImage.setImageDrawable(context?.let {
             ContextCompat.getDrawable(
                 it,
@@ -159,7 +163,7 @@ class MainChatFragment : Fragment(), ChatEOContract.View {
             actionSearch.layoutParams.width = ActionBar.LayoutParams.MATCH_PARENT
         }
 
-        val searchIconEditText = actionSearch.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+        val searchIconEditText = actionSearch.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchIconEditText.setTextColor(resources.getColor(R.color.white))
 
         actionSearch.setOnCloseListener {

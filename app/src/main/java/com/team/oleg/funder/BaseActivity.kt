@@ -1,8 +1,8 @@
 package com.team.oleg.funder
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 
 open class BaseActivity : AppCompatActivity() {
@@ -11,14 +11,14 @@ open class BaseActivity : AppCompatActivity() {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    protected fun openFragment(viewId:Int,fragment: Fragment) {
+    protected fun openFragment(viewId:Int,fragment: androidx.fragment.app.Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(viewId, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }
 
-    protected fun removeFragment(fragment: Fragment){
+    protected fun removeFragment(fragment: androidx.fragment.app.Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(fragment).commit()
     }

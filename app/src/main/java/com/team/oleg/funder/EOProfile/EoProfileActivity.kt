@@ -1,9 +1,9 @@
 package com.team.oleg.funder.EOProfile
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,11 @@ class EoProfileActivity : AppCompatActivity(), EoProfileContract.View {
         }
 
         val data = intent.getParcelableExtra<User>(Utils.INTENT_PARCELABLE)
-        trackRecordEO.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        trackRecordEO.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            this,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         presenter = EoProfilePresenter(this)
         if (data != null){
             listAdapter = EoProfileAdapter(this, data.deal, itemListener)

@@ -6,7 +6,7 @@
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:background="@color/colorWhiteBackground"
         tools:context=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
             android:layout_alignParentTop="true"
             android:id="@+id/chat_message_toolbar"
             android:layout_width="match_parent"
@@ -46,14 +46,14 @@
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
-    <android.support.v7.widget.RecyclerView
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout2"
             android:layout_below="@+id/chat_message_toolbar">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

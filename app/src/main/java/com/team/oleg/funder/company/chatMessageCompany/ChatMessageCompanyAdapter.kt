@@ -1,7 +1,7 @@
 package com.team.oleg.funder.company.chatMessageCompany
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ class ChatMessageCompanyAdapter(
     private val context: Context,
     private val items: MutableList<Message>
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     private val MESSAGE_SENDER = Utils.SENDER_COMPANY
 
@@ -37,7 +37,7 @@ class ChatMessageCompanyAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
             SENDER_VIEW_TYPE -> {
@@ -56,7 +56,7 @@ class ChatMessageCompanyAdapter(
     }
 
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is MessageSenderViewHolder -> {
                 holder.bindItem(context, items[position])
@@ -77,7 +77,7 @@ class ChatMessageCompanyAdapter(
         notifyDataSetChanged()
     }
 
-    class MessageReceiverViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MessageReceiverViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val tvMessage = view.tv_item_chat_message_receive
 
         fun bindItem(context: Context?, items: Message) {
@@ -90,7 +90,7 @@ class ChatMessageCompanyAdapter(
     }
 
 
-    class MessageSenderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MessageSenderViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val tvMessage = view.tv_item_chat_message_sent
         private val statusMessage = view.tv_item_chat_message_read
 

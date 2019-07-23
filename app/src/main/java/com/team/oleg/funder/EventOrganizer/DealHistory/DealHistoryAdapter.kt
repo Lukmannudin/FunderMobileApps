@@ -2,7 +2,7 @@ package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ class DealHistoryAdapter(
     private val context: Context?,
     private val items: List<DealHistory>,
     private val listener: MainDealHistoryFragment.DealHistoryItemListener
-) : RecyclerView.Adapter<DealHistoryAdapter.DealHistoryViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<DealHistoryAdapter.DealHistoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealHistoryViewHolder {
         return DealHistoryViewHolder(
@@ -32,7 +32,7 @@ class DealHistoryAdapter(
         holder.bindItem(context, items[position], listener)
     }
 
-    class DealHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class DealHistoryViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val sponsorImage = view.ivDealHistorySponsor
         private val bidStatus = view.tvBidStatus
         private val bidName = view.tvBidName

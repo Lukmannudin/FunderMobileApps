@@ -6,7 +6,7 @@
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         tools:context="com.team.oleg.funder.company.CompanyActivity">
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
             android:id="@+id/tbCompanyMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -14,12 +14,12 @@
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="#b2bec3"
     >
-    </android.support.design.widget.TabLayout>
-    <android.support.v4.view.ViewPager
+    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager.widget.ViewPager
             android:id="@+id/vpCompanyMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
     <FrameLayout
             android:id="@+id/frameMainCompany"
             android:layout_width="match_parent"

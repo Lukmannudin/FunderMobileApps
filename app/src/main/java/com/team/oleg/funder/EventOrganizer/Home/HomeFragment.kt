@@ -3,8 +3,8 @@ package com.team.oleg.funder.EventOrganizer.Home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +26,7 @@ import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
 
-class HomeFragment : Fragment(), HomeContract.View {
+class HomeFragment : androidx.fragment.app.Fragment(), HomeContract.View {
 
     override lateinit var presenter: HomeContract.Presenter
 
@@ -92,7 +92,11 @@ class HomeFragment : Fragment(), HomeContract.View {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_main_home, container, false)
-        view.rvAuction.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.rvAuction.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         view.tbUnreadChat.setOnClickListener {
             startActivity(
                 intentFor<MainActivity>(

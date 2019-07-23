@@ -2,9 +2,9 @@ package com.team.oleg.funder.company.chat
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.SearchView
 import android.view.*
 import com.team.oleg.funder.Data.Chat
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import org.jetbrains.anko.support.v4.intentFor
 
-class ChatFragment : Fragment(), ChatCompanyContract.View {
+class ChatFragment : androidx.fragment.app.Fragment(), ChatCompanyContract.View {
 
 
     override lateinit var presenter: ChatCompanyContract.Presenter
@@ -64,7 +64,11 @@ class ChatFragment : Fragment(), ChatCompanyContract.View {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
-        view.rvChatCompany.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.rvChatCompany.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         view.chatCompanySwipeRefresh.setOnRefreshListener {
             presenter.loadChat(false)
         }

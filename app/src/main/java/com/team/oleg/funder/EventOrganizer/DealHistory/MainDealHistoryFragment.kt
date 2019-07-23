@@ -3,14 +3,15 @@ package com.team.oleg.funder.EventOrganizer.DealHistory
 import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.team.oleg.funder.Data.DealHistory
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Utils.SharedPreferenceUtils
@@ -25,7 +26,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
+class MainDealHistoryFragment : androidx.fragment.app.Fragment(), DealHistoryContract.View {
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -84,7 +85,11 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_deal_history, container, false)
-        view.rvDealHistory.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.rvDealHistory.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            RecyclerView.VERTICAL,
+            false
+        )
         view.dealHistorySwipeRefresh.setOnRefreshListener {
             presenter.loadDealHistory(false)
         }
@@ -129,11 +134,11 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
     }
 
     private fun setupSearchView() {
-        val searchIconImage = actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_button)
+        val searchIconImage = actionSearch.findViewById<ImageView>(androidx.appcompat.R.id.search_button)
         searchIconImage.setImageDrawable(context?.let { ContextCompat.getDrawable(it, R.drawable.icon_search) })
 
         val searchIconCloseImage =
-            actionSearch.findViewById<ImageView>(android.support.v7.appcompat.R.id.search_close_btn)
+            actionSearch.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
         searchIconCloseImage.setImageDrawable(context?.let {
             ContextCompat.getDrawable(
                 it,
@@ -145,7 +150,7 @@ class MainDealHistoryFragment : Fragment(), DealHistoryContract.View {
             actionSearch.layoutParams.width = ActionBar.LayoutParams.MATCH_PARENT
         }
 
-        val searchIconEditText = actionSearch.findViewById<EditText>(android.support.v7.appcompat.R.id.search_src_text)
+        val searchIconEditText = actionSearch.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
         searchIconEditText.setTextColor(resources.getColor(R.color.white))
 
         actionSearch.setOnCloseListener {

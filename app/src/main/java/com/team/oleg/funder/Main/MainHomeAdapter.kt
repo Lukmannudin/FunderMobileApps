@@ -1,12 +1,12 @@
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-class MainHomeAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
-    private var mFragmentList : MutableList<Fragment> = mutableListOf()
+class MainHomeAdapter(manager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(manager) {
+    private var mFragmentList : MutableList<androidx.fragment.app.Fragment> = mutableListOf()
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         return mFragmentList.get(position)
     }
 
@@ -15,7 +15,7 @@ class MainHomeAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) 
     }
 
 
-    fun addFragment(fragment: Fragment) {
+    fun addFragment(fragment: androidx.fragment.app.Fragment) {
         mFragmentList.add(fragment)
     }
 

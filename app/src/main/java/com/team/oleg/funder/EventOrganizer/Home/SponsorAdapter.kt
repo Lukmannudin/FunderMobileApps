@@ -1,8 +1,8 @@
 package com.team.oleg.funder.EventOrganizer.Home
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ class SponsorAdapter(
     private val sponsor: List<Sponsor>,
     private val listener: HomeFragment.SponsorItemListener
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     private val TOP_FUNDER_VIEW_TYPE = 0
     private val AUCTION_VIEW_TYPE = 1
@@ -37,7 +37,7 @@ class SponsorAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
             AUCTION_VIEW_TYPE -> {
@@ -55,7 +55,7 @@ class SponsorAdapter(
         throw RuntimeException("View Type not defined")
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is TopFunderViewHolder -> {
                 holder.bindItem(context, items, listener)
@@ -70,11 +70,15 @@ class SponsorAdapter(
         return sponsor.size + 1
     }
 
-    class TopFunderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class TopFunderViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val TopFunderRecyclerView = view.rvTopFunder
 
         fun bindItem(context: Context?, items: List<Sponsor>, listener: HomeFragment.SponsorItemListener) {
-            TopFunderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            TopFunderRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+                context,
+                androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                false
+            )
             TopFunderRecyclerView.adapter =
                     TopFunderAdapter(context, items, listener)
 
@@ -82,7 +86,7 @@ class SponsorAdapter(
     }
 
 
-    class AuctionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class AuctionViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val sponsorImage = view.ivAuctionList
         private val sponsorTitle = view.tvTitleAuctionList
         private val sponsorDescription = view.tvContentAuctionList

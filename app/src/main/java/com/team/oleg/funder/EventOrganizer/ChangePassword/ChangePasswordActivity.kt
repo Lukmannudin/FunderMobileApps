@@ -1,7 +1,7 @@
 package com.team.oleg.funder.EventOrganizer.ChangePassword
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.team.oleg.funder.Data.User
 import com.team.oleg.funder.Login.LoginPresenter

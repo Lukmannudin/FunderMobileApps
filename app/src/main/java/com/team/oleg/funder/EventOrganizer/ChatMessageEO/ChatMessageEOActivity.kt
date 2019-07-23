@@ -7,8 +7,8 @@ import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -57,7 +57,11 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
 
         listAdapter = ChatMessageEOAdapter(this, messageList)
         presenter = ChatMessageEOPresenter(this, chatId, this)
-        rvMessage.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvMessage.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            this,
+            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            false
+        )
         presenter.loadChat(false)
 
         rvMessage.adapter = listAdapter
