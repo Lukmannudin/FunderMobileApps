@@ -3,18 +3,17 @@ package com.team.oleg.funder.EOProfile
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Data.Bidder
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.Bidder
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.data.User
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_eo_profile.*
 
 class EoProfileActivity : AppCompatActivity(), EoProfileContract.View {
@@ -49,7 +48,7 @@ class EoProfileActivity : AppCompatActivity(), EoProfileContract.View {
         val data = intent.getParcelableExtra<User>(Utils.INTENT_PARCELABLE)
         trackRecordEO.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
             this,
-            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            RecyclerView.VERTICAL,
             false
         )
         presenter = EoProfilePresenter(this)

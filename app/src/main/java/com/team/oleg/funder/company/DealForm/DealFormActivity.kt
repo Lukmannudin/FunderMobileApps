@@ -7,10 +7,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import com.team.oleg.funder.company.CompanyActivity
-import com.team.oleg.funder.Data.Bank
-import com.team.oleg.funder.Data.Event
+import com.team.oleg.funder.data.Bank
+import com.team.oleg.funder.data.Event
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_deal_form.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor

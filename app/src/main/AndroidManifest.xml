@@ -34,7 +34,7 @@
         <activity android:name=".company.RequestDetail.RequestDetailActivity">
         </activity>
         <activity
-                android:name=".Login.LoginPresenter"
+                android:name=".nlogin.LoginActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -42,6 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!--<activity android:name=".nlogin.LoginActivity"/>-->
+        <activity android:name=".Login.LoginPresenter"/>
+
         <activity android:name=".Login.LoginEO.LoginEOActivity"/>
         <activity
                 android:name=".Main.MainActivity"
@@ -60,28 +63,25 @@
         </activity>
         <activity
                 android:name=".EventOrganizer.Profile.EventOrganizerProfileActivity"
-                android:theme="@style/Theme.MyEOProfile">
-        </activity>
+                android:theme="@style/Theme.MyEOProfile"/>
         <activity
                 android:name=".Login.LoginCompany.LoginCompanyActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".Login.SignUp.SignUpActivity"
-                android:parentActivityName=".Login.LoginEO.LoginEOActivity">
-        </activity>
-        <activity android:name=".company.CompanyActivity">
-        </activity>
+                android:parentActivityName=".Login.LoginEO.LoginEOActivity"/>
+        <activity android:name=".company.CompanyActivity"/>
         <activity
                 android:name=".EventOrganizer.ChatMessageEO.ChatMessageEOActivity"
                 android:parentActivityName=".Main.MainActivity"
-                android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
+                android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
                 android:name=".company.chatMessageCompany.ChatMessageCompanyActivity"
                 android:parentActivityName=".company.CompanyActivity"
                 android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <service android:name=".Service.MessagingService">
+
+        <service android:name=".service.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

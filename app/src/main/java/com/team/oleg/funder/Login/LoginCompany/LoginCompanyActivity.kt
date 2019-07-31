@@ -9,11 +9,10 @@ import android.view.View
 import android.widget.Toast
 import com.team.oleg.funder.company.CompanyActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
-import com.team.oleg.funder.Data.Company
+import com.team.oleg.funder.data.Company
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_company.*
-import kotlinx.android.synthetic.main.activity_login_eo.*
 import org.jetbrains.anko.intentFor
 
 class LoginCompanyActivity : AppCompatActivity(), LoginCompanyContract.View {

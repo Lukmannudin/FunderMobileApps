@@ -1,9 +1,9 @@
 package com.team.oleg.funder.company.DealForm
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.UtilsService
-import com.team.oleg.funder.Data.Bank
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.UtilsService
+import com.team.oleg.funder.data.Bank
+import com.team.oleg.funder.service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

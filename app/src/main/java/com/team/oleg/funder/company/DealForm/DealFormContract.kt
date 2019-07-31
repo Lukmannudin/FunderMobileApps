@@ -2,8 +2,8 @@ package com.team.oleg.funder.company.DealForm
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.Bank
-import com.team.oleg.funder.Data.Event
+import com.team.oleg.funder.data.Bank
+import com.team.oleg.funder.data.Event
 
 interface DealFormContract {
     interface View: BaseView<Presenter>{

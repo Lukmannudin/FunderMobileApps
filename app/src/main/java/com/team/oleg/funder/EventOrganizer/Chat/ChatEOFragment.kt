@@ -2,22 +2,18 @@ package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.app.ActionBar
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import com.team.oleg.funder.EventOrganizer.ChatMessageEO.ChatMessageEOActivity
-import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.data.Chat
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.fragment_main_chat.*
 import kotlinx.android.synthetic.main.fragment_main_chat.view.*
 import kotlinx.android.synthetic.main.toolbar.*

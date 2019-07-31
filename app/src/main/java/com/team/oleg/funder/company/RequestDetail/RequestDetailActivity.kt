@@ -9,9 +9,9 @@ import android.widget.Toast
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.company.CompanyActivity
-import com.team.oleg.funder.Data.Event
+import com.team.oleg.funder.data.Event
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_request_detail.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 import org.jetbrains.anko.intentFor

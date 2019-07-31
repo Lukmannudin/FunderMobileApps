@@ -1,52 +1,45 @@
 {
   "project_info": {
-    "project_number": "1048191670407",
-    "firebase_url": "https://funderchat-61a17.firebaseio.com",
-    "project_id": "funderchat-61a17",
-    "storage_bucket": "funderchat-61a17.appspot.com"
+    "project_number": "943608469192",
+    "firebase_url": "https://funderapp-6e6b7.firebaseio.com",
+    "project_id": "funderapp-6e6b7",
+    "storage_bucket": "funderapp-6e6b7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1048191670407:android:b3704bb812e01db6",
+        "mobilesdk_app_id": "1:943608469192:android:b3704bb812e01db6",
         "android_client_info": {
           "package_name": "com.team.oleg.funder"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1048191670407-cev2j4fi7r7lg5i7c71fkvkn1h60rb7i.apps.googleusercontent.com",
+          "client_id": "943608469192-ck7958i5h9g666sjmib8sob3p2r2hhi2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.team.oleg.funder",
-            "certificate_hash": "ec1fb6422be5a1e09e9b9d7621c7be0c661c11a5"
+            "certificate_hash": "a26d3d3919ce17884527cbd28c843bbf78dd10d7"
           }
         },
         {
-          "client_id": "1048191670407-2v4duv8koptjkatb17395ja6rlthmfk7.apps.googleusercontent.com",
+          "client_id": "943608469192-sj79oubc3b4dlj4qbho0btaimjq5443p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2ULUi2WhQuQGwFJ6ZWpq_4ApEN7sPyTw"
+          "current_key": "AIzaSyDcnlDriU4tJ8SfUqxxEz6xK9jHxW3Y5Cs"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1048191670407-2v4duv8koptjkatb17395ja6rlthmfk7.apps.googleusercontent.com",
+              "client_id": "943608469192-sj79oubc3b4dlj4qbho0btaimjq5443p.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

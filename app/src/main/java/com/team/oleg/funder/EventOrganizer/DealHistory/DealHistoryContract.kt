@@ -2,7 +2,7 @@ package com.team.oleg.funder.EventOrganizer.DealHistory
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.DealHistory
+import com.team.oleg.funder.data.DealHistory
 
 interface DealHistoryContract {
     interface View: BaseView<Presenter>{

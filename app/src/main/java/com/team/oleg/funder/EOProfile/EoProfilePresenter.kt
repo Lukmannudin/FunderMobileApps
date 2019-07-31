@@ -1,10 +1,10 @@
 package com.team.oleg.funder.EOProfile
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.UserService
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Data.User
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.UserService
+import com.team.oleg.funder.data.Sponsor
+import com.team.oleg.funder.data.User
+import com.team.oleg.funder.service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

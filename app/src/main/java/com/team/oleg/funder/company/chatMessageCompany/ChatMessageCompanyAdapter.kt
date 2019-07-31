@@ -1,14 +1,12 @@
 package com.team.oleg.funder.company.chatMessageCompany
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.data.Message
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.chat_message_receive.view.*
 import kotlinx.android.synthetic.main.chat_message_sent.view.*
 

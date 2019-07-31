@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteConstraintException
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -16,12 +15,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.Data.Chat
-import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.data.Chat
+import com.team.oleg.funder.data.Message
 import com.team.oleg.funder.Database.database
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.ChatUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.ChatUtils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_chat_message_eo.*
 import org.jetbrains.anko.db.insert
 
@@ -44,6 +43,8 @@ class ChatMessageEOActivity : AppCompatActivity(), ChatMessageEOContract.View {
         val storageRef: StorageReference? = storage.reference
         val data = intent.getParcelableExtra<Chat>(Utils.INTENT_PARCELABLE)
         chatId = data.chatId
+
+
 
         chat_eo_name.text = data.companyName
         eo_chat_status.text = "status : ${data.bidderStatus}"

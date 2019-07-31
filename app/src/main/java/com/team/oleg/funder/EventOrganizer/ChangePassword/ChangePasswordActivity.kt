@@ -2,11 +2,11 @@ package com.team.oleg.funder.EventOrganizer.ChangePassword
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.Login.LoginPresenter
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.data.User
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_change_password.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast

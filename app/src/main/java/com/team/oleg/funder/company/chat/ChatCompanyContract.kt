@@ -2,7 +2,7 @@ package com.team.oleg.funder.company.chat
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.data.Chat
 
 interface ChatCompanyContract {
     interface View: BaseView<Presenter>{

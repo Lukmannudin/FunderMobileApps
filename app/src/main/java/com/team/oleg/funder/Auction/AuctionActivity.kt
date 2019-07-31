@@ -7,10 +7,10 @@ import com.bumptech.glide.Glide
 import com.team.oleg.funder.BuildConfig
 import com.team.oleg.funder.EventOrganizer.FillForm.FillFormActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.R
 import com.team.oleg.funder.Response.SponsorResponse
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_auction.*
 import kotlinx.android.synthetic.main.toolbar_detail.*
 import org.jetbrains.anko.intentFor

@@ -1,12 +1,11 @@
 package com.team.oleg.funder.EventOrganizer.Home
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.top_funder_list.view.*
 

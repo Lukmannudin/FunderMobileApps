@@ -1,13 +1,13 @@
 package com.team.oleg.funder.company.RequestDetail
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.EventService
-import com.team.oleg.funder.Data.Event
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.EventService
+import com.team.oleg.funder.data.Event
+import com.team.oleg.funder.service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 
 
 class RequestDetailPresenter(

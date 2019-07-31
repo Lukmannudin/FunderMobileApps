@@ -2,7 +2,8 @@ package com.team.oleg.funder.Login.LoginEO
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.Sponsor
+import com.team.oleg.funder.data.User
 
 interface LoginEOContract {
 

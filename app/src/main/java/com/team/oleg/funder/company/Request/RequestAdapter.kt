@@ -2,7 +2,6 @@ package com.team.oleg.funder.company.Request
 
 import android.content.Context
 import android.os.Build
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Data.Bidder
+import com.team.oleg.funder.data.Bidder
 import kotlinx.android.synthetic.main.chat_list.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

@@ -16,13 +16,14 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.EOProfile.EoProfileActivity
 import com.team.oleg.funder.EventOrganizer.ChangePassword.ChangePasswordActivity
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.data.User
+import com.team.oleg.funder.utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_event_organizer_profile.*
 import kotlinx.android.synthetic.main.toolbar_profile.*
 import org.jetbrains.anko.intentFor

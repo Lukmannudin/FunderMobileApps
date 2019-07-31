@@ -2,15 +2,14 @@ package com.team.oleg.funder.EventOrganizer.SearchHome
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import com.team.oleg.funder.Auction.AuctionActivity
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.Main.MainActivity
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.search_home.*
 import org.jetbrains.anko.intentFor
 

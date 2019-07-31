@@ -4,14 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.widget.SearchView
 import android.view.*
-import com.team.oleg.funder.Data.Bidder
+import androidx.recyclerview.widget.RecyclerView
+import com.team.oleg.funder.data.Bidder
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.Utils
 import com.team.oleg.funder.company.RequestDetail.RequestDetailActivity
 import kotlinx.android.synthetic.main.fragment_request.*
 import kotlinx.android.synthetic.main.fragment_request.view.*
@@ -87,7 +87,7 @@ class RequestFragment : androidx.fragment.app.Fragment(), RequestContract.View {
         val view =  inflater.inflate(R.layout.fragment_request, container, false)
         view.rvBidder.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
             context,
-            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            RecyclerView.VERTICAL,
             false
         )
         view.bidderSwipeRefresh.setOnRefreshListener {
@@ -112,7 +112,7 @@ class RequestFragment : androidx.fragment.app.Fragment(), RequestContract.View {
         listener = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.toolbar_company, menu)
         searchView = menu?.findItem(R.id.searchCompany)?.actionView as SearchView
@@ -147,7 +147,7 @@ class RequestFragment : androidx.fragment.app.Fragment(), RequestContract.View {
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId){
             R.id.logout -> {
                 logout()

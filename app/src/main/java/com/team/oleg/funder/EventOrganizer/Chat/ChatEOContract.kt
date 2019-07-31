@@ -2,7 +2,7 @@ package com.team.oleg.funder.EventOrganizer.Chat
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.data.Chat
 
 interface ChatEOContract {
     interface View: BaseView<Presenter>{

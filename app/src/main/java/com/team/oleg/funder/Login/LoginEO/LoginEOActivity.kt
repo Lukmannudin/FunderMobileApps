@@ -5,16 +5,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.team.oleg.funder.Login.LoginCompany.LoginCompanyActivity
 import com.team.oleg.funder.Login.SignUp.SignUpActivity
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.User
 import com.team.oleg.funder.Login.ForgotPasswordActivity
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
 import kotlinx.android.synthetic.main.activity_login_eo.*
 import org.jetbrains.anko.intentFor
 

@@ -1,8 +1,9 @@
 package com.team.oleg.funder.EventOrganizer.FillForm
 
-import com.team.oleg.funder.APIRequest.EventService
-import com.team.oleg.funder.Data.Event
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.EventService
+import com.team.oleg.funder.data.Event
+import com.team.oleg.funder.service.ApiService
+import com.team.oleg.funder.service.firebase.FirestoreService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +19,16 @@ class FillFormPresenter(
     }
 
     override fun addEvent(event: Event) {
+        val bid = HashMap<String,String?>()
+
+        bid["Event Name"] = event.eventName
+        bid["Artist"] = event.eventSpeaker
+        bid["date"] = event.eventDate
+        bid["media_partner"] = event.eventMp
+        bid["description"] = event.eventDesc
+        bid["demand_fund"] = event.eventDana
+
+        FirestoreService.onBiddingSponsor(bid)
         val service: EventService = ApiService.eventService
         disposable = service.setEvent(event)
             .observeOn(AndroidSchedulers.mainThread())
@@ -31,6 +42,7 @@ class FillFormPresenter(
                     }
                 },
                 { error ->
+                    error.printStackTrace()
                     FillFormView.showMessageError(error.localizedMessage)
 
                 }

@@ -1,10 +1,10 @@
 package com.team.oleg.funder.EventOrganizer.Home
 
 import android.util.Log
-import com.team.oleg.funder.APIRequest.ChatService
-import com.team.oleg.funder.APIRequest.SponsorService
-import com.team.oleg.funder.Data.Sponsor
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.ChatService
+import com.team.oleg.funder.apirequest.SponsorService
+import com.team.oleg.funder.data.Sponsor
+import com.team.oleg.funder.service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

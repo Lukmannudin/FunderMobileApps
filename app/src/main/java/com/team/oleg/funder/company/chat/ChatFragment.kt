@@ -2,15 +2,14 @@ package com.team.oleg.funder.company.chat
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.widget.SearchView
 import android.view.*
-import com.team.oleg.funder.Data.Chat
+import androidx.recyclerview.widget.RecyclerView
+import com.team.oleg.funder.data.Chat
 import com.team.oleg.funder.Login.LoginEO.LoginEOActivity
 import com.team.oleg.funder.R
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.Utils
 import com.team.oleg.funder.company.chatMessageCompany.ChatMessageCompanyActivity
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.view.*
@@ -66,7 +65,7 @@ class ChatFragment : androidx.fragment.app.Fragment(), ChatCompanyContract.View 
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
         view.rvChatCompany.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
             context,
-            androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+            RecyclerView.VERTICAL,
             false
         )
         view.chatCompanySwipeRefresh.setOnRefreshListener {
@@ -104,7 +103,7 @@ class ChatFragment : androidx.fragment.app.Fragment(), ChatCompanyContract.View 
     override fun showNoChat(active: Boolean) {
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.toolbar_company, menu)
         searchView = menu?.findItem(R.id.searchCompany)?.actionView as SearchView
@@ -148,7 +147,7 @@ class ChatFragment : androidx.fragment.app.Fragment(), ChatCompanyContract.View 
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId){
             R.id.logout -> {
                 logout()

@@ -1,14 +1,12 @@
 package com.team.oleg.funder.EventOrganizer.Chat
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.team.oleg.funder.BuildConfig
-import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.data.Chat
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
 

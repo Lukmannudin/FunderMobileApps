@@ -1,7 +1,6 @@
 package com.team.oleg.funder.company.chat
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Data.Chat
+import com.team.oleg.funder.data.Chat
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.chat_list.view.*
 

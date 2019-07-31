@@ -26,3 +26,14 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    minSdkVersion = 22
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+
+    // App dependencies
+    roomVersion = '2.0.0'
+    archLifecycleVersion = '2.0.0'
+    espressoVersion = '3.2.0'
+}

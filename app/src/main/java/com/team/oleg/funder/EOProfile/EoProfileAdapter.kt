@@ -2,12 +2,11 @@ package com.team.oleg.funder.EOProfile
 
 import android.content.Context
 import android.os.Build
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.team.oleg.funder.Data.Bidder
+import com.team.oleg.funder.data.Bidder
 import com.team.oleg.funder.R
 import kotlinx.android.synthetic.main.track_record_list.view.*
 import java.time.LocalDate

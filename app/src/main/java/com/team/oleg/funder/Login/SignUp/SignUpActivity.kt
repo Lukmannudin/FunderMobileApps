@@ -14,14 +14,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.team.oleg.funder.Data.User
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.Login.LoginPresenter
 import com.team.oleg.funder.R
+import com.team.oleg.funder.data.User
 import kotlinx.android.synthetic.main.activity_login_eo.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*

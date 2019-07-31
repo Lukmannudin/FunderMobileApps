@@ -2,7 +2,7 @@ package com.team.oleg.funder.Database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.team.oleg.funder.Utils.ChatUtils
+import com.team.oleg.funder.utils.ChatUtils
 import org.jetbrains.anko.db.*
 
 class FunderChatDatabaseHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "FunderChatDB", null, 1) {

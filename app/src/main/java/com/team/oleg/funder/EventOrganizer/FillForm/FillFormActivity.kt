@@ -15,14 +15,13 @@ import android.widget.Toast
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.team.oleg.funder.Auction.AuctionActivity
-import com.team.oleg.funder.Data.Event
-import com.team.oleg.funder.Data.Sponsor
+import com.team.oleg.funder.data.Event
+import com.team.oleg.funder.data.Sponsor
 import com.team.oleg.funder.Main.MainActivity
-import com.team.oleg.funder.Utils.SharedPreferenceUtils
-import com.team.oleg.funder.Utils.Utils
+import com.team.oleg.funder.utils.SharedPreferenceUtils
+import com.team.oleg.funder.utils.Utils
 import kotlinx.android.synthetic.main.activity_fill_form.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
-import org.jetbrains.anko.datePicker
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -53,6 +52,7 @@ class FillFormActivity : AppCompatActivity(), FillFormContract.View {
         USER_NAME = sharedPref.getString(SharedPreferenceUtils.USER_NAME, SharedPreferenceUtils.EMPTY)
 
         presenter = FillFormPresenter(this)
+
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)

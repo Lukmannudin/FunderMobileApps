@@ -2,7 +2,7 @@ package com.team.oleg.funder.company.RequestDetail
 
 import com.team.oleg.funder.BasePresenter
 import com.team.oleg.funder.BaseView
-import com.team.oleg.funder.Data.Event
+import com.team.oleg.funder.data.Event
 
 interface RequestDetailContract {
     interface View: BaseView<Presenter>{

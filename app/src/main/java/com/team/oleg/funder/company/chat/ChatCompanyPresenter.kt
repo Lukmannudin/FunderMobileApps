@@ -1,8 +1,8 @@
 package com.team.oleg.funder.company.chat
 
-import com.team.oleg.funder.APIRequest.ChatService
-import com.team.oleg.funder.Data.Chat
-import com.team.oleg.funder.Service.ApiService
+import com.team.oleg.funder.apirequest.ChatService
+import com.team.oleg.funder.data.Chat
+import com.team.oleg.funder.service.ApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

@@ -2,11 +2,11 @@ package com.team.oleg.funder.EventOrganizer.ChatMessageEO
 
 import android.content.Context
 import android.util.Log
-import com.team.oleg.funder.APIRequest.ChatService
-import com.team.oleg.funder.Data.Message
+import com.team.oleg.funder.apirequest.ChatService
+import com.team.oleg.funder.data.Message
 import com.team.oleg.funder.Database.database
-import com.team.oleg.funder.Service.ApiService
-import com.team.oleg.funder.Utils.ChatUtils
+import com.team.oleg.funder.service.ApiService
+import com.team.oleg.funder.utils.ChatUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

@@ -240,14 +240,14 @@
                     android:layout_height="wrap_content">
 
 
-                <TextView
-                        android:id="@+id/fileChooserFillForm"
-                        android:layout_below="@id/btnUploadProposal"
-                        android:layout_toEndOf="@id/dlIconPdf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="50dp"
-                />
+                <!--<TextView-->
+                        <!--android:id="@+id/fileChooserFillForm"-->
+                        <!--android:layout_below="@id/btnUploadProposal"-->
+                        <!--android:layout_toEndOf="@id/dlIconPdf"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginStart="50dp"-->
+                <!--/>-->
             </RelativeLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
