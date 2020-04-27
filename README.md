@@ -21,14 +21,16 @@ To be able to build this application all you have to do is:
   
 This application uses 2 data storage namely server funder and firebase. But if the server dies then to be able to log in
 is open the LoginPresenter.kt file then in the following code:
-if (USER_TYPE != SharedPreferenceUtils.EMPTY) {<br>
-            ....<br>
-        }<br>
-Rubah menjadi <br>
-        if (USER_TYPE == SharedPreferenceUtils.EMPTY) {<br>
-            ....<br>
-        }<br><br>
+<pre>
+if (USER_TYPE != SharedPreferenceUtils.EMPTY) {
+            ....
+        }
+Rubah menjadi 
+        if (USER_TYPE == SharedPreferenceUtils.EMPTY) {
+            ....
+        }
 
+</pre>
 <b><i>Bahasa</i></i></b><br>
 
 Aplikasi Funder adalah 
