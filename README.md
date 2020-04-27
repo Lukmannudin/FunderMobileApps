@@ -1,9 +1,8 @@
 # FunderMobileApps
 <b><i>English</i></b><br>
-Funder application is
-application that connects event organizers with funding by auctioning sponsorship with bidder proposals
+Funder App is an application that connects event organizers with sponosr by auctioning sponsorship with bidder proposals
 
-Funder has a bidding auction, chat, trackrecord feature
+Funder has a bidding auction, chat, and trackrecord feature
 
 This application uses Firebase Firestore, Firebase Cloud Messaging, and Firebase Storage.
 
