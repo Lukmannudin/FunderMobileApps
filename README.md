@@ -22,7 +22,7 @@ To be able to build this application all you have to do is:
 This application uses 2 data storage namely server funder and firebase. But if the server dies then to be able to log in
 is open the LoginPresenter.kt file then in the following code:
 <pre>
-if (USER_TYPE != SharedPreferenceUtils.EMPTY) {
+        if (USER_TYPE != SharedPreferenceUtils.EMPTY) {
             ....
         }
 change it into  
