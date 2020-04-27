@@ -1,5 +1,5 @@
 # FunderMobileApps
-<i>English</i>
+<b><i>English</i></b><br>
 Funder application is
 application that connects event organizers with funding by auctioning sponsorship with bidder proposals
 
@@ -29,7 +29,7 @@ Rubah menjadi
             ....
         }
 
-<i>Bahasa</i>
+<b><i>Bahasa</i></i></b><br>
 
 Aplikasi Funder adalah 
 aplikasi yang menghubungkan antara para event organizer dengan para funding dengan cara melelang sponsorhip dengan bidder proposal
