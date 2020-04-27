@@ -25,7 +25,7 @@ is open the LoginPresenter.kt file then in the following code:
         if (USER_TYPE != SharedPreferenceUtils.EMPTY) {
             ....
         }
-change it into  
+change it to  
         if (USER_TYPE == SharedPreferenceUtils.EMPTY) {
             ....
         }
