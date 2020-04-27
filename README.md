@@ -55,11 +55,11 @@ Untuk dapat membuild aplikasi ini yang harus dilakukan adalah:
 Aplikasi ini menggunakan 2 tempat penyimpanan data yaitu server funder dan firebase. Namun jika server mati maka untuk bisa login
 adalah buka file LoginPresenter.kt kemudian pada kode berikut: 
 <pre>
-        if (USER_TYPE != SharedPreferenceUtils.EMPTY) {<br>
-            ....<br>
-        }<br>
-Rubah menjadi <br>
-        if (USER_TYPE == SharedPreferenceUtils.EMPTY) {<br>
-            ....<br>
-        }<br>
+        if (USER_TYPE != SharedPreferenceUtils.EMPTY) {
+            ....
+        }
+Rubah menjadi 
+        if (USER_TYPE == SharedPreferenceUtils.EMPTY) {
+            ....
+        }
 </pre>
