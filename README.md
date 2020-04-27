@@ -12,13 +12,13 @@ This application uses Firebase Firestore, Firebase Cloud Messaging, and Firebase
 - Firebase Storage is used to store files used in the Funder application
 
 To be able to build this application all you have to do is:
-  1. Installing git on your computer, git can be downloaded here https://git-scm.com/downloads
-  2. Open your terminal then select the folder where this project will be saved then type the command git clone https://github.com/Lukmannudin/FunderMobileApps.git
-  3. Make sure your internet is not slow then open the project results from the second command using Android Studio
-  4. Wait for the compiling process and download the resource to finish. To ensure there are not many errors, don't update the gradual version.
-  5. Change the project branch in the lower right corner from the master to development
-  6. Done!
-  
+1. Installing git on your computer, git can be downloaded here https://git-scm.com/downloads
+2. Open your terminal then select the folder where this project will be saved then type the command git clone https://github.com/Lukmannudin/FunderMobileApps.git
+3. Make sure your internet is not slow then open the project results from the second command using Android Studio
+4. Wait for the compiling process and download the resource to finish. To ensure there are not many errors, don't update the gradual version.
+5. Change the project branch in the lower right corner from the master to development
+6. Done!
+
 This application uses 2 data storage namely server funder and firebase. But if the server dies then to be able to log in
 is open the LoginPresenter.kt file then in the following code:
 <pre>
