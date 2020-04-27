@@ -1,4 +1,8 @@
 # FunderMobileApps
+<i>English</i>
+
+
+<i>Bahasa</i>
 
 Aplikasi Funder adalah 
 aplikasi yang menghubungkan antara para event organizer dengan para funding dengan cara melelang sponsorhip dengan bidder proposal
